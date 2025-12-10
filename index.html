@@ -139,17 +139,75 @@
     <div class="overlay" id="overlay"></div>
 
     <main>
-      <section id="intro" class="card">
-        <h1>Teoria i Exercicis — Versió clònica</h1>
-        <p style="color:#cfe7ff">Aquesta pàgina replica l'estil clar i afegeix el multichoice clàssic amb fons negre i desplegables, més una secció de lletres amb espais a la dreta.</p>
-        <div class="note">Només s'integra el contingut del document de teoria; no es barregen altres fonts.</div>
-      </section>
+        <h1>Seguretat Sense Fils i Vectors d'Atac</h1>
 
-      <section id="teoria" class="card">
-        <h2>Teoria (del document)</h2>
-        <p>El contingut s'està carregant i normalitzant per aplicar el nou estil…</p>
-        <div id="teoria-content"></div>
-      </section>
+        <section id="intro">
+            <h2>1.1 Descripció General</h2>
+            <p>Molts clients estan preocupats per la seguretat de les seves xarxes Wi-Fi. Com que els senyals sense fils es poden rebre fora de les instal·lacions, és essencial verificar periòdicament l'eficàcia de les mesures de seguretat.</p>
+            <div class="note">
+                <strong>Important:</strong> La fortalesa de la seguretat d'accés a la xarxa no està directament relacionada amb el Wi-Fi, però és igualment crucial.
+            </div>
+        </section>
+
+        <section id="rogue">
+            <h2>1.2 Punts d'accés no autoritzats (Rogue AP)</h2>
+            <p>Un dels atacs més simplistes implica que un atacant instal·li un punt d'accés (AP) fals en una xarxa per enganyar els usuaris perquè es connectin a aquest AP. Bàsicament, l'atacant pot utilitzar aquest AP dubtós per crear una porta del darrere (backdoor).</p>
+        </section>
+
+        <section id="eviltwin">
+            <h2>1.3 Atacs de Bessons Malvats (Evil Twin)</h2>
+            <p>L'atacant crea un AP fraudulent i el configura exactament igual que la xarxa corporativa existent.</p>
+            <h3>Tècnica: DNS Spoofing</h3>
+            <p>En general, s'utilitza la suplantació de DNS per redirigir la víctima a un portal captiu clonat. L'atacant injecta un registre DNS falsificat a la memòria cau.</p>
+            <div class="note">
+                <strong>CONSELL:</strong> Els portals captius són comuns en aeroports i cafeteries. Els atacants poden clonar-los per fer enginyeria social.
+            </div>
+        </section>
+
+        <section id="deauth">
+            <h2>1.4 Atacs de Dissociació (Deauth)</h2>
+            <p>Un atacant pot fer que clients legítims es desconnectin dels seus APs per provocar una condició de DoS o per forçar-los a connectar-se a un Evil Twin. Això també permet capturar el <em>Handshake</em>.</p>
+            
+            <h3>Ús d'Airmon-ng</h3>
+            <pre><code><span class="cmd">root@websploit:~#</span> airmon-ng start wlan0
+<span class="cmd">root@websploit:~#</span> airodump-ng wlan0mon</code></pre>
+            <p>L'eina <strong>Aireplay-ng</strong> s'utilitza per injectar els paquets de desautenticació:</p>
+            <pre><code><span class="cmd">root@kali:~#</span> aireplay-ng -0 0 -a [BSSID_OBJECTIU] -c [CLIENT] wlan0</code></pre>
+        </section>
+
+        <section id="wep">
+            <h2>1.8 Atacs Vector d'Inicialització (WEP)</h2>
+            <p>WEP és un protocol obsolet. Utilitza un Vector d'Inicialització (IV) de 24 bits enviat en text pla. Com que l'IV es reutilitza, és fàcil de predir.</p>
+            <h3>Passos per crackejar WEP:</h3>
+            <ol>
+                <li>Iniciar mode monitor.</li>
+                <li>Capturar trànsit amb <code>airodump-ng</code>.</li>
+                <li>Injectar paquets ARP amb <code>aireplay-ng</code> per accelerar la recollida d'IVs.</li>
+                <li>Crackejar la clau amb <code>aircrack-ng</code>.</li>
+            </ol>
+        </section>
+
+        <section id="wpa">
+            <h2>Atacs contra WPA/WPA2</h2>
+            <p>Aquests protocols són vulnerables a atacs de diccionari si es captura el <strong>4-way handshake</strong>.</p>
+            <div class="note">
+                També existeixen vulnerabilitats com <strong>KRACK</strong> (Key Reinstallation Attack), descobert per Mathy Vanhoef, que permet reinstal·lar claus de xifratge.
+            </div>
+            <h3>Comandes bàsiques:</h3>
+            <pre><code># Capturar handshake
+airodump-ng -c [CANAL] --bssid [MAC_AP] -w captura wlan0
+
+# Crackejar amb diccionari
+aircrack-ng -w wordlist.txt captura.cap</code></pre>
+        </section>
+
+        <section id="bluetooth">
+            <h2>1.13 Bluejacking i Bluesnarfing</h2>
+            <ul>
+                <li><strong>Bluejacking:</strong> Enviar missatges no sol·licitats (vCards) via Bluetooth. Molest però inofensiu.</li>
+                <li><strong>Bluesnarfing:</strong> Més perillós. Permet l'accés no autoritzat i robatori d'informació (contactes, imatges).</li>
+            </ul>
+        </section>
 
       <section id="sec-1-11" class="card">
         <h2>1.11 Pràctica - Qüestionari</h2>
