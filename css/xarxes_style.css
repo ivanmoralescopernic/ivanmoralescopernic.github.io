@@ -1,0 +1,330 @@
+:root {
+  --bg-1: #0b1220;
+  --bg-2: #12263a;
+  --accent: #00e5a8;
+  --accent-2: #5ab0ff;
+  --accent-3: #8b5cf6;
+  --text: #e6eef6;
+  --muted: #c8d6e5;
+  --card: rgba(16, 34, 54, 0.65);
+  --border: rgba(255, 255, 255, 0.08);
+  --code-bg: rgba(255, 255, 255, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* FONS ORIGINAL COMPLEX */
+  background:
+    radial-gradient(1200px 800px at 10% 10%, rgba(90,176,255,0.25), transparent 60%),
+    radial-gradient(800px 600px at 90% 20%, rgba(0,229,168,0.25), transparent 60%),
+    radial-gradient(900px 700px at 30% 90%, rgba(139,92,246,0.20), transparent 60%),
+    linear-gradient(135deg, #0ea5e9 0%, #22d3ee 18%, #8b5cf6 40%, #0b1220 100%);
+  
+  min-height: 100vh;
+  line-height: 1.65;
+}
+
+/* Patró de graella original */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  z-index: -1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-2); }
+
+/* Capçalera */
+header {
+  position: sticky; top: 0; 
+  backdrop-filter: saturate(140%) blur(6px);
+  background: rgba(10, 20, 32, 0.6);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px; z-index: 1000;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #fff; }
+.brand .dot { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #00f5c8 0%, #00c2a0 60%, #058b78 100%); box-shadow: 0 0 12px rgba(0, 229, 168, 0.9); }
+
+.hamburger { 
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border); 
+  color: var(--text); padding: 8px 12px; border-radius: 8px; cursor: pointer; 
+  display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem;
+}
+.hamburger:hover { background: rgba(255,255,255,0.1); }
+
+/* Sidebar */
+.sidebar { 
+  position: fixed; top: 0; left: 0; width: 280px; height: 100vh; 
+  background: rgba(7,14,24,0.95); backdrop-filter: blur(8px); border-right: 1px solid var(--border); 
+  padding: 16px; transform: translateX(-100%); transition: transform 0.3s ease; 
+  z-index: 1100; overflow-y: auto;
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar h3 { font-size: 1rem; color: var(--accent); margin: 8px 0; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.sidebar a { display: block; color: var(--muted); text-decoration: none; padding: 8px 6px; border-radius: 6px; font-size: 0.95rem; }
+.sidebar a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); opacity: 0; visibility: hidden; transition: 0.25s; z-index: 1090; }
+.overlay.show { opacity: 1; visibility: visible; }
+
+/* Contingut */
+main { max-width: 1080px; margin: 24px auto; padding: 0 16px 64px; }
+
+.card { 
+  background: var(--card); border: 1px solid var(--border); 
+  border-radius: 14px; padding: 22px; margin-bottom: 30px; 
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25); 
+}
+
+h1 { margin: 10px 0 18px; font-size: 1.9rem; }
+h2 { margin: 26px 0 10px; color: var(--accent); font-size: 1.5rem; }
+h3 { margin: 18px 0 8px; color: var(--accent-2); font-size: 1.2rem; }
+
+p, li { line-height: 1.65; margin-bottom: 12px; }
+strong, b { font-weight: 700; color: #fff; }
+a { color: var(--accent-2); text-decoration: none; }
+
+/* Imatges */
+img { 
+  display: block; margin: 16px auto; width: clamp(280px, 80vw, 720px); 
+  max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border);
+}
+
+/* Blocs de codi i notes */
+pre { 
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border); 
+  border-radius: 10px; padding: 12px 14px; overflow-x: auto; margin: 15px 0;
+}
+code { font-family: ui-monospace, monospace; color: #e9f5ff; }
+
+.note { 
+  border-left: 4px solid var(--accent); background: rgba(0,229,168,0.10); 
+  padding: 12px 14px; border-radius: 8px; margin: 20px 0;
+}
+
+/* QUIZ Styles */
+.quiz-container { border: 1px solid var(--border); border-radius: 12px; padding: 16px; background: #0b0b0b; }
+.q, .q-block { margin-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 15px; }
+.q:last-child { border-bottom: none; }
+
+.q-option { display: block; margin: 6px 0; cursor: pointer; padding: 6px; border-radius: 6px; }
+.q-option:hover { background: rgba(255,255,255,0.05); }
+input[type="checkbox"] { margin-right: 10px; accent-color: var(--accent); }
+select { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); padding: 8px 10px; border-radius: 8px; width: 100%; max-width: 300px; margin-top:5px; }
+
+.status-msg { font-weight: 700; margin-left: 10px; }
+.ok { color: #16a34a; }
+.ko { color: #e11d48; }
+.fillable-actions { margin-top: 15px; }
+
+
+/* --- DRAG & DROP STYLES --- */
+
+/* Estil per a les "mini lletres" de la llista (NOVES) */
+.mini-letter {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 800; width: 24px; height: 24px; border-radius: 6px;
+  margin-right: 8px; color: #041421; /* Text fosc */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+
+/* Safata i Caixes */
+.letters-tray { 
+  display: flex; gap: 10px; flex-wrap: wrap; 
+  min-height: 48px; border: 1px dashed var(--border); 
+  border-radius: 10px; padding: 10px; margin-bottom: 20px;
+}
+
+.letter-box { 
+  display: inline-flex; align-items: center; justify-content: center; 
+  font-weight: 800; width: 44px; height: 44px; 
+  border-radius: 10px; color: #041421; /* Text fosc */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: grab; 
+}
+.letter-box:active { cursor: grabbing; transform: scale(0.95); }
+
+/* COLORS (Iguals per a box i mini-letter) */
+.letter-A { background: #4ade80; }
+.letter-B { background: #60a5fa; }
+.letter-C { background: #f472b6; }
+.letter-D { background: #a78bfa; }
+.letter-E { background: #22d3ee; }
+.letter-F { background: #f59e0b; }
+.letter-G { background: #3d49f6; }
+
+/* Taula i Drop Zones */
+.dnd-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.dnd-table th { text-align: left; padding: 8px; border-bottom: 1px solid var(--border); color: var(--accent); }
+.dnd-table td { padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+
+.drop-zone { 
+  width: 44px; height: 44px; padding: 0; 
+  border: 1px dashed var(--border); border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: center; 
+  margin: 0 auto;
+}
+
+/* Resultats */
+.final-section { text-align: center; }
+.input-name { 
+  background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; 
+  padding: 10px; border-radius: 6px; width: 260px; margin-right: 10px;
+}
+.btn-check { 
+  background: var(--accent); color: #041421; font-weight: 700; border: none; 
+  padding: 10px 20px; border-radius: 6px; cursor: pointer; 
+}
+.btn-check:hover { opacity: 0.9; }
+/* =========================================
+   ESTILS ESPECÍFICS PER A LA PORTADA (INDEX)
+   ========================================= */
+
+/* Fem servir aquesta classe per no afectar el body de les altres pàgines */
+body.portal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--accent-2);
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.institute-info {
+  background: rgba(16, 34, 54, 0.6);
+  border-left: 4px solid var(--accent);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Graella de Mòduls */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  width: 100%;
+  max-width: 1100px;
+  padding: 20px;
+  margin-bottom: 60px;
+}
+
+.module-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 25px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+/* Targeta ACTIVA */
+.module-card.active {
+  border-color: var(--accent);
+  background: linear-gradient(145deg, rgba(16,34,54,0.9), rgba(0, 229, 168, 0.05));
+  cursor: pointer;
+}
+.module-card.active:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 229, 168, 0.15);
+}
+.module-card.active .card-icon {
+  color: var(--accent);
+  text-shadow: 0 0 15px var(--accent);
+}
+
+/* Targeta INACTIVA */
+.module-card.inactive {
+  opacity: 0.6;
+  cursor: default;
+  border-style: dashed;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.unit-tag {
+  background: rgba(255,255,255,0.1);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.card-icon {
+  font-size: 2rem;
+  color: var(--muted);
+}
+
+.module-card h3 { margin: 0 0 10px 0; color: #fff; font-size: 1.3rem; }
+.module-card p { margin: 0; font-size: 0.95rem; color: var(--muted); }
+
+.btn-access {
+  margin-top: 20px;
+  display: inline-block;
+  text-align: center;
+  background: var(--accent);
+  color: #041421;
+  font-weight: 800;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+.module-card.active:hover .btn-access {
+  background: #fff;
+}

