@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teoria i Exercicis — Versió Multichoice + Drag & Drop</title>
+    <style>
+      
+      :root {
+        --bg-1: #0b1220;
+        --bg-2: #12263a;
+        --accent: #00e5a8;
+        --accent-2: #5ab0ff;
+        --accent-3: #8b5cf6;
+        --text: #e6eef6;
+        --muted: #c8d6e5;
+        --card: rgba(16, 34, 54, 0.65);
+        --border: rgba(255, 255, 255, 0.08);
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+        background:
+          radial-gradient(1200px 800px at 10% 10%, rgba(90,176,255,0.25), transparent 60%),
+          radial-gradient(800px 600px at 90% 20%, rgba(0,229,168,0.25), transparent 60%),
+          radial-gradient(900px 700px at 30% 90%, rgba(139,92,246,0.20), transparent 60%),
+          linear-gradient(135deg, #0ea5e9 0%, #22d3ee 18%, #8b5cf6 40%, #0b1220 100%);
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+        background-size: 32px 32px;
+        pointer-events: none;
+        mix-blend-mode: soft-light;
+      }
+
+      header {
+        position: sticky; top: 0; backdrop-filter: saturate(140%) blur(6px);
+        background: rgba(10, 20, 32, 0.6);
+        border-bottom: 1px solid var(--border);
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 12px 18px; z-index: 1000;
+      }
+      .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+      .brand .dot { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #00f5c8 0%, #00c2a0 60%, #058b78 100%); box-shadow: 0 0 12px rgba(0, 229, 168, 0.9); }
+
+      .hamburger { border: 1px solid var(--border); background: rgba(255,255,255,0.06); color: var(--text); padding: 8px 12px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+      .hamburger span { display:block; width:18px; height:2px; background:var(--text); position:relative; }
+      .hamburger span::before, .hamburger span::after { content:""; position:absolute; left:0; width:18px; height:2px; background:var(--text); }
+      .hamburger span::before { top:-6px; } .hamburger span::after { top:6px; }
+
+      .sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100vh; background: rgba(7,14,24,0.85); backdrop-filter: blur(8px); border-right: 1px solid var(--border); padding: 16px; transform: translateX(-100%); transition: transform 0.3s ease; z-index: 1100; }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar h2 { font-size: 1rem; color: var(--accent); margin: 8px 0; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+      .sidebar a { display:block; color: var(--muted); text-decoration:none; padding:8px 6px; border-radius:6px; }
+      .sidebar a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+
+      .overlay { position:fixed; inset:0; background: rgba(0,0,0,0.35); opacity:0; visibility:hidden; transition: opacity 0.25s ease, visibility 0.25s ease; z-index:1090; }
+      .overlay.show { opacity:1; visibility:visible; }
+
+      main { max-width: 1080px; margin: 24px auto; padding: 0 16px 64px; }
+      .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+      h1 { margin: 10px 0 18px; font-size: 1.9rem; }
+      h2 { margin: 26px 0 10px; color: var(--accent); }
+      h3 { margin: 18px 0 8px; color: var(--accent-2); }
+      p, li { line-height: 1.65; }
+      pre { background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; overflow-x: auto; }
+      code { font-family: ui-monospace, Menlo, Consolas, "Liberation Mono", monospace; color: #e9f5ff; }
+      .note { border-left: 4px solid var(--accent); background: rgba(0,229,168,0.10); padding: 12px 14px; border-radius: 8px; }
+
+      /* Imatges de la teoria: centrades, mida coherent i responsives */
+      #teoria-content img.doc-image { display: block; margin: 16px auto; width: clamp(280px, 80vw, 720px); max-width: 100%; height: auto; }
+
+      /* Multichoice: fons negre i selects */
+      .quiz-container { border: 1px solid var(--border); border-radius: 12px; padding: 16px; background: #0b0b0b; }
+      .q { margin-bottom: 12px; }
+      select { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid var(--border); padding: 8px 10px; border-radius: 8px; min-width: 240px; }
+      .status-msg { font-weight: 700; }
+      .ok { color: #16a34a; } .ko { color: #e11d48; }
+
+      /* Lletres: zones a la dreta */
+      .q-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+      .q-text { flex: 1 1 auto; }
+      .q-zone { flex: 0 0 220px; }
+    .letters-tray, .drop-zone { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:10px; min-height:48px; border:1px dashed var(--border); border-radius:10px; padding:10px; }
+      .drop-zone { background: rgba(255,255,255,0.04); }
+    .letter-box { display:inline-flex; align-items:center; justify-content:center; font-weight:800; width:44px; height:44px; border-radius:10px; color:#041421; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor:grab; }
+    /* Mini icones de lletra per la llista de categories */
+    .mini-letter { display:inline-flex; align-items:center; justify-content:center; font-weight:800; width:24px; height:24px; border-radius:6px; margin-right:8px; color:#041421; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .mini-letter.letter-A { background:#34d399; }
+    .mini-letter.letter-B { background:#60a5fa; }
+    .mini-letter.letter-C { background:#f59e0b; }
+    .mini-letter.letter-D { background:#f43f5e; }
+    .mini-letter.letter-E { background:#a78bfa; }
+    .mini-letter.letter-F { background:#f97316; }
+    .mini-letter.letter-G { background:#22c55e; }
+    /* Zones de drop d'una sola lletra, mida exacta de la caixa */
+    .drop-zone { width:44px; height:44px; padding:0; flex-wrap:nowrap; align-items:center; justify-content:center; }
+      .letter-A { background:#4ade80; }
+      .letter-B { background:#60a5fa; }
+      .letter-C { background:#f472b6; }
+      .letter-D { background:#a78bfa; }
+      .letter-E { background:#22d3ee; }
+      .letter-F { background:#f59e0b; }
+      .letter-G { background:#34d399; }
+
+      @media (max-width: 720px) {
+        .q-zone { flex-basis: 160px; }
+      }
+    </style>
+    <!-- Llibreria drag-and-drop -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand"><div class="dot" aria-hidden="true"></div><div>Ciberseguretat i Xarxes Wi‑Fi</div></div>
+      <button class="hamburger" id="openSidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Obrir índex"><span></span>Índex</button>
+    </header>
+
+    <aside class="sidebar" id="sidebar" aria-hidden="true" role="navigation">
+      <h2>Contingut</h2>
+      <a href="#intro">Introducció</a>
+      <a href="#teoria">Teoria (carregada)</a>
+      <a href="#sec-1-11">1.11 Pràctica - Qüestionari</a>
+      <a href="#exercicis">Exercicis (Multichoice)</a>
+      <a href="#lletres">Lletres (Drag & Drop)</a>
+      <a href="#final">Comprovació final</a>
+      <a href="#practica">Part Pràctica</a>
+      <a href="manual_estil.html">Manual TP‑Link/Mercusys</a>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+      <section id="intro" class="card">
+        <h1>Teoria i Exercicis — Versió clònica</h1>
+        <p style="color:#cfe7ff">Aquesta pàgina replica l'estil clar i afegeix el multichoice clàssic amb fons negre i desplegables, més una secció de lletres amb espais a la dreta.</p>
+        <div class="note">Només s'integra el contingut del document de teoria; no es barregen altres fonts.</div>
+      </section>
+
+      <section id="teoria" class="card">
+        <h2>Teoria (del document)</h2>
+        <p>El contingut s'està carregant i normalitzant per aplicar el nou estil…</p>
+        <div id="teoria-content"></div>
+      </section>
+
+      <section id="sec-1-11" class="card">
+        <h2>1.11 Pràctica - Qüestionari</h2>
+        <div class="quiz-container">
+          <div class="q">
+            <p><strong>Pregunta 1:</strong><br>Veritat o fals: El protocol WPA3 va introduir un nou protocol d'enllaç anomenat "handshake libèl·lula" que utilitza EAP. Això garanteix que el protocol WPA3 sigui immune als atacs KRACK o DoS.</p>
+            <label><input type="checkbox" class="q11-option" data-q="q11_1" value="veritat"> Veritat</label><br>
+            <label><input type="checkbox" class="q11-option" data-q="q11_1" value="fals"> Fals</label>
+          </div>
+          <div class="q">
+            <p><strong>Pregunta 2:</strong><br>Pixel Paradise no transmet els seus SSID. Has configurat Airodump-ng. Què ha de passar per interceptar un SSID?</p>
+            <label><input type="checkbox" class="q11-option" data-q="q11_2" value="assoc"> Un client legítim ha d'iniciar el procés d'associació amb un AP.</label><br>
+            <label><input type="checkbox" class="q11-option" data-q="q11_2" value="psk"> S'ha de desxifrar la PSK WPA.</label><br>
+            <label><input type="checkbox" class="q11-option" data-q="q11_2" value="mac"> S'ha de configurar una adreça MAC falsificada a la interfície sense fils.</label><br>
+            <label><input type="checkbox" class="q11-option" data-q="q11_2" value="dns"> Els clients han de ser redirigits al vostre AP dubtós via suplantació de DNS.</label>
+          </div>
+        </div>
+      </section>
+
+      <section id="exercicis" class="card">
+        <h2>Exercicis (Multichoice clàssic)</h2>
+        <div class="quiz-container">
+          <div class="q">
+            <label for="sel1">1. Quin xifrat utilitza WPA2 per defecte?</label><br />
+            <select id="sel1">
+              <option value="">— Selecciona una opció —</option>
+              <option>TKIP</option>
+              <option>CCMP (AES)</option>
+              <option>WEP</option>
+            </select>
+          </div>
+          <div class="q">
+            <label for="sel2">2. Què fa l'atac de deauth?</label><br />
+            <select id="sel2">
+              <option value="">— Selecciona una opció —</option>
+              <option>Canvia el canal de l'AP</option>
+              <option>Desconnecta clients de l'AP</option>
+              <option>Xifra el trànsit amb AES</option>
+            </select>
+          </div>
+          <div class="q">
+            <label for="sel3">3. Quina longitud té l'IV de WEP?</label><br />
+            <select id="sel3">
+              <option value="">— Selecciona una opció —</option>
+              <option>16 bits</option>
+              <option>24 bits</option>
+              <option>128 bits</option>
+            </select>
+          </div>
+          <div class="fillable-actions">
+            <button onclick="checkSelectQuiz()">Comprovar</button>
+            <span id="select-result" class="status-msg"></span>
+          </div>
+        </div>
+      </section>
+
+      <section id="lletres" class="card">
+        <h2>1.18 Pràctica - Atacs sense fils</h2>
+        <div class="quiz-container">
+          <p><strong>Instruccions:</strong> Relaciona cada descripció de la columna de l'esquerra amb el tipus d'atac corresponent de la llista de la dreta. Arrossega la <em>lletra</em> correcta a la columna «Opció».</p>
+          <h3 style="margin-top:10px;color:var(--accent-2)">Llistat de categories amb definicions</h3>
+          <ul class="categories-list" style="margin:8px 0 12px 0">
+            <li><span class="mini-letter letter-A">A</span> Dissociació — desconnexió forçada de clients de l'AP.</li>
+            <li><span class="mini-letter letter-B">B</span> Interferència de senyal sense fils (Jamming) — soroll intencionat en les freqüències Wi‑Fi per causar DoS.</li>
+            <li><span class="mini-letter letter-C">C</span> Bluejacking / Atacs BLE* — manipulació/comunicació enganyosa en Bluetooth Low Energy.</li>
+            <li><span class="mini-letter letter-D">D</span> Atacs de bessons malvats (Evil Twin) — AP fals amb SSID/clau clonats per robar credencials.</li>
+            <li><span class="mini-letter letter-E">E</span> Propagació de contrasenyes (Password Spraying) — proves de contrasenyes comunes sobre molts usuaris.</li>
+            <li><span class="mini-letter letter-F">F</span> KARMA — respondre a sol·licituds de <em>probe</em> amb l'SSID que el client busca.</li>
+            <li><span class="mini-letter letter-G">G</span> Conducció de guerra (War Driving) — localització d'APs desplaçant-se per l'entorn.</li>
+          </ul>
+
+          <h3 style="margin-top:10px;color:var(--accent-2)">Safata de lletres</h3>
+          <ul id="letters-pool" class="letters-tray" aria-label="Safata de lletres">
+            <li class="letter-box letter-A" data-letter="A">A</li>
+            <li class="letter-box letter-B" data-letter="B">B</li>
+            <li class="letter-box letter-C" data-letter="C">C</li>
+            <li class="letter-box letter-D" data-letter="D">D</li>
+            <li class="letter-box letter-E" data-letter="E">E</li>
+            <li class="letter-box letter-F" data-letter="F">F</li>
+            <li class="letter-box letter-G" data-letter="G">G</li>
+          </ul>
+
+          <div class="table-wrapper" style="margin-top:12px">
+            <table class="fillable-table dnd-table">
+              <thead>
+                <tr>
+                  <th style="width:70%">Descripció de l'Atac</th>
+                  <th style="width:30%">Opció (Lletra)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1. L'atacant intenta desconnectar l'usuari de l'AP i després obtenir credencials.</td>
+                  <td><ul id="ld1-zone" class="drop-zone" aria-label="Opció 1"></ul></td>
+                </tr>
+                <tr>
+                  <td>2. L'atacant es desplaça per trobar punts d'accés sense fils.</td>
+                  <td><ul id="ld2-zone" class="drop-zone" aria-label="Opció 2"></ul></td>
+                </tr>
+                <tr>
+                  <td>3. Suplantació de DNS per redirigir a un portal captiu/loci fals.</td>
+                  <td><ul id="ld3-zone" class="drop-zone" aria-label="Opció 3"></ul></td>
+                </tr>
+                <tr>
+                  <td>4. Genera soroll a les freqüències Wi‑Fi per causar DoS (Jamming).</td>
+                  <td><ul id="ld4-zone" class="drop-zone" aria-label="Opció 4"></ul></td>
+                </tr>
+                <tr>
+                  <td>5. Manipula missatges Bluetooth Low Energy (BLE) per enganyar sistemes.</td>
+                  <td><ul id="ld5-zone" class="drop-zone" aria-label="Opció 5"></ul></td>
+                </tr>
+                <tr>
+                  <td>6. Escolta sol·licituds de <em>probe</em> i respon amb el SSID buscat (KARMA).</td>
+                  <td><ul id="ld6-zone" class="drop-zone" aria-label="Opció 6"></ul></td>
+                </tr>
+                <tr>
+                  <td>7. Prova credencials amb contrasenyes comunes sobre llistes d'usuaris (Password Spraying).</td>
+                  <td><ul id="ld7-zone" class="drop-zone" aria-label="Opció 7"></ul></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fillable-actions" style="margin-top:14px">
+            <span id="dnd-result" class="status-msg"></span>
+          </div>
+        </div>
+      </section>
+
+      <section id="final" class="card">
+        <h2>Comprovació final de la part pràctica</h2>
+        <p>Introdueix el teu nom i prem el botó per calcular el percentatge d'encerts total (seccions 1.11 i 1.18). Després s'esborraran totes les opcions seleccionades i les lletres col·locades.</p>
+        <div class="fillable-actions">
+          <input id="finalName" type="text" placeholder="Nom complet" style="min-width:260px" />
+          <button onclick="checkAll()">Comprovar</button>
+        </div>
+        <div id="final-output" style="margin-top:14px;font-size:1.6rem;font-weight:800"></div>
+      </section>
+
+      <section id="practica" class="card">
+        <h2>Part Pràctica — Laboratori</h2>
+        <h3>Captura de Handshake i atac de diccionari (WPA/WPA2)</h3>
+        <ol>
+          <li>Activa mode monitor: <code>airmon-ng start wlan0</code></li>
+          <li>Localitza l'AP: <code>airodump-ng wlan0mon</code></li>
+          <li>Fixa canal i captura: <pre><code>airodump-ng -c [CANAL] --bssid [MAC_AP] -w captura wlan0mon</code></pre></li>
+          <li>(Opcional) Força desconnexions: <pre><code>aireplay-ng -0 4 -a [MAC_AP] -c [MAC_CLIENT] wlan0mon</code></pre></li>
+          <li>Prova diccionari: <pre><code>aircrack-ng -w wordlist.txt captura.cap</code></pre></li>
+        </ol>
+
+        <h3>Accelerar IVs i crack WEP</h3>
+        <ol>
+          <li>Mode monitor i sniffing amb <code>airodump-ng</code>.</li>
+          <li>Injecta ARP per generar trànsit: <pre><code>aireplay-ng -3 -b [BSSID] -h [MAC_TEVA] wlan0mon</code></pre></li>
+          <li>Quan hi hagi prou IVs, executa: <pre><code>aircrack-ng captura.cap</code></pre></li>
+        </ol>
+
+        <h3>Bluetooth — Bluejacking vs Bluesnarfing</h3>
+        <ul>
+          <li>Escaneja dispositius: <code>hcitool scan</code>, <code>bluetoothctl</code>.</li>
+          <li>Bluejacking: enviament de vCards; prova amb dispositius en mode discoverable.</li>
+          <li>Bluesnarfing: accés no autoritzat a dades (no executar en entorns productius).</li>
+        </ul>
+      </section>
+    </main>
+
+    <script>
+      const openBtn = document.getElementById('openSidebar');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+
+      function toggleSidebar(show) {
+        const isOpen = show ?? !sidebar.classList.contains('open');
+        sidebar.classList.toggle('open', isOpen);
+        overlay.classList.toggle('show', isOpen);
+        openBtn.setAttribute('aria-expanded', String(isOpen));
+        sidebar.setAttribute('aria-hidden', String(!isOpen));
+      }
+      openBtn.addEventListener('click', () => toggleSidebar());
+      overlay.addEventListener('click', () => toggleSidebar(false));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleSidebar(false); });
+
+      // Carrega i saneja contingut de la teoria
+      async function loadTeoria() {
+        const container = document.getElementById('teoria-content');
+        try {
+          const res = await fetch('Xarxes_Inalmbriques_Teoria.html');
+          const html = await res.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const body = doc.body;
+
+          // Elimina elements d'estil dins el body (per si n'hi ha)
+          body.querySelectorAll('style, link[rel="stylesheet"]').forEach(el => el.remove());
+
+          // Sanejament: eliminar atributs d'estil i classes de Google Docs
+          function sanitize(node) {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              node.removeAttribute('style');
+              const cls = node.getAttribute('class');
+              if (cls && (/^(c\d+|lst-kix_|li-bullet|ol|ul)/.test(cls))) {
+                node.removeAttribute('class');
+              }
+              if (node.tagName === 'FONT') {
+                const span = document.createElement('span');
+                span.innerHTML = node.innerHTML;
+                node.replaceWith(span);
+                node = span;
+              }
+            }
+            node.childNodes.forEach(sanitize);
+          }
+
+          sanitize(body);
+          body.querySelectorAll('img').forEach(img => img.classList.add('doc-image'));
+          container.innerHTML = '';
+          const wrapper = document.createElement('div');
+          wrapper.className = 'card';
+          wrapper.append(...Array.from(body.childNodes));
+          container.appendChild(wrapper);
+        } catch (e) {
+          container.innerHTML = '<p style="color: #ffb4b4">No s\'ha pogut carregar el document de teoria.</p>';
+          console.error(e);
+        }
+      }
+      loadTeoria();
+
+      // Multichoice: correcció
+      function checkSelectQuiz() {
+        const answers = {
+          sel1: 'CCMP (AES)',
+          sel2: "Desconnecta clients de l'AP",
+          sel3: '24 bits'
+        };
+        let score = 0;
+        Object.keys(answers).forEach(id => {
+          const el = document.getElementById(id);
+          const ok = el.value === answers[id];
+          el.style.borderColor = ok ? '#16a34a' : '#e11d48';
+          if (ok) score++;
+        });
+        const result = document.getElementById('select-result');
+        result.className = 'status-msg ' + (score === 3 ? 'ok' : 'ko');
+        result.textContent = score === 3 ? 'Correcte' : `Has encertat ${score} de 3.`;
+      }
+
+      // 1.11: checkboxes exclusius (una opció per pregunta)
+      function setupExclusiveCheckboxes() {
+        const boxes = Array.from(document.querySelectorAll('.q11-option'));
+        const groups = {};
+        boxes.forEach(cb => {
+          const g = cb.getAttribute('data-q');
+          if (!groups[g]) groups[g] = [];
+          groups[g].push(cb);
+        });
+        Object.values(groups).forEach(arr => {
+          arr.forEach(cb => {
+            cb.addEventListener('change', () => {
+              if (cb.checked) arr.forEach(other => { if (other !== cb) other.checked = false; });
+            });
+          });
+        });
+      }
+      setupExclusiveCheckboxes();
+
+      // Inicia Sortable a safata i zones (límit: 1 lletra per zona)
+      function initDnD() {
+        new Sortable(document.getElementById('letters-pool'), {
+          group: { name: 'letters', pull: true, put: true },
+          animation: 150,
+          sort: true,
+        });
+        ['ld1-zone','ld2-zone','ld3-zone','ld4-zone','ld5-zone','ld6-zone','ld7-zone'].forEach(id => {
+          new Sortable(document.getElementById(id), {
+            group: { name: 'letters', pull: true, put: true },
+            animation: 150,
+            sort: false,
+            onAdd: evt => {
+              const zone = evt.to;
+              const pool = document.getElementById('letters-pool');
+              if (zone.children.length > 1) {
+                // Manté l'element acabat d'afegir i retorna l'antic a la safata
+                const newItem = evt.item;
+                Array.from(zone.children).forEach(child => {
+                  if (child !== newItem) pool.appendChild(child);
+                });
+              }
+            }
+          });
+        });
+      }
+      initDnD();
+
+      function getZoneLetter(id) {
+        const zone = document.getElementById(id);
+        const item = zone.querySelector('[data-letter]');
+        return item ? item.getAttribute('data-letter') : '';
+      }
+
+      function computeScore11() {
+        // Respostes correctes: q11_1 = fals; q11_2 = assoc
+        const q1 = Array.from(document.querySelectorAll('.q11-option[data-q="q11_1"]'));
+        const q2 = Array.from(document.querySelectorAll('.q11-option[data-q="q11_2"]'));
+        const sel1 = q1.find(cb => cb.checked)?.value || '';
+        const sel2 = q2.find(cb => cb.checked)?.value || '';
+        let score = 0;
+        if (sel1 === 'fals') score++;
+        if (sel2 === 'assoc') score++;
+        return { score, total: 2 };
+      }
+
+      function computeScore118() {
+        const answers = { 'ld1-zone': 'A', 'ld2-zone': 'G', 'ld3-zone': 'D', 'ld4-zone': 'B', 'ld5-zone': 'C', 'ld6-zone': 'F', 'ld7-zone': 'E' };
+        let score = 0;
+        Object.keys(answers).forEach(zoneId => {
+          const letter = getZoneLetter(zoneId);
+          const ok = letter === answers[zoneId];
+          const zone = document.getElementById(zoneId);
+          zone.style.borderColor = ok ? '#16a34a' : '#e11d48';
+          if (ok) score++;
+        });
+        return { score, total: 7 };
+      }
+
+      function clearCheckboxes11() {
+        document.querySelectorAll('.q11-option').forEach(cb => { cb.checked = false; });
+      }
+
+      function checkAll() {
+        const name = (document.getElementById('finalName')?.value || '').trim();
+        const out = document.getElementById('final-output');
+        if (!name) {
+          out.style.color = '#e11d48';
+          out.textContent = 'Cal introduir el nom complet abans de comprovar.';
+          return;
+        }
+        const s11 = computeScore11();
+        const s118 = computeScore118();
+        const totalScore = s11.score + s118.score;
+        const totalItems = s11.total + s118.total;
+        const percent = Math.round((totalScore / totalItems) * 100);
+        out.style.color = '#e6eef6';
+        out.textContent = `${name} — Tens un ${percent}% encertat a la part pràctica.`;
+        // Esborrar opcions i drag-and-drop
+        clearCheckboxes11();
+        resetDnD();
+        // Netejar missatges locals
+        const dndMsg = document.getElementById('dnd-result');
+        if (dndMsg) { dndMsg.textContent = ''; dndMsg.className = 'status-msg'; }
+      }
+
+      function resetDnD() {
+        ['ld1-zone','ld2-zone','ld3-zone','ld4-zone','ld5-zone','ld6-zone','ld7-zone'].forEach(zoneId => {
+          const zone = document.getElementById(zoneId);
+          Array.from(zone.children).forEach(child => document.getElementById('letters-pool').appendChild(child));
+          zone.style.borderColor = 'var(--border)';
+        });
+        const result = document.getElementById('dnd-result');
+        result.textContent = '';
+        result.className = 'status-msg';
+        const name = document.getElementById('studentName');
+        if (name) name.value = '';
+      }
+    </script>
+  </body>
+</html>

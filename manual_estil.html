@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manual — TP‑Link/Mercusys (Estil combinat)</title>
+    <style>
+      :root {
+        --bg-1: #0b1220;
+        --bg-2: #12263a;
+        --accent: #00e5a8;
+        --accent-2: #5ab0ff;
+        --accent-3: #8b5cf6;
+        --text: #e6eef6;
+        --muted: #c8d6e5;
+        --card: rgba(16, 34, 54, 0.65);
+        --border: rgba(255, 255, 255, 0.08);
+      }
+
+      body { margin: 0; color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+        background:
+          radial-gradient(1200px 800px at 10% 10%, rgba(90,176,255,0.25), transparent 60%),
+          radial-gradient(800px 600px at 90% 20%, rgba(0,229,168,0.25), transparent 60%),
+          radial-gradient(900px 700px at 30% 90%, rgba(139,92,246,0.20), transparent 60%),
+          linear-gradient(135deg, #0ea5e9 0%, #22d3ee 18%, #8b5cf6 40%, #0b1220 100%);
+        min-height: 100vh; }
+      body::before { content:""; position:fixed; inset:0; background-image:
+          linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+        background-size:32px 32px; pointer-events:none; mix-blend-mode:soft-light; }
+
+      header { position: sticky; top: 0; backdrop-filter: saturate(140%) blur(6px);
+        background: rgba(10, 20, 32, 0.6); border-bottom: 1px solid var(--border);
+        display:flex; align-items:center; justify-content:space-between; padding:12px 18px; z-index:1000; }
+      .brand { display:flex; align-items:center; gap:10px; font-weight:700; }
+      .brand .dot { width:10px; height:10px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #00f5c8 0%, #00c2a0 60%, #058b78 100%); box-shadow: 0 0 12px rgba(0, 229, 168, 0.9); }
+      .hamburger { border: 1px solid var(--border); background: rgba(255,255,255,0.06); color: var(--text); padding: 8px 12px; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+      .hamburger span { display:block; width:18px; height:2px; background:var(--text); position:relative; }
+      .hamburger span::before, .hamburger span::after { content:""; position:absolute; left:0; width:18px; height:2px; background:var(--text); }
+      .hamburger span::before { top:-6px; } .hamburger span::after { top:6px; }
+
+      .sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100vh; background: rgba(7,14,24,0.85); backdrop-filter: blur(8px); border-right: 1px solid var(--border); padding: 16px; transform: translateX(-100%); transition: transform 0.3s ease; z-index: 1100; }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar h2 { font-size: 1rem; color: var(--accent); margin: 8px 0; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+      .sidebar a { display:block; color: var(--muted); text-decoration:none; padding:8px 6px; border-radius:6px; }
+      .sidebar a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+
+      .overlay { position:fixed; inset:0; background: rgba(0,0,0,0.35); opacity:0; visibility:hidden; transition: opacity 0.25s ease, visibility 0.25s ease; z-index:1090; }
+      .overlay.show { opacity:1; visibility:visible; }
+
+      main { max-width: 1080px; margin: 24px auto; padding: 0 16px 64px; }
+      .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+      h1 { margin: 10px 0 18px; font-size: 1.9rem; }
+      h2 { margin: 26px 0 10px; color: var(--accent); }
+      h3 { margin: 18px 0 8px; color: var(--accent-2); }
+      p, li { line-height: 1.65; }
+      pre { background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; overflow-x: auto; }
+      code { font-family: ui-monospace, Menlo, Consolas, "Liberation Mono", monospace; color: #e9f5ff; }
+      details.code-long { border: 1px solid var(--border); border-radius: 10px; background: rgba(255,255,255,0.06); padding: 10px 12px; }
+      details.code-long summary { cursor: pointer; color: var(--accent-2); font-weight: 700; }
+      #manual-content img.doc-image { display: block; margin: 16px auto; width: clamp(280px, 80vw, 720px); max-width: 100%; height: auto; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand"><div class="dot" aria-hidden="true"></div><div>Manual TP‑Link/Mercusys</div></div>
+      <button class="hamburger" id="openSidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Obrir índex"><span></span>Índex</button>
+    </header>
+    <aside class="sidebar" id="sidebar" aria-hidden="true" role="navigation">
+      <h2>Navegació</h2>
+      <a href="teoria_combinada_opcions.html">Teoria i Exercicis</a>
+      <a href="#manual">Manual (aquesta pàgina)</a>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+      <section id="manual" class="card">
+        <h1>Manual — Configuració i Prova de Seguretat Bàsica</h1>
+        <p style="color:#cfe7ff">Aquest manual s'integra amb el mateix estil i amb les seccions de codi llarg en desplegables.</p>
+        <div id="manual-content">Carregant manual…</div>
+      </section>
+    </main>
+
+    <script>
+      const openBtn = document.getElementById('openSidebar');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      function toggleSidebar(show) {
+        const isOpen = show ?? !sidebar.classList.contains('open');
+        sidebar.classList.toggle('open', isOpen);
+        overlay.classList.toggle('show', isOpen);
+        openBtn.setAttribute('aria-expanded', String(isOpen));
+        sidebar.setAttribute('aria-hidden', String(!isOpen));
+      }
+      openBtn.addEventListener('click', () => toggleSidebar());
+      overlay.addEventListener('click', () => toggleSidebar(false));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleSidebar(false); });
+
+      async function loadManual() {
+        const container = document.getElementById('manual-content');
+        try {
+          const res = await fetch('ManualdeConfiguracinyPruebadeSeguridadBsicapa.html');
+          const html = await res.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const body = doc.body;
+          // Elimina estils i fulls d'estil interns
+          body.querySelectorAll('style, link[rel="stylesheet"]').forEach(el => el.remove());
+          // Sanejament: treure estils i classes decoratives
+          function sanitize(node) {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              node.removeAttribute('style');
+              const cls = node.getAttribute('class');
+              if (cls && (/^(c\d+|lst-kix_|li-bullet|ol|ul)/.test(cls))) node.removeAttribute('class');
+              if (node.tagName === 'FONT') {
+                const span = document.createElement('span'); span.innerHTML = node.innerHTML; node.replaceWith(span); node = span;
+              }
+            }
+            node.childNodes.forEach(sanitize);
+          }
+          sanitize(body);
+          body.querySelectorAll('img').forEach(img => img.classList.add('doc-image'));
+
+          // Embolcallar codi molt extens en <details>
+          const wrapLongCode = () => {
+            const blocks = Array.from(body.querySelectorAll('pre, code'));
+            blocks.forEach(b => {
+              const text = b.textContent || '';
+              const isPre = b.tagName.toLowerCase() === 'pre';
+              const limit = isPre ? 400 : 600; // llindars heurístics
+              if (text.length > limit) {
+                const details = document.createElement('details');
+                details.className = 'code-long';
+                const summary = document.createElement('summary');
+                summary.textContent = 'Mostrar codi llarg (' + text.length + ' caràcters)';
+                details.appendChild(summary);
+                const wrap = document.createElement(isPre ? 'pre' : 'div');
+                if (!isPre) { wrap.style.whiteSpace = 'pre-wrap'; wrap.style.fontFamily = 'ui-monospace, Menlo, Consolas, monospace'; }
+                wrap.appendChild(b.cloneNode(true));
+                details.appendChild(wrap);
+                b.replaceWith(details);
+              }
+            });
+          };
+          wrapLongCode();
+
+          container.innerHTML = '';
+          const wrapper = document.createElement('div');
+          Array.from(body.children).forEach(child => wrapper.appendChild(child));
+          container.appendChild(wrapper);
+        } catch (e) {
+          container.textContent = 'Error carregant el manual: ' + e.message;
+        }
+      }
+      loadManual();
+    </script>
+  </body>
+</html>
