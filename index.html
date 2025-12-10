@@ -102,8 +102,12 @@
     .mini-letter.letter-E { background:#a78bfa; }
     .mini-letter.letter-F { background:#f97316; }
     .mini-letter.letter-G { background:#22c55e; }
-    /* Zones de drop d'una sola lletra, mida exacta de la caixa */
-    .drop-zone { width:44px; height:44px; padding:0; flex-wrap:nowrap; align-items:center; justify-content:center; }
+      /* Zones de drop d'una sola lletra, mida exacta de la caixa */
+      .drop-zone { width:44px; height:44px; padding:0; flex-wrap:nowrap; align-items:center; justify-content:center; }
+      /* Alineació taula drag & drop */
+      .dnd-table td, .dnd-table th { vertical-align: middle; }
+      .dnd-table td:last-child { text-align: center; }
+      .dnd-table .drop-zone { margin: 0 auto; }
       .letter-A { background:#4ade80; }
       .letter-B { background:#60a5fa; }
       .letter-C { background:#f472b6; }
@@ -514,6 +518,11 @@ aircrack-ng -w wordlist.txt captura.cap</code></pre>
         const percent = Math.round((totalScore / totalItems) * 100);
         out.style.color = '#e6eef6';
         out.textContent = `${name} — Tens un ${percent}% encertat a la part pràctica.`;
+        try {
+          localStorage.setItem('practice_pass', String(percent >= 80));
+          localStorage.setItem('practice_percent', String(percent));
+          localStorage.setItem('practice_name', name);
+        } catch (_) {}
         // Esborrar opcions i drag-and-drop
         clearCheckboxes11();
         resetDnD();

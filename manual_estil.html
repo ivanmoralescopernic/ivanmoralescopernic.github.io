@@ -96,6 +96,20 @@
       overlay.addEventListener('click', () => toggleSidebar(false));
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleSidebar(false); });
 
+      function canAccessManual() {
+        try {
+          const pass = localStorage.getItem('practice_pass') === 'true';
+          const percent = parseInt(localStorage.getItem('practice_percent') || '0', 10);
+          return pass && percent >= 80;
+        } catch (_) { return false; }
+      }
+
+      function showLocked() {
+        const container = document.getElementById('manual-content');
+        container.innerHTML = '<div class="note" style="border-left:4px solid var(--accent);background:rgba(0,229,168,0.10);padding:12px 14px;border-radius:8px"><strong>Accés restringit:</strong> Necessites un 80% o més a la part pràctica per veure aquest manual.</div>' +
+          '<p style="margin-top:10px"><a href="index.html#final" style="color:var(--accent-2)">Tornar a la comprovació final</a></p>';
+      }
+
       async function loadManual() {
         const container = document.getElementById('manual-content');
         try {
@@ -121,28 +135,37 @@
           sanitize(body);
           body.querySelectorAll('img').forEach(img => img.classList.add('doc-image'));
 
-          // Embolcallar codi molt extens en <details>
-          const wrapLongCode = () => {
-            const blocks = Array.from(body.querySelectorAll('pre, code'));
-            blocks.forEach(b => {
-              const text = b.textContent || '';
-              const isPre = b.tagName.toLowerCase() === 'pre';
-              const limit = isPre ? 400 : 600; // llindars heurístics
-              if (text.length > limit) {
-                const details = document.createElement('details');
-                details.className = 'code-long';
-                const summary = document.createElement('summary');
-                summary.textContent = 'Mostrar codi llarg (' + text.length + ' caràcters)';
-                details.appendChild(summary);
-                const wrap = document.createElement(isPre ? 'pre' : 'div');
-                if (!isPre) { wrap.style.whiteSpace = 'pre-wrap'; wrap.style.fontFamily = 'ui-monospace, Menlo, Consolas, monospace'; }
-                wrap.appendChild(b.cloneNode(true));
-                details.appendChild(wrap);
-                b.replaceWith(details);
-              }
+          // Embolcallar TOT el codi en <details>
+          const wrapAllCode = () => {
+            // Primer, embolcallar tots els <pre>
+            Array.from(body.querySelectorAll('pre')).forEach(pre => {
+              const details = document.createElement('details');
+              details.className = 'code-long';
+              const summary = document.createElement('summary');
+              summary.textContent = 'Mostrar codi';
+              details.appendChild(summary);
+              const wrap = document.createElement('pre');
+              wrap.appendChild(pre.cloneNode(true));
+              details.appendChild(wrap);
+              pre.replaceWith(details);
+            });
+            // Després, embolcallar <code> que no estigui dins d'un <pre>
+            Array.from(body.querySelectorAll('code')).forEach(code => {
+              if (code.closest('pre')) return;
+              const details = document.createElement('details');
+              details.className = 'code-long';
+              const summary = document.createElement('summary');
+              summary.textContent = 'Mostrar codi';
+              details.appendChild(summary);
+              const wrap = document.createElement('div');
+              wrap.style.whiteSpace = 'pre-wrap';
+              wrap.style.fontFamily = 'ui-monospace, Menlo, Consolas, monospace';
+              wrap.appendChild(code.cloneNode(true));
+              details.appendChild(wrap);
+              code.replaceWith(details);
             });
           };
-          wrapLongCode();
+          wrapAllCode();
 
           container.innerHTML = '';
           const wrapper = document.createElement('div');
@@ -152,7 +175,7 @@
           container.textContent = 'Error carregant el manual: ' + e.message;
         }
       }
-      loadManual();
+      if (canAccessManual()) { loadManual(); } else { showLocked(); }
     </script>
   </body>
 </html>
