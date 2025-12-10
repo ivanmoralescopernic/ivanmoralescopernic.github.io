@@ -141,72 +141,78 @@
     <main>
         <h1>Seguretat Sense Fils i Vectors d'Atac</h1>
 
-        <section id="intro">
-            <h2>1.1 Descripció General</h2>
-            <p>Molts clients estan preocupats per la seguretat de les seves xarxes Wi-Fi. Com que els senyals sense fils es poden rebre fora de les instal·lacions, és essencial verificar periòdicament l'eficàcia de les mesures de seguretat.</p>
-            <div class="note">
-                <strong>Important:</strong> La fortalesa de la seguretat d'accés a la xarxa no està directament relacionada amb el Wi-Fi, però és igualment crucial.
-            </div>
-        </section>
+        <section id="teoria" class="card">
+          <h2>Teoria</h2>
+          <div id="teoria-content">
+            <h3>1.1 Descripció General</h3>
+            <p>Els senyals Wi‑Fi es propaguen més enllà dels límits físics d’un edifici, per això cal revisar periòdicament la configuració de seguretat i detectar dispositius no autoritzats.</p>
 
-        <section id="rogue">
-            <h2>1.2 Punts d'accés no autoritzats (Rogue AP)</h2>
-            <p>Un dels atacs més simplistes implica que un atacant instal·li un punt d'accés (AP) fals en una xarxa per enganyar els usuaris perquè es connectin a aquest AP. Bàsicament, l'atacant pot utilitzar aquest AP dubtós per crear una porta del darrere (backdoor).</p>
-        </section>
+            <h3>1.2 Punts d’accés no autoritzats (Rogue AP)</h3>
+            <p>Un Rogue AP és un punt d’accés connectat a la xarxa sense control. Pot obrir una porta d’entrada per atacants i exposar trànsit no xifrat o mal configurat.</p>
+            <img src="images/image1.png" alt="Exemple d’AP no autoritzat" class="doc-image" />
 
-        <section id="eviltwin">
-            <h2>1.3 Atacs de Bessons Malvats (Evil Twin)</h2>
-            <p>L'atacant crea un AP fraudulent i el configura exactament igual que la xarxa corporativa existent.</p>
-            <h3>Tècnica: DNS Spoofing</h3>
-            <p>En general, s'utilitza la suplantació de DNS per redirigir la víctima a un portal captiu clonat. L'atacant injecta un registre DNS falsificat a la memòria cau.</p>
-            <div class="note">
-                <strong>CONSELL:</strong> Els portals captius són comuns en aeroports i cafeteries. Els atacants poden clonar-los per fer enginyeria social.
-            </div>
-        </section>
+            <h3>1.3 Bessó Malvat (Evil Twin) i suplantació de DNS</h3>
+            <p>L’atacant clona l’SSID i la configuració d’un AP real. Amb suplantació de DNS, redirigeix la víctima a un portal captiu fals per capturar credencials.</p>
+            <img src="images/image2.png" alt="Portal fals i redirecció DNS" class="doc-image" />
 
-        <section id="deauth">
-            <h2>1.4 Atacs de Dissociació (Deauth)</h2>
-            <p>Un atacant pot fer que clients legítims es desconnectin dels seus APs per provocar una condició de DoS o per forçar-los a connectar-se a un Evil Twin. Això també permet capturar el <em>Handshake</em>.</p>
-            
-            <h3>Ús d'Airmon-ng</h3>
-            <pre><code><span class="cmd">root@websploit:~#</span> airmon-ng start wlan0
-<span class="cmd">root@websploit:~#</span> airodump-ng wlan0mon</code></pre>
-            <p>L'eina <strong>Aireplay-ng</strong> s'utilitza per injectar els paquets de desautenticació:</p>
-            <pre><code><span class="cmd">root@kali:~#</span> aireplay-ng -0 0 -a [BSSID_OBJECTIU] -c [CLIENT] wlan0</code></pre>
-        </section>
+            <h3>1.4 Desautenticació (Deauth)</h3>
+            <p>Envia trames per forçar la desconnexió de clients. Ajuda a capturar el <em>handshake</em> i a forçar connexions a un Evil Twin.</p>
+            <pre><code>airmon-ng start wlan0
+airodump-ng wlan0mon
+aireplay-ng -0 4 -a [BSSID] -c [CLIENT] wlan0mon</code></pre>
+            <img src="images/image3.png" alt="Esquema de desautenticació" class="doc-image" />
 
-        <section id="wep">
-            <h2>1.8 Atacs Vector d'Inicialització (WEP)</h2>
-            <p>WEP és un protocol obsolet. Utilitza un Vector d'Inicialització (IV) de 24 bits enviat en text pla. Com que l'IV es reutilitza, és fàcil de predir.</p>
-            <h3>Passos per crackejar WEP:</h3>
-            <ol>
-                <li>Iniciar mode monitor.</li>
-                <li>Capturar trànsit amb <code>airodump-ng</code>.</li>
-                <li>Injectar paquets ARP amb <code>aireplay-ng</code> per accelerar la recollida d'IVs.</li>
-                <li>Crackejar la clau amb <code>aircrack-ng</code>.</li>
-            </ol>
-        </section>
-
-        <section id="wpa">
-            <h2>Atacs contra WPA/WPA2</h2>
-            <p>Aquests protocols són vulnerables a atacs de diccionari si es captura el <strong>4-way handshake</strong>.</p>
-            <div class="note">
-                També existeixen vulnerabilitats com <strong>KRACK</strong> (Key Reinstallation Attack), descobert per Mathy Vanhoef, que permet reinstal·lar claus de xifratge.
-            </div>
-            <h3>Comandes bàsiques:</h3>
-            <pre><code># Capturar handshake
-airodump-ng -c [CANAL] --bssid [MAC_AP] -w captura wlan0
-
-# Crackejar amb diccionari
-aircrack-ng -w wordlist.txt captura.cap</code></pre>
-        </section>
-
-        <section id="bluetooth">
-            <h2>1.13 Bluejacking i Bluesnarfing</h2>
+            <h3>1.5 Protecció bàsica</h3>
             <ul>
-                <li><strong>Bluejacking:</strong> Enviar missatges no sol·licitats (vCards) via Bluetooth. Molest però inofensiu.</li>
-                <li><strong>Bluesnarfing:</strong> Més perillós. Permet l'accés no autoritzat i robatori d'informació (contactes, imatges).</li>
+              <li>Wi‑Fi amb WPA2/WPA3 i contrasenyes fortes.</li>
+              <li>Segmentació de xarxa i VLAN.</li>
+              <li>Monitoratge d’APs i detecció d’intrusions.</li>
             </ul>
+            <img src="images/image4.png" alt="Bones pràctiques Wi‑Fi" class="doc-image" />
+
+            <h3>1.8 WEP i IVs</h3>
+            <p>WEP utilitza IVs de 24 bits i és vulnerable a recomputació. No s’ha d’utilitzar en entorns actuals.</p>
+            <pre><code>aireplay-ng -3 -b [BSSID] -h [MAC_TEVA] wlan0mon
+aircrack-ng captura.cap</code></pre>
+            <img src="images/image5.png" alt="Captura d’IVs en WEP" class="doc-image" />
+
+            <h3>1.9 WPA/WPA2</h3>
+            <p>Vulnerable a atacs de diccionari si es captura el handshake de quatre passos. Cal contrasenyes robustes i evitar SSID trivials.</p>
+            <pre><code>airodump-ng -c [CANAL] --bssid [MAC_AP] -w captura wlan0mon
+aircrack-ng -w wordlist.txt captura.cap</code></pre>
+            <img src="images/image6.png" alt="Handshakes WPA/WPA2" class="doc-image" />
+
+            <h3>1.10 Interferència de senyal (Jamming)</h3>
+            <p>La generació de soroll intencionat pot causar denegació de servei. S’identifica per SNR baix i variacions de canal.</p>
+            <img src="images/image7.png" alt="Interferència de senyal" class="doc-image" />
+
+            <h3>1.13 Bluetooth: Bluejacking i Bluesnarfing</h3>
+            <ul>
+              <li>Bluejacking: enviament de missatges no sol·licitats. Impacte menor.</li>
+              <li>Bluesnarfing: accés no autoritzat a dades. Impacte elevat.</li>
+            </ul>
+            <img src="images/image8.png" alt="Atacs Bluetooth" class="doc-image" />
+
+            <h3>1.15 KARMA i probes</h3>
+            <p>Respon a <em>probe requests</em> amb l’SSID sol·licitat, fent que dispositius confiïn en un AP fals.</p>
+            <img src="images/image9.png" alt="KARMA i probes" class="doc-image" />
+
+            <h3>1.16 War Driving</h3>
+            <p>Localització d’APs desplaçant-se per l’entorn amb eines de mapeig. Implica riscos de privacitat si es publiquen ubicacions.</p>
+            <img src="images/image10.png" alt="Mapa d’APs" class="doc-image" />
+
+            <h3>1.17 Password Spraying</h3>
+            <p>Prova de contrasenyes comunes sobre molts comptes per evitar bloqueig per força bruta. Mitigar amb MFA i polítiques de contrasenyes.</p>
+            <img src="images/image11.png" alt="Spraying de contrasenyes" class="doc-image" />
+
+            <h3>1.18 Recomanacions finals</h3>
+            <ul>
+              <li>Auditories periòdiques, actualitzacions de firmware i logs.</li>
+              <li>MFA, portals captius segurs i control de dispositius.</li>
+              <li>Alertes sobre APs no autoritzats.</li>
+            </ul>
+            <img src="images/image12.png" alt="Recomanacions de seguretat" class="doc-image" />
+          </div>
         </section>
 
       <section id="sec-1-11" class="card">
@@ -390,50 +396,7 @@ aircrack-ng -w wordlist.txt captura.cap</code></pre>
       overlay.addEventListener('click', () => toggleSidebar(false));
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleSidebar(false); });
 
-      // Carrega i saneja contingut de la teoria
-      async function loadTeoria() {
-        const container = document.getElementById('teoria-content');
-        try {
-          const res = await fetch('Xarxes_Inalmbriques_Teoria.html');
-          const html = await res.text();
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-          const body = doc.body;
-
-          // Elimina elements d'estil dins el body (per si n'hi ha)
-          body.querySelectorAll('style, link[rel="stylesheet"]').forEach(el => el.remove());
-
-          // Sanejament: eliminar atributs d'estil i classes de Google Docs
-          function sanitize(node) {
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              node.removeAttribute('style');
-              const cls = node.getAttribute('class');
-              if (cls && (/^(c\d+|lst-kix_|li-bullet|ol|ul)/.test(cls))) {
-                node.removeAttribute('class');
-              }
-              if (node.tagName === 'FONT') {
-                const span = document.createElement('span');
-                span.innerHTML = node.innerHTML;
-                node.replaceWith(span);
-                node = span;
-              }
-            }
-            node.childNodes.forEach(sanitize);
-          }
-
-          sanitize(body);
-          body.querySelectorAll('img').forEach(img => img.classList.add('doc-image'));
-          container.innerHTML = '';
-          const wrapper = document.createElement('div');
-          wrapper.className = 'card';
-          wrapper.append(...Array.from(body.childNodes));
-          container.appendChild(wrapper);
-        } catch (e) {
-          container.innerHTML = '<p style="color: #ffb4b4">No s\'ha pogut carregar el document de teoria.</p>';
-          console.error(e);
-        }
-      }
-      loadTeoria();
+      
 
       // Multichoice: correcció
       function checkSelectQuiz() {
