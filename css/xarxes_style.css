@@ -113,7 +113,7 @@ pre {
 /* Per a comandes de terminal (ex: <code>airmon-ng</code>) */
 code {
   font-family: 'Fira Code', monospace; /* O 'Courier New' */
-  color: var(--accent-3); /* Violeta per diferenciar del text normal */
+  color: var(--accent); /* Violeta per diferenciar del text normal */
   background: rgba(255, 255, 255, 0.1); /* Fons lleugerament gris */
   padding: 2px 6px;
   border-radius: 4px;
