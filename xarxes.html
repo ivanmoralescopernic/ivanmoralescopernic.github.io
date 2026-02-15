@@ -1,426 +1,539 @@
 <!DOCTYPE html>
 <html lang="ca">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Seguretat Sense Fils - Complet</title>
-    <!-- Vincle al full d'estils extern -->
-    <link rel="stylesheet" href="css/xarxes_style.css" />
-    <!-- Llibreria per Drag and Drop (externa) -->
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-  </head>
-  <body>
 
-    <!-- Capçalera -->
-    <header>
-      <div class="brand">
-        <div class="dot"></div>
-        <span>Ciberseguretat: Wireless & Vectors</span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seguretat Sense Fils - Complet</title>
+  <!-- Vincle al full d'estils extern -->
+  <link rel="stylesheet" href="css/xarxes_style.css" />
+  <!-- Llibreria per Drag and Drop (externa) -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Capçalera -->
+  <header>
+    <div class="brand">
+      <div class="dot"></div>
+      <span>Ciberseguretat: Wireless & Vectors</span>
+    </div>
+    <button class="hamburger" id="toggleMenu">☰ Índex</button>
+  </header>
+
+  <!-- Menú Lateral -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <h3>Teoria</h3>
+    <a href="#s1-1">1.1 Descripció General</a>
+    <a href="#s1-2">1.2 Rogue AP</a>
+    <a href="#s1-3">1.3 Evil Twin</a>
+    <a href="#s1-4">1.4 Deauth / Desautenticació</a>
+    <a href="#s1-5">1.5 - 1.6 PNL & Jamming</a>
+    <a href="#s1-7">1.7 War Driving</a>
+    <a href="#s1-8">1.8 WEP / WPA Attacks</a>
+    <a href="#s1-9">1.9 KARMA & Frag</a>
+    <a href="#s1-11">1.11 Pràctica (Quiz)</a>
+    <a href="#exercicis">Exercicis Extra (Select)</a>
+    <a href="#s1-12">1.12 - 1.13 Enginyeria Social & Bluetooth</a>
+    <a href="#s1-14">1.14 - 1.17 BLE, RFID & Spraying</a>
+    <a href="#s1-18">1.18 Pràctica (Drag & Drop)</a>
+    <a href="#final">Resultats Finals</a>
+  </aside>
+
+  <main>
+    <h1>Seguretat Sense Fils i Vectors d'Atac</h1>
+
+    <!-- 1.1 Descripció General -->
+    <section class="card" id="s1-1">
+      <h2>1.1 Descripció General</h2>
+      <p><strong>Solucions de seguretat Protego</strong></p>
+      <p>Molts dels nostres clients estan preocupats per la seguretat de les seves xarxes Wi-Fi, i amb raó. Com que els
+        senyals sense fils es poden rebre fora de les instal·lacions i les xarxes sense fils són essencialment xarxes
+        internes, és essencial verificar periòdicament l'eficàcia de les mesures de seguretat Wi-Fi. La fortalesa de la
+        seguretat d'accés a la xarxa no està directament relacionada amb el Wi-Fi, però és igualment crucial; d'aquesta
+        manera, si un atacant aconsegueix accedir a la xarxa sense fils, encara no podrà accedir a recursos
+        confidencials.</p>
+      <p>Part del nostre acord amb Pixel Paradise inclou proves exhaustives de la seguretat de la seva xarxa Wi-Fi.
+        Pixel Paradise està ubicat en un entorn urbà d'alta densitat, per la qual cosa moltes persones podrien detectar
+        la seva LAN sense fils i intentar penetrar-hi. Els actius de producte de Pixel Paradise són digitals, de manera
+        que un compromís exitós de la xarxa interna podria provocar pèrdues comercials considerables.</p>
+      <p>A les seccions següents, aprendràs sobre diferents atacs sense fils i vulnerabilitats.</p>
+    </section>
+
+    <!-- 1.2 Rogue AP -->
+    <section class="card" id="s1-2">
+      <h2>1.2 Punts d'accés no autoritzats (Rogue AP)</h2>
+      <p>Un dels atacs sense fils més simplistes implica que un atacant instal·li un punt d'accés (AP) fals en una xarxa
+        per enganyar els usuaris perquè es connectin a aquest AP. Bàsicament, l'atacant pot utilitzar aquest AP dubtós
+        per crear una porta del darrere (<em>backdoor</em>) i obtenir accés a la xarxa i als seus sistemes, com
+        s'il·lustra a continuació:</p>
+      <img src="images/xarxeswifi/image4.png" alt="Esquema Rogue AP">
+    </section>
+
+    <!-- 1.3 Evil Twin -->
+    <section class="card" id="s1-3">
+      <h2>1.3 Atacs de bessons malvats (Evil Twin)</h2>
+      <p>En un atac de bessó malvat, l'atacant crea un punt d'accés fraudulent i el configura exactament igual que la
+        xarxa corporativa existent, com s'il·lustra a la següent imatge:</p>
+      <img src="images/xarxeswifi/image13.png" alt="Esquema Evil Twin">
+      <p>En general, l'atacant utilitza la suplantació de DNS (<em>DNS spoofing</em>) per redirigir la víctima a un
+        portal captiu clonat o a un lloc web. Quan els usuaris inicien sessió al bessó malvat, un hacker pot injectar
+        fàcilment un registre DNS falsificat a la memòria cau del DNS, canviant el registre DNS de tots els usuaris a la
+        xarxa falsa. Qualsevol usuari que iniciï sessió al bessó malvat serà redirigit pel registre DNS falsificat
+        injectat a la memòria cau.</p>
+      <p>Un atacant que realitza un atac d'enverinament de la memòria cau del DNS (<em>DNS cache poisoning</em>) vol que
+        la memòria cau accepti un registre falsificat. Algunes formes de defensar-se contra la suplantació de DNS són
+        l'ús de filtratge de paquets, protocols criptogràfics i funcions de detecció de suplantació proporcionades per
+        les implementacions sense fils modernes.</p>
+
+      <div class="note">
+        <strong>CONSELL:</strong> Els portals captius són portals web que s'utilitzen normalment en xarxes sense fils en
+        llocs públics, com aeroports i cafeteries. En general, s'usen per autenticar usuaris o simplement per mostrar
+        els termes i condicions que s'apliquen quan s'utilitza la xarxa. Els atacants poden fer-se passar per portals
+        captius per realitzar atacs d'enginyeria social o robar informació confidencial.
       </div>
-      <button class="hamburger" id="toggleMenu">☰ Índex</button>
-    </header>
+    </section>
 
-    <!-- Menú Lateral -->
-    <div class="overlay" id="overlay"></div>
-    <aside class="sidebar" id="sidebar">
-      <h3>Teoria</h3>
-      <a href="#s1-1">1.1 Descripció General</a>
-      <a href="#s1-2">1.2 Rogue AP</a>
-      <a href="#s1-3">1.3 Evil Twin</a>
-      <a href="#s1-4">1.4 Deauth / Desautenticació</a>
-      <a href="#s1-5">1.5 - 1.6 PNL & Jamming</a>
-      <a href="#s1-7">1.7 War Driving</a>
-      <a href="#s1-8">1.8 WEP / WPA Attacks</a>
-      <a href="#s1-9">1.9 KARMA & Frag</a>
-      <a href="#s1-11">1.11 Pràctica (Quiz)</a>
-      <a href="#exercicis">Exercicis Extra (Select)</a>
-      <a href="#s1-12">1.12 - 1.13 Enginyeria Social & Bluetooth</a>
-      <a href="#s1-14">1.14 - 1.17 BLE, RFID & Spraying</a>
-      <a href="#s1-18">1.18 Pràctica (Drag & Drop)</a>
-      <a href="#final">Resultats Finals</a>
-    </aside>
+    <!-- 1.4 Deauth -->
+    <section class="card" id="s1-4">
+      <h2>1.4 Atacs de dissociació (o desautenticació)</h2>
+      <p>Un atacant pot fer que clients sense fils legítims es desautentiquin de punts d'accés legítims o encaminadors
+        sense fils per provocar una condició de denegació de servei (DoS) o per forçar aquests clients a connectar-se a
+        un bessó malvat. Aquest tipus d'atac també es coneix com a atac de dissociació perquè l'atacant dissocia
+        (intenta desconnectar) l'usuari de l'AP d'autenticació i després realitza un altre atac per obtenir les
+        credencials vàlides de l'usuari.</p>
+      <p>Un identificador de conjunt de serveis (SSID) és el nom associat amb una xarxa d'àrea local sense fils (WLAN)
+        802.11. Els noms SSID s'inclouen en text pla en molts paquets sense fils i balises (<em>beacons</em>). Un client
+        necessita conèixer el SSID per associar-se amb un AP. És possible configurar eines passives com Kismet o KisMAC
+        per escoltar i capturar SSID i trànsit de xarxa. A més, eines com Airmon-ng (part de la suite Aircrack-ng) poden
+        realitzar aquest reconeixement.</p>
 
-    <main>
-      <h1>Seguretat Sense Fils i Vectors d'Atac</h1>
+      <h3>Exemple - Inici d'Airmon-ng</h3>
+      <img src="images/xarxeswifi/image3.png" alt="Airmon-ng start">
+      <p>A l'exemple anterior, la sortida mostra que la interfície <code>wlan1</code> s'utilitza per al monitoratge. La
+        comanda <code>ip -s -h -c link show wlan1</code> serveix per verificar l'estat. Quan poses una interfície en
+        mode monitor, Airmon-ng verifica si hi ha processos que interfereixin. Per aturar-los, pots usar
+        <code>airmon-ng check kill</code>.</p>
 
-      <!-- 1.1 Descripció General -->
-      <section class="card" id="s1-1">
-        <h2>1.1 Descripció General</h2>
-        <p><strong>Solucions de seguretat Protego</strong></p>
-        <p>Molts dels nostres clients estan preocupats per la seguretat de les seves xarxes Wi-Fi, i amb raó. Com que els senyals sense fils es poden rebre fora de les instal·lacions i les xarxes sense fils són essencialment xarxes internes, és essencial verificar periòdicament l'eficàcia de les mesures de seguretat Wi-Fi. La fortalesa de la seguretat d'accés a la xarxa no està directament relacionada amb el Wi-Fi, però és igualment crucial; d'aquesta manera, si un atacant aconsegueix accedir a la xarxa sense fils, encara no podrà accedir a recursos confidencials.</p>
-        <p>Part del nostre acord amb Pixel Paradise inclou proves exhaustives de la seguretat de la seva xarxa Wi-Fi. Pixel Paradise està ubicat en un entorn urbà d'alta densitat, per la qual cosa moltes persones podrien detectar la seva LAN sense fils i intentar penetrar-hi. Els actius de producte de Pixel Paradise són digitals, de manera que un compromís exitós de la xarxa interna podria provocar pèrdues comercials considerables.</p>
-        <p>A les seccions següents, aprendràs sobre diferents atacs sense fils i vulnerabilitats.</p>
-      </section>
+      <p>L'eina Airodump-ng es pot utilitzar per detectar i analitzar el trànsit, com es mostra a l'exemple.</p>
 
-      <!-- 1.2 Rogue AP -->
-      <section class="card" id="s1-2">
-        <h2>1.2 Punts d'accés no autoritzats (Rogue AP)</h2>
-        <p>Un dels atacs sense fils més simplistes implica que un atacant instal·li un punt d'accés (AP) fals en una xarxa per enganyar els usuaris perquè es connectin a aquest AP. Bàsicament, l'atacant pot utilitzar aquest AP dubtós per crear una porta del darrere (<em>backdoor</em>) i obtenir accés a la xarxa i als seus sistemes, com s'il·lustra a continuació:</p>
-        <img src="images/image4.png" alt="Esquema Rogue AP">
-      </section>
+      <h3>Exemple - Ús de l'eina Airodump-ng</h3>
+      <img src="images/xarxeswifi/image7.png" alt="Airodump-ng">
+      <p>Pots fer servir Airodump-ng per rastrejar xarxes i obtenir els seus SSID i canals. Moltes corporacions
+        configuren els seus AP per no anunciar (difondre) els seus SSID. No obstant això, si espies una xarxa el temps
+        suficient, eventualment atraparàs un client intentant associar-se i obtindràs el SSID.</p>
+      <p>A l'exemple, pots veure el BSSID (adreça MAC de l'AP), l'ESSID (nom de la xarxa) i el protocol de xifratge
+        (ENC), que pot ser WPA, WPA2, WPA3, WEP o Obert (OPN).</p>
 
-      <!-- 1.3 Evil Twin -->
-      <section class="card" id="s1-3">
-        <h2>1.3 Atacs de bessons malvats (Evil Twin)</h2>
-        <p>En un atac de bessó malvat, l'atacant crea un punt d'accés fraudulent i el configura exactament igual que la xarxa corporativa existent, com s'il·lustra a la següent imatge:</p>
-        <img src="images/image13.png" alt="Esquema Evil Twin">
-        <p>En general, l'atacant utilitza la suplantació de DNS (<em>DNS spoofing</em>) per redirigir la víctima a un portal captiu clonat o a un lloc web. Quan els usuaris inicien sessió al bessó malvat, un hacker pot injectar fàcilment un registre DNS falsificat a la memòria cau del DNS, canviant el registre DNS de tots els usuaris a la xarxa falsa. Qualsevol usuari que iniciï sessió al bessó malvat serà redirigit pel registre DNS falsificat injectat a la memòria cau.</p>
-        <p>Un atacant que realitza un atac d'enverinament de la memòria cau del DNS (<em>DNS cache poisoning</em>) vol que la memòria cau accepti un registre falsificat. Algunes formes de defensar-se contra la suplantació de DNS són l'ús de filtratge de paquets, protocols criptogràfics i funcions de detecció de suplantació proporcionades per les implementacions sense fils modernes.</p>
-        
-        <div class="note">
-          <strong>CONSELL:</strong> Els portals captius són portals web que s'utilitzen normalment en xarxes sense fils en llocs públics, com aeroports i cafeteries. En general, s'usen per autenticar usuaris o simplement per mostrar els termes i condicions que s'apliquen quan s'utilitza la xarxa. Els atacants poden fer-se passar per portals captius per realitzar atacs d'enginyeria social o robar informació confidencial.
-        </div>
-      </section>
+      <h3>Realització d'un atac de desautenticació:</h3>
+      <img src="images/xarxeswifi/image14.png" alt="Aireplay-ng deauth attack">
+      <p>A la imatge es veu l'eina Aireplay-ng llançant l'atac. L'atacant envia paquets de desautenticació (DeAuth) al
+        BSSID <code>08:02:8E:D3:88:82</code> i al client víctima. L'opció <code>-c</code> accelera l'atac enviant els
+        paquets directament al client.</p>
+      <p>L'estàndard 802.11w defineix la protecció de trames d'administració (MFP), que ajuda a defensar-se d'aquests
+        atacs.</p>
 
-      <!-- 1.4 Deauth -->
-      <section class="card" id="s1-4">
-        <h2>1.4 Atacs de dissociació (o desautenticació)</h2>
-        <p>Un atacant pot fer que clients sense fils legítims es desautentiquin de punts d'accés legítims o encaminadors sense fils per provocar una condició de denegació de servei (DoS) o per forçar aquests clients a connectar-se a un bessó malvat. Aquest tipus d'atac també es coneix com a atac de dissociació perquè l'atacant dissocia (intenta desconnectar) l'usuari de l'AP d'autenticació i després realitza un altre atac per obtenir les credencials vàlides de l'usuari.</p>
-        <p>Un identificador de conjunt de serveis (SSID) és el nom associat amb una xarxa d'àrea local sense fils (WLAN) 802.11. Els noms SSID s'inclouen en text pla en molts paquets sense fils i balises (<em>beacons</em>). Un client necessita conèixer el SSID per associar-se amb un AP. És possible configurar eines passives com Kismet o KisMAC per escoltar i capturar SSID i trànsit de xarxa. A més, eines com Airmon-ng (part de la suite Aircrack-ng) poden realitzar aquest reconeixement.</p>
+      <div class="note">
+        <strong>NOTA:</strong> Molts adaptadors sense fils no permeten injectar paquets. Per a una llista d'adaptadors
+        compatibles, consulta <a href="https://theartofhacking.org/github"
+          target="_blank">theartofhacking.org/github</a>.
+      </div>
+    </section>
 
-        <h3>Exemple - Inici d'Airmon-ng</h3>
-        <img src="images/image3.png" alt="Airmon-ng start">
-        <p>A l'exemple anterior, la sortida mostra que la interfície <code>wlan1</code> s'utilitza per al monitoratge. La comanda <code>ip -s -h -c link show wlan1</code> serveix per verificar l'estat. Quan poses una interfície en mode monitor, Airmon-ng verifica si hi ha processos que interfereixin. Per aturar-los, pots usar <code>airmon-ng check kill</code>.</p>
-        
-        <p>L'eina Airodump-ng es pot utilitzar per detectar i analitzar el trànsit, com es mostra a l'exemple.</p>
+    <!-- 1.5 - 1.7 Sniffing & WarDriving -->
+    <section class="card" id="s1-5">
+      <h2>1.5 Atacs a la llista de xarxes preferides (PNL)</h2>
+      <p>Els sistemes operatius i els suplicants (clients) mantenen una llista de xarxes preferides (PNL) amb els SSID i
+        contrasenyes. Els clients utilitzen aquestes xarxes per associar-se automàticament. Els atacants poden escoltar
+        aquestes sol·licituds i fer-se passar per les xarxes preferides perquè els clients s'hi connectin, permetent
+        escoltar o manipular la comunicació.</p>
 
-        <h3>Exemple - Ús de l'eina Airodump-ng</h3>
-        <img src="images/image7.png" alt="Airodump-ng">
-        <p>Pots fer servir Airodump-ng per rastrejar xarxes i obtenir els seus SSID i canals. Moltes corporacions configuren els seus AP per no anunciar (difondre) els seus SSID. No obstant això, si espies una xarxa el temps suficient, eventualment atraparàs un client intentant associar-se i obtindràs el SSID.</p>
-        <p>A l'exemple, pots veure el BSSID (adreça MAC de l'AP), l'ESSID (nom de la xarxa) i el protocol de xifratge (ENC), que pot ser WPA, WPA2, WPA3, WEP o Obert (OPN).</p>
+      <h2>1.6 Interferència i bloqueig del senyal sense fils (Jamming)</h2>
+      <p>L'objectiu d'interferir (<em>jamming</em>) és crear una condició de DoS total o parcial generant soroll
+        aleatori en les freqüències utilitzades. Amb les eines adequades, un atacant pot desconnectar clients legítims.
+      </p>
+    </section>
 
-        <h3>Realització d'un atac de desautenticació:</h3>
-        <img src="images/image14.png" alt="Aireplay-ng deauth attack">
-        <p>A la imatge es veu l'eina Aireplay-ng llançant l'atac. L'atacant envia paquets de desautenticació (DeAuth) al BSSID <code>08:02:8E:D3:88:82</code> i al client víctima. L'opció <code>-c</code> accelera l'atac enviant els paquets directament al client.</p>
-        <p>L'estàndard 802.11w defineix la protecció de trames d'administració (MFP), que ajuda a defensar-se d'aquests atacs.</p>
+    <section class="card" id="s1-7">
+      <h2>1.7 Conducció de guerra (War Driving)</h2>
+      <p>El <em>War Driving</em> és un mètode per trobar punts d'accés desplaçant-se (conduint o caminant). Amb poc
+        temps, es pot obtenir molta informació. El <em>War Flying</em> és similar però utilitzant drons o vehicles
+        aeris.</p>
+      <div class="note">
+        <strong>CONSELL:</strong> Un lloc popular és WiGLE (<a href="https://wigle.net"
+          target="_blank">https://wigle.net</a>), on els usuaris pugen informació de xarxes detectades.
+      </div>
+      <img src="images/xarxeswifi/image9.png" alt="Mapa War Driving">
+    </section>
 
-        <div class="note">
-          <strong>NOTA:</strong> Molts adaptadors sense fils no permeten injectar paquets. Per a una llista d'adaptadors compatibles, consulta <a href="https://theartofhacking.org/github" target="_blank">theartofhacking.org/github</a>.
-        </div>
-      </section>
+    <!-- 1.8 WEP / WPA Attacks -->
+    <section class="card" id="s1-8">
+      <h2>1.8 Atacs per vector d'inicialització (IV) i protocols no segurs</h2>
 
-      <!-- 1.5 - 1.7 Sniffing & WarDriving -->
-      <section class="card" id="s1-5">
-        <h2>1.5 Atacs a la llista de xarxes preferides (PNL)</h2>
-        <p>Els sistemes operatius i els suplicants (clients) mantenen una llista de xarxes preferides (PNL) amb els SSID i contrasenyes. Els clients utilitzen aquestes xarxes per associar-se automàticament. Els atacants poden escoltar aquestes sol·licituds i fer-se passar per les xarxes preferides perquè els clients s'hi connectin, permetent escoltar o manipular la comunicació.</p>
+      <h3>Atacs contra WEP</h3>
+      <p>WEP és un protocol obsolet i s'ha d'evitar. Utilitza claus de 40 o 104 bits i un Vector d'Inicialització (IV)
+        de 24 bits enviat en text pla. WEP utilitza l'algorisme RC4 d'una manera que permet desxifrar la clau (PSK) amb
+        poc esforç, ja que l'IV es reutilitza i es pot predir. Un atacant pot utilitzar <strong>Aircrack-ng</strong> per
+        recuperar la clau WEP:</p>
+      <ol>
+        <li>Iniciar mode monitor: <code>airmon-ng start wlan0 11</code></li>
+        <li>Capturar trànsit: <code>airodump-ng -c 11 --bssid 08:02:8E:D3:88:82 -w ciber_capture wlan0</code></li>
+        <li>Injectar paquets ARP per accelerar la recollida d'IVs:
+          <code>aireplay-ng -3 -b [BSSID] -h [MAC_ORIGEN] wlan0</code></li>
+        <li>Crackejar la clau: <code>aircrack-ng -b [BSSID] ciber_capture.cap</code></li>
+      </ol>
+      <img src="images/xarxeswifi/image5.png" alt="Crackeig WEP">
 
-        <h2>1.6 Interferència i bloqueig del senyal sense fils (Jamming)</h2>
-        <p>L'objectiu d'interferir (<em>jamming</em>) és crear una condició de DoS total o parcial generant soroll aleatori en les freqüències utilitzades. Amb les eines adequades, un atacant pot desconnectar clients legítims.</p>
-      </section>
+      <h3>Atacs contra WPA/WPA2</h3>
+      <p>WPA i WPA2 són susceptibles a atacs, tot i que WPA3 soluciona moltes vulnerabilitats. WPA no és susceptible als
+        atacs d'IV del WEP, però es pot capturar el <strong>protocol d'enllaç de quatre vies (4-way handshake)</strong>
+        i aplicar força bruta.</p>
+      <img src="images/xarxeswifi/image11.png" alt="Captura Handshake">
 
-      <section class="card" id="s1-7">
-        <h2>1.7 Conducció de guerra (War Driving)</h2>
-        <p>El <em>War Driving</em> és un mètode per trobar punts d'accés desplaçant-se (conduint o caminant). Amb poc temps, es pot obtenir molta informació. El <em>War Flying</em> és similar però utilitzant drons o vehicles aeris.</p>
-        <div class="note">
-          <strong>CONSELL:</strong> Un lloc popular és WiGLE (<a href="https://wigle.net" target="_blank">https://wigle.net</a>), on els usuaris pugen informació de xarxes detectades.
-        </div>
-        <img src="images/image9.png" alt="Mapa War Driving">
-      </section>
+      <p><strong>Passos de l'atac:</strong></p>
+      <ol>
+        <li>Monitorar la xarxa i trobar clients.</li>
+        <li>Enviar paquets DeAuth per desconnectar el client.</li>
+        <li>Quan el client es reconecta, l'atacant captura el <em>handshake</em>.</li>
+        <li>Utilitzar <code>aircrack-ng</code> amb una llista de paraules (diccionari) per desxifrar la contrasenya.
+        </li>
+      </ol>
+      <p>A la següent il·lustració podem veure aquest cicle de manera gràfica:</p>
+      <img src="images/xarxeswifi/image6.png" alt="Cicle atac WPA">
 
-      <!-- 1.8 WEP / WPA Attacks -->
-      <section class="card" id="s1-8">
-        <h2>1.8 Atacs per vector d'inicialització (IV) i protocols no segurs</h2>
-        
-        <h3>Atacs contra WEP</h3>
-        <p>WEP és un protocol obsolet i s'ha d'evitar. Utilitza claus de 40 o 104 bits i un Vector d'Inicialització (IV) de 24 bits enviat en text pla. WEP utilitza l'algorisme RC4 d'una manera que permet desxifrar la clau (PSK) amb poc esforç, ja que l'IV es reutilitza i es pot predir. Un atacant pot utilitzar <strong>Aircrack-ng</strong> per recuperar la clau WEP:</p>
-        <ol>
-          <li>Iniciar mode monitor: <code>airmon-ng start wlan0 11</code></li>
-          <li>Capturar trànsit: <code>airodump-ng -c 11 --bssid 08:02:8E:D3:88:82 -w ciber_capture wlan0</code></li>
-          <li>Injectar paquets ARP per accelerar la recollida d'IVs: <code>aireplay-ng -3 -b [BSSID] -h [MAC_ORIGEN] wlan0</code></li>
-          <li>Crackejar la clau: <code>aircrack-ng -b [BSSID] ciber_capture.cap</code></li>
-        </ol>
-        <img src="images/image5.png" alt="Crackeig WEP">
+      <p><strong>Detall pas a pas:</strong></p>
 
-        <h3>Atacs contra WPA/WPA2</h3>
-        <p>WPA i WPA2 són susceptibles a atacs, tot i que WPA3 soluciona moltes vulnerabilitats. WPA no és susceptible als atacs d'IV del WEP, però es pot capturar el <strong>protocol d'enllaç de quatre vies (4-way handshake)</strong> i aplicar força bruta.</p>
-        <img src="images/image11.png" alt="Captura Handshake">
+      <p><strong>Pas 1.</strong> L'atacant utilitza Airmon-ng per iniciar la interfície sense fils en mode de
+        monitoratge, mitjançant l'ordre <code>airmon-ng start wlan0</code>.</p>
 
-        <p><strong>Passos de l'atac:</strong></p>
-        <ol>
-          <li>Monitorar la xarxa i trobar clients.</li>
-          <li>Enviar paquets DeAuth per desconnectar el client.</li>
-          <li>Quan el client es reconecta, l'atacant captura el <em>handshake</em>.</li>
-          <li>Utilitzar <code>aircrack-ng</code> amb una llista de paraules (diccionari) per desxifrar la contrasenya.</li>
-        </ol>
-        <p>A la següent il·lustració podem veure aquest cicle de manera gràfica:</p>
-        <img src="images/image6.png" alt="Cicle atac WPA">
+      <p><strong>Pas 2.</strong> Després de localitzar la xarxa <code>corp-net</code>, l'atacant utilitza l'ordre
+        <code>airodump-ng</code> per capturar tot el trànsit en un fitxer de captura anomenat <code>wpa_capture</code>,
+        especificant el canal sense fils (11), el BSSID i la interfície sense fils (wlan0).</p>
+      <img src="images/xarxeswifi/image8.png" alt="Airodump capture">
+      <p style="text-align: center; font-style: italic;">Ús d'Airodump-ng per veure les xarxes i capturar el trànsit</p>
 
-        <p><strong>Detall pas a pas:</strong></p>
-        
-        <p><strong>Pas 1.</strong> L'atacant utilitza Airmon-ng per iniciar la interfície sense fils en mode de monitoratge, mitjançant l'ordre <code>airmon-ng start wlan0</code>.</p>
-        
-        <p><strong>Pas 2.</strong> Després de localitzar la xarxa <code>corp-net</code>, l'atacant utilitza l'ordre <code>airodump-ng</code> per capturar tot el trànsit en un fitxer de captura anomenat <code>wpa_capture</code>, especificant el canal sense fils (11), el BSSID i la interfície sense fils (wlan0).</p>
-        <img src="images/image8.png" alt="Airodump capture">
-        <p style="text-align: center; font-style: italic;">Ús d'Airodump-ng per veure les xarxes i capturar el trànsit</p>
+      <p><strong>Pas 3.</strong> L'atacant utilitza l'ordre <code>aireplay-ng</code> per realitzar un atac de
+        desautenticació. L'atacant ha recopilat el protocol d'enllaç (handshake) WPA.</p>
+      <img src="images/xarxeswifi/image12.png" alt="Aireplay deauth">
+      <p style="text-align: center; font-style: italic;">Ús d'Aireplay-ng per desconnectar els clients</p>
 
-        <p><strong>Pas 3.</strong> L'atacant utilitza l'ordre <code>aireplay-ng</code> per realitzar un atac de desautenticació. L'atacant ha recopilat el protocol d'enllaç (handshake) WPA.</p>
-        <img src="images/image12.png" alt="Aireplay deauth">
-        <p style="text-align: center; font-style: italic;">Ús d'Aireplay-ng per desconnectar els clients</p>
+      <p><strong>Pas 4.</strong> L'atacant utilitza l'ordre <code>aircrack-ng</code> per desxifrar la PSK de WPA
+        mitjançant una llista de paraules (diccionari).</p>
+      <img src="images/xarxeswifi/image2.png" alt="Aircrack execució">
 
-        <p><strong>Pas 4.</strong> L'atacant utilitza l'ordre <code>aircrack-ng</code> per desxifrar la PSK de WPA mitjançant una llista de paraules (diccionari).</p>
-        <img src="images/image2.png" alt="Aircrack execució">
+      <p><strong>Pas 5.</strong> L'eina triga una mica a processar-se. Després de desxifrar la PSK WPA, una finestra
+        mostra la PSK (<code>corpsupersecret</code> en aquest exemple).</p>
+      <img src="images/xarxeswifi/image1.png" alt="Clau trobada">
 
-        <p><strong>Pas 5.</strong> L'eina triga una mica a processar-se. Després de desxifrar la PSK WPA, una finestra mostra la PSK (<code>corpsupersecret</code> en aquest exemple).</p>
-        <img src="images/image1.png" alt="Clau trobada">
+      <h3>Atacs KRACK</h3>
+      <p>Mathy Vanhoef i Frank Piessens van revelar vulnerabilitats que afecten WPA i WPA2, anomenades KRACK (Key
+        Reinstallation Attack). Una explotació reeixida podria permetre que atacants reinstal·lin una clau de xifratge
+        utilitzada anteriorment. La majoria de proveïdors han llançat parches per a això, i WPA3 també aborda aquestes
+        vulnerabilitats.</p>
 
-        <h3>Atacs KRACK</h3>
-        <p>Mathy Vanhoef i Frank Piessens van revelar vulnerabilitats que afecten WPA i WPA2, anomenades KRACK (Key Reinstallation Attack). Una explotació reeixida podria permetre que atacants reinstal·lin una clau de xifratge utilitzada anteriorment. La majoria de proveïdors han llançat parches per a això, i WPA3 també aborda aquestes vulnerabilitats.</p>
+      <h3>Vulnerabilitats de WPA3</h3>
+      <p>WPA3 introdueix el "handshake Dragonfly" (basat en EAP). Tot i ser més segur, s'han descobert vulnerabilitats
+        (com els atacs <em>Dragonblood</em>) que permeten atacs de canal lateral o de degradació. També existeixen els
+        <strong>FragAttacks</strong> (fragmentació i agregació).</p>
 
-        <h3>Vulnerabilitats de WPA3</h3>
-        <p>WPA3 introdueix el "handshake Dragonfly" (basat en EAP). Tot i ser més segur, s'han descobert vulnerabilitats (com els atacs <em>Dragonblood</em>) que permeten atacs de canal lateral o de degradació. També existeixen els <strong>FragAttacks</strong> (fragmentació i agregació).</p>
+      <h3>Atacs WPS (Wi-Fi Protected Setup)</h3>
+      <p>WPS simplifica la connexió mitjançant un PIN. Molts dispositius no bloquegen els intents fallits, fent-los
+        susceptibles a atacs de força bruta amb eines com <strong>Reaver</strong>.</p>
+    </section>
 
-        <h3>Atacs WPS (Wi-Fi Protected Setup)</h3>
-        <p>WPS simplifica la connexió mitjançant un PIN. Molts dispositius no bloquegen els intents fallits, fent-los susceptibles a atacs de força bruta amb eines com <strong>Reaver</strong>.</p>
-      </section>
+    <!-- 1.9 KARMA & Frag -->
+    <section class="card" id="s1-9">
+      <h2>1.9 Atacs de KARMA</h2>
+      <p>KARMA (Karma Attacks Radio Machines Automatically) és un atac en ruta on l'atacant escolta les sol·licituds de
+        sondeig (<em>probe requests</em>) dels dispositius i crea un AP fals amb el mateix SSID que el dispositiu està
+        buscant.</p>
 
-      <!-- 1.9 KARMA & Frag -->
-      <section class="card" id="s1-9">
-        <h2>1.9 Atacs de KARMA</h2>
-        <p>KARMA (Karma Attacks Radio Machines Automatically) és un atac en ruta on l'atacant escolta les sol·licituds de sondeig (<em>probe requests</em>) dels dispositius i crea un AP fals amb el mateix SSID que el dispositiu està buscant.</p>
+      <h2>1.10 Atacs de fragmentació</h2>
+      <p>Aquests atacs contra WEP permeten adquirir elements de l'algorisme PRGA per generar paquets amb eines com
+        <strong>Packetforge-ng</strong> i injectar-los a la xarxa.</p>
+      <h3>Exemple - Ús de Packetforge-ng</h3>
+      <img src="images/xarxeswifi/image10.png" alt="Packetforge">
+      <p>Podem trobar un document que descriu i demostra aquest tipus d’atac a: <a
+          href="http://download.aircrack-ng.org/wiki-files/doc/Fragmentation-Attack-in-Practice.pdf"
+          target="_blank">Fragmentation-Attack-in-Practice.pdf</a>.</p>
+    </section>
+    <!-- SECCIÓ PRÀCTICA / LABORATORI -->
+    <section class="card" id="laboratori" style="border-left: 4px solid var(--accent-3);">
+      <h2 style="color:var(--accent-3); margin-top:0;">🔬 Part Pràctica — Laboratori (Cheat Sheet)</h2>
+      <p>Resum de comandes essencials per a l'auditoria de xarxes amb la suite <strong>Aircrack-ng</strong>.</p>
 
-        <h2>1.10 Atacs de fragmentació</h2>
-        <p>Aquests atacs contra WEP permeten adquirir elements de l'algorisme PRGA per generar paquets amb eines com <strong>Packetforge-ng</strong> i injectar-los a la xarxa.</p>
-        <h3>Exemple - Ús de Packetforge-ng</h3>
-        <img src="images/image10.png" alt="Packetforge">
-        <p>Podem trobar un document que descriu i demostra aquest tipus d’atac a: <a href="http://download.aircrack-ng.org/wiki-files/doc/Fragmentation-Attack-in-Practice.pdf" target="_blank">Fragmentation-Attack-in-Practice.pdf</a>.</p>
-      </section>
-      <!-- SECCIÓ PRÀCTICA / LABORATORI -->
-      <section class="card" id="laboratori" style="border-left: 4px solid var(--accent-3);">
-        <h2 style="color:var(--accent-3); margin-top:0;">🔬 Part Pràctica — Laboratori (Cheat Sheet)</h2>
-        <p>Resum de comandes essencials per a l'auditoria de xarxes amb la suite <strong>Aircrack-ng</strong>.</p>
+      <h3>Captura de Handshake i atac de diccionari (WPA/WPA2)</h3>
+      <ol>
+        <li>Activa mode monitor:
+          <pre><code>airmon-ng start wlan0</code></pre>
+        </li>
+        <li>Localitza l'AP (Escaneig):
+          <pre><code>airodump-ng wlan0mon</code></pre>
+        </li>
+        <li>Fixa canal i captura (Sniffing):
+          <pre><code>airodump-ng -c [CANAL] --bssid [MAC_AP] -w captura wlan0mon</code></pre>
+        </li>
+        <li>(Opcional) Força desconnexions (Deauth):
+          <pre><code>aireplay-ng -0 4 -a [MAC_AP] -c [MAC_CLIENT] wlan0mon</code></pre>
+        </li>
+        <li>Prova diccionari (Cracking):
+          <pre><code>aircrack-ng -w wordlist.txt captura.cap</code></pre>
+        </li>
+      </ol>
 
-        <h3>Captura de Handshake i atac de diccionari (WPA/WPA2)</h3>
-        <ol>
-          <li>Activa mode monitor:
-            <pre><code>airmon-ng start wlan0</code></pre>
-          </li>
-          <li>Localitza l'AP (Escaneig):
-            <pre><code>airodump-ng wlan0mon</code></pre>
-          </li>
-          <li>Fixa canal i captura (Sniffing):
-            <pre><code>airodump-ng -c [CANAL] --bssid [MAC_AP] -w captura wlan0mon</code></pre>
-          </li>
-          <li>(Opcional) Força desconnexions (Deauth):
-            <pre><code>aireplay-ng -0 4 -a [MAC_AP] -c [MAC_CLIENT] wlan0mon</code></pre>
-          </li>
-          <li>Prova diccionari (Cracking):
-            <pre><code>aircrack-ng -w wordlist.txt captura.cap</code></pre>
-          </li>
-        </ol>
+      <h3>Accelerar IVs i crack WEP</h3>
+      <ol>
+        <li>Mode monitor i sniffing amb <code>airodump-ng</code>.</li>
+        <li>Injecta ARP per generar trànsit (Replay Attack):
+          <pre><code>aireplay-ng -3 -b [BSSID] -h [MAC_TEVA] wlan0mon</code></pre>
+        </li>
+        <li>Quan hi hagi prou IVs, executa:
+          <pre><code>aircrack-ng captura.cap</code></pre>
+        </li>
+      </ol>
 
-        <h3>Accelerar IVs i crack WEP</h3>
-        <ol>
-          <li>Mode monitor i sniffing amb <code>airodump-ng</code>.</li>
-          <li>Injecta ARP per generar trànsit (Replay Attack):
-            <pre><code>aireplay-ng -3 -b [BSSID] -h [MAC_TEVA] wlan0mon</code></pre>
-          </li>
-          <li>Quan hi hagi prou IVs, executa:
-            <pre><code>aircrack-ng captura.cap</code></pre>
-          </li>
-        </ol>
+      <h3>Bluetooth — Bluejacking vs Bluesnarfing</h3>
+      <ul>
+        <li>Escaneja dispositius: <code>hcitool scan</code>, <code>bluetoothctl</code>.</li>
+        <li><strong>Bluejacking:</strong> enviament de vCards; prova amb dispositius en mode discoverable.</li>
+        <li><strong>Bluesnarfing:</strong> accés no autoritzat a dades (⚠️ no executar en entorns productius sense
+          permís).</li>
+      </ul>
+    </section>
 
-        <h3>Bluetooth — Bluejacking vs Bluesnarfing</h3>
-        <ul>
-          <li>Escaneja dispositius: <code>hcitool scan</code>, <code>bluetoothctl</code>.</li>
-          <li><strong>Bluejacking:</strong> enviament de vCards; prova amb dispositius en mode discoverable.</li>
-          <li><strong>Bluesnarfing:</strong> accés no autoritzat a dades (⚠️ no executar en entorns productius sense permís).</li>
-        </ul>
-      </section>
+    <!-- 1.11 Pràctica (Quiz) -->
+    <section class="card" id="s1-11">
+      <h2>1.11 Pràctica - Qüestionari</h2>
+      <div class="quiz-container">
 
-      <!-- 1.11 Pràctica (Quiz) -->
-      <section class="card" id="s1-11">
-        <h2>1.11 Pràctica - Qüestionari</h2>
-        <div class="quiz-container">
-          
-          <div class="q-block">
-            <p><strong>Pregunta 1:</strong><br>Veritat o fals: El protocol WPA3 va introduir un nou protocol d'enllaç anomenat "handshake libèl·lula" que utilitza EAP. Això garanteix que el protocol WPA3 sigui immune als atacs KRACK o DoS.</p>
-            <label class="q-option">
-              <input type="checkbox" name="q1" value="v"> Veritat
-            </label>
-            <label class="q-option">
-              <input type="checkbox" name="q1" value="f"> Fals
-            </label>
-          </div>
-
-          <div class="q-block">
-            <p><strong>Pregunta 2:</strong><br>Pixel Paradise no transmet els seus SSID. Has configurat Airodump-ng. Què ha de passar per interceptar un SSID?</p>
-            <label class="q-option">
-              <input type="checkbox" name="q2" value="a"> Un client legítim ha d'iniciar el procés d'associació amb un AP.
-            </label>
-            <label class="q-option">
-              <input type="checkbox" name="q2" value="b"> S'ha de desxifrar la PSK WPA.
-            </label>
-            <label class="q-option">
-              <input type="checkbox" name="q2" value="c"> S'ha de configurar una adreça MAC falsificada a la interfície sense fils del vostre ordinador de prova.
-            </label>
-            <label class="q-option">
-              <input type="checkbox" name="q2" value="d"> Els clients han de ser redirigits al vostre AP dubtós a través de la suplantació de DNS.
-            </label>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- EXERCICIS EXTRA (Multichoice Clàssic) -->
-      <section id="exercicis" class="card">
-        <h2>Exercicis (Multichoice clàssic)</h2>
-        <div class="quiz-container">
-          <div class="q">
-            <label for="sel1">1. Quin xifrat utilitza WPA2 per defecte?</label><br />
-            <select id="sel1">
-              <option value="">— Selecciona una opció —</option>
-              <option value="tkip">TKIP</option>
-              <option value="aes">CCMP (AES)</option>
-              <option value="wep">WEP</option>
-            </select>
-          </div>
-          <div class="q">
-            <label for="sel2">2. Què fa l'atac de deauth?</label><br />
-            <select id="sel2">
-              <option value="">— Selecciona una opció —</option>
-              <option value="canal">Canvia el canal de l'AP</option>
-              <option value="descon">Desconnecta clients de l'AP</option>
-              <option value="xifra">Xifra el trànsit amb AES</option>
-            </select>
-          </div>
-          <div class="q">
-            <label for="sel3">3. Quina longitud té l'IV de WEP?</label><br />
-            <select id="sel3">
-              <option value="">— Selecciona una opció —</option>
-              <option value="16">16 bits</option>
-              <option value="24">24 bits</option>
-              <option value="128">128 bits</option>
-            </select>
-          </div>
-          <div class="fillable-actions">
-            <button class="btn-check" onclick="checkSelectQuiz()">Comprovar aquest bloc</button>
-            <span id="select-result" class="status-msg"></span>
-          </div>
-        </div>
-      </section>
-
-      <!-- 1.12 - 1.13 Enginyeria Social & Bluetooth -->
-      <section class="card" id="s1-12">
-        <h2>1.12 Recopilació de credencials</h2>
-        <p>Implica obtenir credencials d'usuari mitjançant enginyeria social (phishing), APs falsos o portals captius falsos. Eines com <strong>Ettercap</strong> o <strong>SET</strong> (Social Engineering Toolkit) poden falsificar DNS i clonar llocs web per robar dades.</p>
-
-        <h2>1.13 Bluejacking i Bluesnarfing</h2>
-        <ul>
-          <li><strong>Bluejacking:</strong> Enviar missatges no sol·licitats (com vCards) via Bluetooth a dispositius vulnerables. És molest però generalment inofensiu.</li>
-          <li><strong>Bluesnarfing:</strong> Més perillós. Permet l'accés no autoritzat i el robatori d'informació (contactes, imatges, correus) del dispositiu. També pot obtenir l'IMEI.</li>
-        </ul>
-        <p>Eina d'exemple: <code>bluesnarfer</code>.</p>
-      </section>
-
-      <!-- 1.14 - 1.17 BLE, RFID & Spraying -->
-      <section class="card" id="s1-14">
-        <h2>1.14 Atacs de Bluetooth de Baixa Energia (BLE)</h2>
-        <p>Molts dispositius IoT usen BLE. Són susceptibles a atacs en ruta (<em>Man-in-the-Middle</em>), modificació de missatges o DoS. Investigacions han demostrat atacs d'empremta digital (<em>fingerprinting</em>) per revelar errors de disseny.</p>
-
-        <h2>1.15 Atacs d'Identificació per Radiofreqüència (RFID)</h2>
-        <p>RFID usa camps electromagnètics per rastrejar etiquetes (actives o passives).</p>
-        <ul>
-          <li><strong>LF (Baixa freqüència):</strong> 120-140 kHz (curta distància).</li>
-          <li><strong>HF (Alta freqüència):</strong> 13.56 MHz (targetes intel·ligents, NFC).</li>
-          <li><strong>UHF (Ultra alta freqüència):</strong> 860-960 MHz.</li>
-        </ul>
-        <p><strong>Atacs comuns:</strong></p>
-        <ol>
-          <li>Robatori d'informació amb lectors com Proxmark3 passant a prop de la víctima.</li>
-          <li>Clonació d'etiquetes RFID per accedir a edificis.</li>
-          <li>Implantació de <em>skimmers</em> en lectors legítims.</li>
-          <li>Atacs d'amplificació (Relay attacks) per llegir targetes a més distància.</li>
-        </ol>
-
-        <h2>1.16 Difusió de contrasenyes (Password Spraying)</h2>
-        <p>Un atacant prova una contrasenya comuna (ex: "Password123") contra molts noms d'usuari diferents per evitar el bloqueig de comptes. El <strong>Farciment de credencials</strong> (<em>Credential Stuffing</em>) utilitza parells d'usuari/contrasenya robats en altres bretxes per intentar accedir a nous sistemes.</p>
-
-        <h2>1.17 Encadenament d'explotacions</h2>
-        <p>Els atacs sofisticats "encadenen" múltiples exploits (coneguts o de dia zero) per comprometre sistemes progressivament.</p>
-      </section>
-
-      <!-- 1.18 Pràctica (Drag & Drop) -->
-      <section class="card" id="s1-18">
-        <h2>1.18 Pràctica - Atacs sense fils</h2>
-        <p><strong>Instruccions:</strong> Relaciona cada descripció de la columna de l'esquerra amb el tipus d'atac corresponent de la llista de la dreta. Arrossega la <strong>Lletra</strong> correcta a la columna "Opció".</p>
-
-       <p><strong>Llistat de categories:</strong></p>
-        <ul style="list-style:none; padding-left:0; columns: 1;">
-          <li><span class="mini-letter letter-A">A</span> Dissociació</li>
-          <li><span class="mini-letter letter-B">B</span> Interferència (Jamming)</li>
-          <li><span class="mini-letter letter-C">C</span> Bluejacking</li>
-          <li><span class="mini-letter letter-D">D</span> Evil Twin (Bessons malvats)</li>
-          <li><span class="mini-letter letter-E">E</span> Password Spraying</li>
-          <li><span class="mini-letter letter-F">F</span> KARMA</li>
-          <li><span class="mini-letter letter-G">G</span> War Driving</li>
-        </ul>
-
-        <!-- Safata de lletres -->
-        <div class="letters-tray" id="tray">
-          <div class="letter-box letter-A" data-id="A">A</div>
-          <div class="letter-box letter-B" data-id="B">B</div>
-          <div class="letter-box letter-C" data-id="C">C</div>
-          <div class="letter-box letter-D" data-id="D">D</div>
-          <div class="letter-box letter-E" data-id="E">E</div>
-          <div class="letter-box letter-F" data-id="F">F</div>
-          <div class="letter-box letter-G" data-id="G">G</div>
+        <div class="q-block">
+          <p><strong>Pregunta 1:</strong><br>Veritat o fals: El protocol WPA3 va introduir un nou protocol d'enllaç
+            anomenat "handshake libèl·lula" que utilitza EAP. Això garanteix que el protocol WPA3 sigui immune als atacs
+            KRACK o DoS.</p>
+          <label class="q-option">
+            <input type="checkbox" name="q1" value="v"> Veritat
+          </label>
+          <label class="q-option">
+            <input type="checkbox" name="q1" value="f"> Fals
+          </label>
         </div>
 
-        <div class="quiz-container">
-          <table class="dnd-table">
-            <thead>
-              <tr>
-                <th>Descripció de l'Atac</th>
-                <th style="width: 80px; text-align:center;">Opció</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1. En aquest tipus d'atac, l'atacant intenta desconnectar l'usuari de l'AP d'autenticació i després realitza un altre atac per obtenir les credencials vàlides de l'usuari.</td>
-                <td><div class="drop-zone" id="zone-1"></div></td>
-              </tr>
-              <tr>
-                <td>2. En aquest tipus d'atac, l'atacant es desplaça per trobar punts d'accés sense fils on sigui que es trobin.</td>
-                <td><div class="drop-zone" id="zone-2"></div></td>
-              </tr>
-              <tr>
-                <td>3. En aquest tipus d'atac, l'atacant utilitza la suplantació de DNS per redirigir la víctima a un portal captiu clonat o un lloc web falsificat.</td>
-                <td><div class="drop-zone" id="zone-3"></div></td>
-              </tr>
-              <tr>
-                <td>4. En aquest tipus d'atac, l'atacant intenta crear una condició de DoS total o parcial a la xarxa sense fils generant soroll aleatori en les freqüències.</td>
-                <td><div class="drop-zone" id="zone-4"></div></td>
-              </tr>
-              <tr>
-                <td>5. En aquest tipus d'atac, un atacant podria iniciar un atac en ruta modificant els missatges de Bluetooth de baixa energia entre sistemes.</td>
-                <td><div class="drop-zone" id="zone-5"></div></td>
-              </tr>
-              <tr>
-                <td>6. En aquest tipus d'atac, l'atacant escolta les sol·licituds de sondeig (probes) de dispositius sense fils i les intercepta per generar el mateix SSID que el dispositiu està buscant.</td>
-                <td><div class="drop-zone" id="zone-6"></div></td>
-              </tr>
-              <tr>
-                <td>7. En aquest tipus d'atac, un atacant prova per força bruta inicis de sessió basant-se en una llista de noms d'usuari amb contrasenyes predeterminades o comunes.</td>
-                <td><div class="drop-zone" id="zone-7"></div></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="q-block">
+          <p><strong>Pregunta 2:</strong><br>Pixel Paradise no transmet els seus SSID. Has configurat Airodump-ng. Què
+            ha de passar per interceptar un SSID?</p>
+          <label class="q-option">
+            <input type="checkbox" name="q2" value="a"> Un client legítim ha d'iniciar el procés d'associació amb un AP.
+          </label>
+          <label class="q-option">
+            <input type="checkbox" name="q2" value="b"> S'ha de desxifrar la PSK WPA.
+          </label>
+          <label class="q-option">
+            <input type="checkbox" name="q2" value="c"> S'ha de configurar una adreça MAC falsificada a la interfície
+            sense fils del vostre ordinador de prova.
+          </label>
+          <label class="q-option">
+            <input type="checkbox" name="q2" value="d"> Els clients han de ser redirigits al vostre AP dubtós a través
+            de la suplantació de DNS.
+          </label>
         </div>
-      </section>
 
-      <!-- RESULTATS FINALS -->
-      <section class="card final-section" id="final">
-        <h2>Resultats Finals</h2>
-        <p>Introdueix el teu nom per corregir tots els exercicis (1.11, Multichoice i 1.18).</p>
-        <input type="text" id="studentName" class="input-name" placeholder="El teu nom complet...">
-        <br>
-        <button class="btn-check" onclick="calculateFinalScore()">Corregir i Calcular Nota</button>
-        <div id="final-output"></div>
-      </section>
+      </div>
+    </section>
 
-    </main>
+    <!-- EXERCICIS EXTRA (Multichoice Clàssic) -->
+    <section id="exercicis" class="card">
+      <h2>Exercicis (Multichoice clàssic)</h2>
+      <div class="quiz-container">
+        <div class="q">
+          <label for="sel1">1. Quin xifrat utilitza WPA2 per defecte?</label><br />
+          <select id="sel1">
+            <option value="">— Selecciona una opció —</option>
+            <option value="tkip">TKIP</option>
+            <option value="aes">CCMP (AES)</option>
+            <option value="wep">WEP</option>
+          </select>
+        </div>
+        <div class="q">
+          <label for="sel2">2. Què fa l'atac de deauth?</label><br />
+          <select id="sel2">
+            <option value="">— Selecciona una opció —</option>
+            <option value="canal">Canvia el canal de l'AP</option>
+            <option value="descon">Desconnecta clients de l'AP</option>
+            <option value="xifra">Xifra el trànsit amb AES</option>
+          </select>
+        </div>
+        <div class="q">
+          <label for="sel3">3. Quina longitud té l'IV de WEP?</label><br />
+          <select id="sel3">
+            <option value="">— Selecciona una opció —</option>
+            <option value="16">16 bits</option>
+            <option value="24">24 bits</option>
+            <option value="128">128 bits</option>
+          </select>
+        </div>
+        <div class="fillable-actions">
+          <button class="btn-check" onclick="checkSelectQuiz()">Comprovar aquest bloc</button>
+          <span id="select-result" class="status-msg"></span>
+        </div>
+      </div>
+    </section>
 
-    <!-- Vincle al fitxer Javascript extern (al final del body) -->
-<script src="js/xarxes_script.js"></script>
-  </body>
+    <!-- 1.12 - 1.13 Enginyeria Social & Bluetooth -->
+    <section class="card" id="s1-12">
+      <h2>1.12 Recopilació de credencials</h2>
+      <p>Implica obtenir credencials d'usuari mitjançant enginyeria social (phishing), APs falsos o portals captius
+        falsos. Eines com <strong>Ettercap</strong> o <strong>SET</strong> (Social Engineering Toolkit) poden falsificar
+        DNS i clonar llocs web per robar dades.</p>
+
+      <h2>1.13 Bluejacking i Bluesnarfing</h2>
+      <ul>
+        <li><strong>Bluejacking:</strong> Enviar missatges no sol·licitats (com vCards) via Bluetooth a dispositius
+          vulnerables. És molest però generalment inofensiu.</li>
+        <li><strong>Bluesnarfing:</strong> Més perillós. Permet l'accés no autoritzat i el robatori d'informació
+          (contactes, imatges, correus) del dispositiu. També pot obtenir l'IMEI.</li>
+      </ul>
+      <p>Eina d'exemple: <code>bluesnarfer</code>.</p>
+    </section>
+
+    <!-- 1.14 - 1.17 BLE, RFID & Spraying -->
+    <section class="card" id="s1-14">
+      <h2>1.14 Atacs de Bluetooth de Baixa Energia (BLE)</h2>
+      <p>Molts dispositius IoT usen BLE. Són susceptibles a atacs en ruta (<em>Man-in-the-Middle</em>), modificació de
+        missatges o DoS. Investigacions han demostrat atacs d'empremta digital (<em>fingerprinting</em>) per revelar
+        errors de disseny.</p>
+
+      <h2>1.15 Atacs d'Identificació per Radiofreqüència (RFID)</h2>
+      <p>RFID usa camps electromagnètics per rastrejar etiquetes (actives o passives).</p>
+      <ul>
+        <li><strong>LF (Baixa freqüència):</strong> 120-140 kHz (curta distància).</li>
+        <li><strong>HF (Alta freqüència):</strong> 13.56 MHz (targetes intel·ligents, NFC).</li>
+        <li><strong>UHF (Ultra alta freqüència):</strong> 860-960 MHz.</li>
+      </ul>
+      <p><strong>Atacs comuns:</strong></p>
+      <ol>
+        <li>Robatori d'informació amb lectors com Proxmark3 passant a prop de la víctima.</li>
+        <li>Clonació d'etiquetes RFID per accedir a edificis.</li>
+        <li>Implantació de <em>skimmers</em> en lectors legítims.</li>
+        <li>Atacs d'amplificació (Relay attacks) per llegir targetes a més distància.</li>
+      </ol>
+
+      <h2>1.16 Difusió de contrasenyes (Password Spraying)</h2>
+      <p>Un atacant prova una contrasenya comuna (ex: "Password123") contra molts noms d'usuari diferents per evitar el
+        bloqueig de comptes. El <strong>Farciment de credencials</strong> (<em>Credential Stuffing</em>) utilitza
+        parells d'usuari/contrasenya robats en altres bretxes per intentar accedir a nous sistemes.</p>
+
+      <h2>1.17 Encadenament d'explotacions</h2>
+      <p>Els atacs sofisticats "encadenen" múltiples exploits (coneguts o de dia zero) per comprometre sistemes
+        progressivament.</p>
+    </section>
+
+    <!-- 1.18 Pràctica (Drag & Drop) -->
+    <section class="card" id="s1-18">
+      <h2>1.18 Pràctica - Atacs sense fils</h2>
+      <p><strong>Instruccions:</strong> Relaciona cada descripció de la columna de l'esquerra amb el tipus d'atac
+        corresponent de la llista de la dreta. Arrossega la <strong>Lletra</strong> correcta a la columna "Opció".</p>
+
+      <p><strong>Llistat de categories:</strong></p>
+      <ul style="list-style:none; padding-left:0; columns: 1;">
+        <li><span class="mini-letter letter-A">A</span> Dissociació</li>
+        <li><span class="mini-letter letter-B">B</span> Interferència (Jamming)</li>
+        <li><span class="mini-letter letter-C">C</span> Bluejacking</li>
+        <li><span class="mini-letter letter-D">D</span> Evil Twin (Bessons malvats)</li>
+        <li><span class="mini-letter letter-E">E</span> Password Spraying</li>
+        <li><span class="mini-letter letter-F">F</span> KARMA</li>
+        <li><span class="mini-letter letter-G">G</span> War Driving</li>
+      </ul>
+
+      <!-- Safata de lletres -->
+      <div class="letters-tray" id="tray">
+        <div class="letter-box letter-A" data-id="A">A</div>
+        <div class="letter-box letter-B" data-id="B">B</div>
+        <div class="letter-box letter-C" data-id="C">C</div>
+        <div class="letter-box letter-D" data-id="D">D</div>
+        <div class="letter-box letter-E" data-id="E">E</div>
+        <div class="letter-box letter-F" data-id="F">F</div>
+        <div class="letter-box letter-G" data-id="G">G</div>
+      </div>
+
+      <div class="quiz-container">
+        <table class="dnd-table">
+          <thead>
+            <tr>
+              <th>Descripció de l'Atac</th>
+              <th style="width: 80px; text-align:center;">Opció</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1. En aquest tipus d'atac, l'atacant intenta desconnectar l'usuari de l'AP d'autenticació i després
+                realitza un altre atac per obtenir les credencials vàlides de l'usuari.</td>
+              <td>
+                <div class="drop-zone" id="zone-1"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>2. En aquest tipus d'atac, l'atacant es desplaça per trobar punts d'accés sense fils on sigui que es
+                trobin.</td>
+              <td>
+                <div class="drop-zone" id="zone-2"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>3. En aquest tipus d'atac, l'atacant utilitza la suplantació de DNS per redirigir la víctima a un
+                portal captiu clonat o un lloc web falsificat.</td>
+              <td>
+                <div class="drop-zone" id="zone-3"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>4. En aquest tipus d'atac, l'atacant intenta crear una condició de DoS total o parcial a la xarxa
+                sense fils generant soroll aleatori en les freqüències.</td>
+              <td>
+                <div class="drop-zone" id="zone-4"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>5. En aquest tipus d'atac, un atacant podria iniciar un atac en ruta modificant els missatges de
+                Bluetooth de baixa energia entre sistemes.</td>
+              <td>
+                <div class="drop-zone" id="zone-5"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>6. En aquest tipus d'atac, l'atacant escolta les sol·licituds de sondeig (probes) de dispositius sense
+                fils i les intercepta per generar el mateix SSID que el dispositiu està buscant.</td>
+              <td>
+                <div class="drop-zone" id="zone-6"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>7. En aquest tipus d'atac, un atacant prova per força bruta inicis de sessió basant-se en una llista
+                de noms d'usuari amb contrasenyes predeterminades o comunes.</td>
+              <td>
+                <div class="drop-zone" id="zone-7"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- RESULTATS FINALS -->
+    <section class="card final-section" id="final">
+      <h2>Resultats Finals</h2>
+      <p>Introdueix el teu nom per corregir tots els exercicis (1.11, Multichoice i 1.18).</p>
+      <input type="text" id="studentName" class="input-name" placeholder="El teu nom complet...">
+      <br>
+      <button class="btn-check" onclick="calculateFinalScore()">Corregir i Calcular Nota</button>
+      <div id="final-output"></div>
+    </section>
+
+  </main>
+
+  <!-- Vincle al fitxer Javascript extern (al final del body) -->
+  <script src="js/xarxes_script.js"></script>
+</body>
+
 </html>

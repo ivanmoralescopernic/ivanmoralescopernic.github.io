@@ -1,97 +1,294 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hacking Ètic — Nicolau Copèrnic</title>
-  <link rel="stylesheet" href="css/xarxes_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacking Ètic · Posada en Producció Segura</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/menu_style.css">
 </head>
-<body class="portal-body">
 
-  <!-- Capçalera Simple -->
-  <header style="width:100%; display:flex; justify-content:space-between;">
-    <div class="brand">
-      <div class="dot"></div>
-      <span>Institut Nicolau Copèrnic</span>
-    </div>
-    <div style="font-size:0.9rem; color:var(--muted)">Curs 2024-2025</div>
-  </header>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="images/menu/logo.svg" alt="Logo">
+            Ciberseguretat
+        </div>
+        <nav class="nav-links">
+            <a href="#about">Projecte</a>
+            <a href="#m05">M05</a>
+            <a href="#m03">M03</a>
+            <a href="#structure">Estructura</a>
+            <a href="#contact">Contacte</a>
+        </nav>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </header>
 
-  <!-- Secció Principal -->
-  <div class="hero-section">
-    <h1 class="hero-title">Hacking Ètic</h1>
-<h2 class="hero-subtitle" style="color: var(--accent);">
-  Mòdul 05 — Ciberseguretat en Entorns TI
-</h2>    
-    <div class="institute-info">
-      <p>
-        Benvinguts al portal de l'assignatura. L'<strong>Institut Nicolau Copèrnic de Terrassa</strong> aposta fermament per la formació tecnològica capdavantera, estrenant enguany per primera vegada el <strong>Curs d'Especialització en Ciberseguretat</strong>.
-      </p>
-      <p style="margin-top:10px; margin-bottom:0;">
-        Aquest curs prepara l'alumnat per determinar eines de monitorització, detectar vulnerabilitats, i atacar i defensar entorns de prova en xarxes, sistemes i aplicacions web.
-      </p>
-    </div>
-  </div>
+    <main>
+        <section class="hero">
+            <div class="badge">Curs d’Especialització en Ciberseguretat</div>
+            <h1 class="hero-title">Repositori de materials M05 i M03</h1>
+            <p class="hero-subtitle">Hacking Ètic · Posada en Producció Segura<br>Institut Nicolau Copèrnic — Terrassa
+            </p>
 
-  <!-- Graella de Continguts -->
-  <div class="modules-grid">
+            <div class="hero-actions">
+                <a href="#m05" class="btn btn-primary">Veure Mòduls</a>
+                <a href="indexM5.html" target="_blank" class="btn btn-outline">Portal Web</a>
+            </div>
+        </section>
 
-    <!-- UNITAT 1 -->
-    <div class="module-card inactive">
-      <div class="card-header">
-        <span class="unit-tag">Unitat 1</span>
-        <div class="card-icon">🛡️</div>
-      </div>
-      <h3>Introducció al Hacking Ètic</h3>
-      <p>Conceptes clau, fases d'un atac informàtic, marcs de treball (frameworks) i aspectes legals.</p>
-    </div>
+        <section class="marquee-container">
+            <div class="marquee-content">
+                <span>Hacking Ètic</span><span class="separator"><img src="images/menu/ethical_hacker.svg"
+                        alt="Logo Ethical Hacker" style="height: 1.8em; transform: translateY(-0.15em);"></span><span
+                    class="separator">✦</span>
+                <span>Posada en Producció Segura</span><span class="separator"><img
+                        src="images/menu/produccio-segura.svg" alt="Logo Secure Production"
+                        style="height: 1.8em; transform: translateY(-0.15em);"></span><span class="separator">✦</span>
+                <span>DevOps</span><span class="separator"><img src="images/menu/devops.svg" alt="Logo DevOps"
+                        style="height: 1.8em; transform: translateY(-0.15em);"></span><span class="separator">✦</span>
+                <span>Ciberseguretat</span><span class="separator"><img src="images/menu/cibersecurity.svg"
+                        alt="Logo Ciberseguretat"></span><span class="separator">✦</span>
+                <span>OWASP</span><span class="separator"><img src="images/menu/logo_owasp.svg"
+                        alt="Logo OWASP"></span><span class="separator">✦</span>
+                <span>Microserveis</span><span class="separator"><img src="images/menu/micro_services.svg"
+                        alt="Logo Microserveis" style="height: 1.8em; transform: translateY(-0.15em);"></span><span
+                    class="separator">✦</span>
+            </div>
+            <div class="marquee-content" aria-hidden="true">
+                <span>Hacking Ètic</span><span class="separator"><img src="images/menu/ethical_hacker.svg"
+                        alt="Logo Ethical Hacker" style="height: 1.8em; transform: translateY(-0.15em);"></span><span
+                    class="separator">✦</span>
+                <span>Posada en Producció Segura</span><span class="separator"><img
+                        src="images/menu/produccio-segura.svg" alt="Logo Secure Production"
+                        style="height: 1.8em; transform: translateY(-0.15em);"></span><span class="separator">✦</span>
+                <span>DevOps</span><span class="separator"><img src="images/menu/devops.svg" alt="Logo DevOps"
+                        style="height: 1.8em; transform: translateY(-0.15em);"></span><span class="separator">✦</span>
+                <span>Ciberseguretat</span><span class="separator"><img src="images/menu/cibersecurity.svg"
+                        alt="Logo Ciberseguretat"></span><span class="separator">✦</span>
+                <span>OWASP</span><span class="separator"><img src="images/menu/logo_owasp.svg"
+                        alt="Logo OWASP"></span><span class="separator">✦</span>
+                <span>Microserveis</span><span class="separator"><img src="images/menu/micro_services.svg"
+                        alt="Logo Microserveis" style="height: 1.8em; transform: translateY(-0.15em);"></span><span
+                    class="separator">✦</span>
+            </div>
+        </section>
 
-    <!-- UNITAT 2 (ACTIVA) -->
-    <a href="xarxes.html" class="module-card active">
-      <div class="card-header">
-        <span class="unit-tag" style="background:var(--accent); color:#000;">Disponible</span>
-        <div class="card-icon">📡</div>
-      </div>
-      <h3>Atac a Xarxes Sense Fils</h3>
-      <p>Seguretat WiFi, vectors d'atac (Rogue AP, Evil Twin), anàlisi de WEP/WPA i captura de handshakes.</p>
-      <span class="btn-access">Accedir al Contingut →</span>
-    </a>
+        <section id="about" class="about-section">
+            <h2 class="section-title">📖 Descripció</h2>
+            <div class="about-text">
+                <p><strong>Pàgina web educativa</strong> dels mòduls:</p>
+                <div style="margin: 1rem 0; font-weight: 600;">
+                    <p>🕵️‍♂️🛡️ M05 – Hacking Ètic</p>
+                    <p>🔐 M03 – Posada en Producció Segura</p>
+                </div>
+                <p>Plataforma centralitzada per consultar apunts, fer exercicis interactius, autoavaluacions i
+                    pràctiques guiades de M05 i M03.
+                    Tot responsive i actualitzat segons avança el curs.</p>
+                <br>
+                <p>L’objectiu és disposar d’una plataforma:</p>
+                <ul style="list-style: disc; margin-left: 2rem; margin-top: 1rem; text-align: left;">
+                    <li>Visualment coherent i moderna</li>
+                    <li>Responsive</li>
+                    <li>Organitzada per unitats</li>
+                    <li>Fàcilment ampliable</li>
+                    <li>Amb exercicis interactius</li>
+                </ul>
+            </div>
+            <section class="features-section">
+                <h2 class="section-title">Què pots fer aquí?</h2>
+                <p class="section-subtitle">Tot el que necessites per aprendre i practicar M05 i M03 de forma pràctica i
+                    organitzada.
 
-    <!-- UNITAT 3 -->
-    <div class="module-card inactive">
-      <div class="card-header">
-        <span class="unit-tag">Unitat 3</span>
-        <div class="card-icon">🎣</div>
-      </div>
-      <h3>Accés Inicial</h3>
-      <p>Avaluació de la superfície d'atac, campanyes de Phishing i administració de sistemes remots.</p>
-    </div>
+                </p>
 
-    <!-- UNITAT 4 -->
-    <div class="module-card inactive">
-      <div class="card-header">
-        <span class="unit-tag">Unitat 4</span>
-        <div class="card-icon">🚀</div>
-      </div>
-      <h3>De l'Execució a l'Impacte</h3>
-      <p>Escalada de privilegis, pivotatge a la xarxa (moviment lateral), persistència i portes del darrere.</p>
-    </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📖</div>
+                        <h3>Consultar teoria i apunts</h3>
+                        <p>Organitzats per unitat i mòdul, amb exemples reals i actualitzacions freqüents.</p>
+                    </div>
 
-    <!-- UNITAT 5 -->
-    <div class="module-card inactive">
-      <div class="card-header">
-        <span class="unit-tag">Unitat 5</span>
-        <div class="card-icon">🌐</div>
-      </div>
-      <h3>Atacs a Aplicacions Web</h3>
-      <p>Proxies web, autenticació, autorització i explotació de les principals vulnerabilitats web (OWASP).</p>
-    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛠️</div>
+                        <h3>Pràctiques guiades</h3>
+                        <p>Laboratoris simulats i passos a seguir (estil TryHackMe / captures pròpies).</p>
+                    </div>
 
-  </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Autoavaluacions interactives</h3>
+                        <p>Qüestionaris amb feedback immediat i seguiment del progrés.</p>
+                    </div>
 
-  <footer style="margin-bottom: 30px; color: var(--muted); font-size: 0.9rem;">
-    &copy; 2025 Institut Nicolau Copèrnic — Terrassa
-  </footer>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Checklists de seguretat</h3>
+                        <p>OWASP Top 10, hardening de sistemes, DevSecOps i més.</p>
+                    </div>
 
+                    <div class="feature-card">
+                        <div class="feature-icon">💻</div>
+                        <h3>Recursos descarregables</h3>
+                        <p>Scripts, plantilles Docker, checklists en PDF i plantilles de informes.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3>FAQ i exemples d'exàmens</h3>
+                        <p>Preguntes freqüents + mostres d'exàmens i projectes anteriors.</p>
+                    </div>
+                </div>
+            </section>
+            <h2 class="section-title">🎯→🏆 Finalitat</h2>
+            <div class="about-text">
+                <ul style="list-style: none; text-align: left;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">→ Centralitzar
+                        continguts teòrics i pràctics</li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">→ Facilitar l’accés als
+                        materials des de qualsevol dispositiu</li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">→ Incorporar exercicis
+                        d’autoavaluació</li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">→ Permetre una
+                        ampliació progressiva dels mòduls</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="m05" class="modules-section">
+            <h2 class="module-header">🕵️‍♂️🛡️ M05 – Hacking Ètic</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">U1</div>
+                    <h4>Introducció al Hacking Ètic</h4>
+                    <span class="badge-dev">En desenvolupament</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon">U2</div>
+                    <h4>Atacs a Xarxes Sense Fils</h4>
+                    <span class="badge-ready">Accessible</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon">U3</div>
+                    <h4>Accés Inicial (Enginyeria Social i Phishing)</h4>
+                    <span class="badge-dev">En desenvolupament</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon">U4</div>
+                    <h4>Escalada de privilegis i persistència</h4>
+                    <span class="badge-dev">En desenvolupament</span>
+                </div>
+                <div class="card">
+                    <div class="card-icon">U5</div>
+                    <h4>Atacs a aplicacions web (OWASP)</h4>
+                    <span class="badge-dev">En desenvolupament</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="m03" class="modules-section" style="padding-top: 2rem;">
+            <h2 class="module-header">🔐 M03 – Posada en Producció Segura</h2>
+            <div class="cards-grid">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">U1</div>
+                    </div>
+                    <h4>DevOps i Automatització</h4>
+                    <ul class="card-list">
+                        <li>DevOps i infraestructura <span class="badge-dev">Dev</span></li>
+                        <li>Arquitectures contenidors <span class="badge-dev">Dev</span></li>
+                        <li>Posada producció <span class="badge-dev">Dev</span></li>
+                        <li>Orquestració <span class="badge-dev">Dev</span></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">U2</div>
+                    </div>
+                    <h4>Proves de Programari</h4>
+                    <ul class="card-list">
+                        <li>Intro proves auto <span class="badge-dev">Dev</span></li>
+                        <li>Tests frameworks web <span class="badge-dev">Dev</span></li>
+                        <li>Proves apps mòbils <span class="badge-dev">Dev</span></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">U3</div>
+                    </div>
+                    <h4>Seguretat Web i Correu</h4>
+                    <ul class="card-list">
+                        <li>Avaluació riscos <span class="badge-dev">Dev</span></li>
+                        <li>Mesures protecció <span class="badge-dev">Dev</span></li>
+                        <li>Correu segur <span class="badge-dev">Dev</span></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">U4</div>
+                    </div>
+                    <h4>Aplicacions Mòbils</h4>
+                    <ul class="card-list">
+                        <li>Seguretat apps <span class="badge-dev">Dev</span></li>
+                        <li>Ofuscació codi <span class="badge-dev">Dev</span></li>
+                        <li>Monitoratge <span class="badge-dev">Dev</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="legal" class="about-section" style="padding-top: 0;">
+            <div class="legal-box">
+                <h3>⚠️ Avís legal</h3>
+                <p>Aquest projecte té finalitats exclusivament educatives.</p>
+                <br>
+                <p>Les pràctiques relacionades amb tècniques de seguretat o anàlisi de vulnerabilitats només s’han de
+                    realitzar en entorns controlats i amb autorització expressa.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact">
+        <h2 class="footer-logo">👥 Autoria</h2>
+        <p>Ivan Morales</p>
+        <p>Institut Nicolau Copèrnic — Departament d’Informàtica</p>
+        <p>Terrassa</p>
+        <div class="social-links">
+            <a href="https://ivanmoralescopernic.github.io/" class="social-link">Portal Web</a>
+            <a href="#" class="social-link">GitHub</a>
+        </div>
+        <p class="copyright">© 2026. Tots els drets reservats.</p>
+    </footer>
+
+    <script src="js/menu_script.js"></script>
 </body>
+
 </html>
