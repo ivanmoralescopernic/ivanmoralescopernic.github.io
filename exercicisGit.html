@@ -81,14 +81,21 @@
                 <h1 class="page-title">Exercicis Pràctics de Git</h1>
                 <p class="page-subtitle">Arrossega i ordena els passos correctament</p>
 
-                <!-- Dificultat Selector -->
-                <div class="difficulty-selector">
-                    <span class="difficulty-label">Dificultat:</span>
-                    <div class="difficulty-options">
-                        <button class="diff-btn" data-level="easy" onclick="setDifficulty('easy')">Fàcil</button>
-                        <button class="diff-btn" data-level="medium" onclick="setDifficulty('medium')">Mitjana</button>
-                        <button class="diff-btn active" data-level="hard"
-                            onclick="setDifficulty('hard')">Difícil</button>
+                <!-- Dificultat Selector (Side Menu) -->
+                <div class="difficulty-side-menu" id="difficulty-menu">
+                    <button class="menu-toggle-btn" onclick="toggleDiffMenu()" aria-label="Obrir configuració">
+                        <img src="images/pps/difficult.svg" alt="Dificultat" width="30" height="30"
+                            style="filter: var(--icon-filter);">
+                    </button>
+                    <div class="menu-content">
+                        <span class="difficulty-label">Dificultat</span>
+                        <div class="difficulty-options">
+                            <button class="diff-btn" data-level="easy" onclick="setDifficulty('easy')">Fàcil</button>
+                            <button class="diff-btn" data-level="medium"
+                                onclick="setDifficulty('medium')">Mitjana</button>
+                            <button class="diff-btn active" data-level="hard"
+                                onclick="setDifficulty('hard')">Difícil</button>
+                        </div>
                     </div>
                 </div>
             </div>

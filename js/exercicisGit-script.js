@@ -58,6 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+function toggleDiffMenu() {
+    const menu = document.getElementById('difficulty-menu');
+    menu.classList.toggle('open');
+}
+
 // ===================================
 // Exercicis Git - Sortable List Logic
 // ===================================
