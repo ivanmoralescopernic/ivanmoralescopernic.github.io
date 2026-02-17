@@ -276,39 +276,74 @@ function renderList(container, ids, exerciseId, fixedIndices = []) {
 }
 
 // ===================================
-// Lògica de Drag & Drop (Sortable)
+// Lògica de Drag & Drop (Mouse + Touch)
 // ===================================
 
 function setupDragging(item, list) {
+    // Mouse Events
     item.addEventListener('dragstart', () => {
         item.classList.add('dragging');
     });
 
     item.addEventListener('dragend', () => {
         item.classList.remove('dragging');
-        // Actualitzar els números d'ordre
         updateIndexes(list);
-        // Netejar validacions prèvies quan es mouen
-        list.querySelectorAll('.sortable-item').forEach(el => {
-            el.classList.remove('correct', 'incorrect');
-        });
+        clearValidations(list);
     });
 
     list.addEventListener('dragover', (e) => {
         e.preventDefault();
-        const afterElement = getDragAfterElement(list, e.clientY);
         const dragging = document.querySelector('.dragging');
+        if (!dragging || dragging.parentElement !== list) return;
 
-        // Només permetre drag dins de la mateixa llista
-        if (dragging && dragging.parentElement === list) {
-            if (afterElement == null) {
-                list.appendChild(dragging);
-            } else {
-                list.insertBefore(dragging, afterElement);
-            }
+        const afterElement = getDragAfterElement(list, e.clientY);
+        if (afterElement == null) {
+            list.appendChild(dragging);
+        } else {
+            list.insertBefore(dragging, afterElement);
         }
     });
+
+    // Touch Events (Mobile/Tablet)
+    item.addEventListener('touchstart', (e) => {
+        // Ignorar si és un element fix
+        if (item.classList.contains('fixed')) return;
+
+        item.classList.add('dragging');
+        // Prevenir scroll mentre arrosseguem
+        // e.preventDefault(); 
+    }, { passive: true });
+
+    item.addEventListener('touchmove', (e) => {
+        const dragging = document.querySelector('.dragging');
+        if (!dragging || dragging.parentElement !== list) return;
+
+        // Prevenir scroll de la pàgina
+        e.preventDefault();
+
+        const touch = e.touches[0];
+        const afterElement = getDragAfterElement(list, touch.clientY);
+
+        if (afterElement == null) {
+            list.appendChild(dragging);
+        } else {
+            list.insertBefore(dragging, afterElement);
+        }
+    }, { passive: false });
+
+    item.addEventListener('touchend', () => {
+        item.classList.remove('dragging');
+        updateIndexes(list);
+        clearValidations(list);
+    });
 }
+
+function clearValidations(list) {
+    list.querySelectorAll('.sortable-item').forEach(el => {
+        el.classList.remove('correct', 'incorrect');
+    });
+}
+
 
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('.sortable-item:not(.dragging)')];
