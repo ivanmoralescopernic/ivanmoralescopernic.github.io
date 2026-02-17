@@ -1,0 +1,380 @@
+/* ===================================
+   Exercicis Git - Estils específics (Sortable)
+   =================================== */
+
+/* Password Overlay */
+.password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.password-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.password-card {
+    background: var(--bg-secondary);
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    backdrop-filter: blur(10px);
+}
+
+.lock-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.password-card h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.password-card p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.password-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.password-input-group input {
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.password-input-group input:focus {
+    border-color: #667eea;
+}
+
+.password-input-group button {
+    padding: 1rem;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.password-input-group button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.password-error-text {
+    color: #ef4444 !important;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    min-height: 1.2rem;
+}
+
+
+.page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-top: 2rem;
+}
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: #1a202c;
+}
+
+[data-theme="dark"] .page-title {
+    color: #f1f5f9;
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* Exercise Section */
+.exercise-section {
+    background: var(--bg-secondary);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-bottom: 4rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.exercise-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.exercise-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.exercise-objective {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Sortable List */
+.sortable-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sortable-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--bg-primary);
+    border-radius: 20px;
+    border: 2px solid var(--border-color);
+}
+
+.sortable-item {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: grab;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    position: relative;
+    gap: 1.5rem;
+}
+
+.sortable-item:hover {
+    border-color: #667eea;
+    transform: translateX(5px);
+    box-shadow: var(--shadow-sm);
+}
+
+.sortable-item:active {
+    cursor: grabbing;
+}
+
+.sortable-item.dragging {
+    opacity: 0.4;
+    scale: 0.98;
+    background: var(--bg-primary);
+    border-style: dashed;
+    border-width: 2px;
+    border-color: #667eea;
+}
+
+.item-index {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.item-content {
+    flex-grow: 1;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.05rem;
+}
+
+.drag-handle {
+    color: var(--text-muted);
+    cursor: grab;
+}
+
+/* States */
+.sortable-item.correct {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.sortable-item.correct .item-index {
+    background: #10b981;
+    color: white;
+    border-color: #10b981;
+}
+
+.sortable-item.incorrect {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.sortable-item.incorrect .item-index {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+}
+
+/* Exercise Actions */
+.exercise-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.btn-check,
+.btn-reset {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-check {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-check:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-reset {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-reset:hover {
+    border-color: var(--accent-secondary);
+    transform: translateY(-3px);
+}
+
+/* Result Message */
+.result-message {
+    margin-top: 2rem;
+    padding: 1.25rem 2rem;
+    border-radius: 16px;
+    font-weight: 700;
+    text-align: center;
+    opacity: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.result-message.show {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
+
+.result-message.success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 2px solid #10b981;
+    color: #10b981;
+}
+
+.result-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 2px solid #ef4444;
+    color: #ef4444;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-8px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.25rem;
+    }
+
+    .exercise-section {
+        padding: 1.5rem;
+    }
+
+    .sortable-item {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .item-content {
+        font-size: 0.95rem;
+    }
+
+    .exercise-actions {
+        flex-direction: column;
+    }
+
+    .btn-check,
+    .btn-reset {
+        width: 100%;
+    }
+}

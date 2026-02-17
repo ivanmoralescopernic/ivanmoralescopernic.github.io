@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mòdul M03: Posada en Producció Segura - Ciberseguretat">
+    <title>M03 - Posada en Producció Segura</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Background decorative elements -->
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <span>M3</span>
+            </div>
+            <span class="logo-text">M03 PPS</span>
+        </div>
+
+        <nav class="nav">
+
+            <a href="#modules-section" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+                <span>Mòduls</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
+
+            <button class="menu-btn" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="hero-section">
+                <div class="hero-text">
+                    <div class="decorative-circle"></div>
+
+                    <p class="greeting"> Del codi a la trinxera</p>
+                    <h1 class="name">
+                        M03: Posada en<br>
+                        Producció Segura
+                    </h1>
+                    <p class="title">Blindant el desplegament en l'era digital</p>
+
+                    <div class="course-info">
+                        <div class="info-box">
+                            <div class="info-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Enfocament 100% Pràctic</h3>
+                                <p>Alineat amb estàndards internacionals OWASP i ASVS</p>
+                            </div>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="info-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Tecnologies Clau</h3>
+                                <p>Docker, Kubernetes, Ansible, Selenium, ZAP, JWT, TLS</p>
+                            </div>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="info-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Especialització</h3>
+                                <p>Ciberseguretat aplicada al desplegament i producció</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <div class="image-container">
+                        <img src="images/pps/logoppseg.svg" alt="Logotip M03 PPS" class="tech-illustration pps-logo">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Section -->
+            <section id="modules-section" class="cards-section">
+                <div class="section-header">
+                    <h2 class="section-title">Què Aprendràs?</h2>
+                    <p class="section-subtitle">Domina les competències clau de la ciberseguretat en producció</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon gradient-1">U1</div>
+                        </div>
+                        <h4>DevOps i Automatització</h4>
+                        <ul class="card-list">
+                            <li>DevOps i infraestructura <span class="badge-dev">Dev</span></li>
+                            <li>Arquitectures contenidors <span class="badge-dev">Dev</span></li>
+                            <li>Posada producció <span class="badge-dev">Dev</span></li>
+                            <li>Orquestració <span class="badge-dev">Dev</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon gradient-2">U2</div>
+                        </div>
+                        <h4>Proves de Programari</h4>
+                        <ul class="card-list">
+                            <li>Intro proves auto <span class="badge-dev">Dev</span></li>
+                            <li>Tests frameworks web <span class="badge-dev">Dev</span></li>
+                            <li>Proves apps mòbils <span class="badge-dev">Dev</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon gradient-3">U3</div>
+                        </div>
+                        <h4>Seguretat Web i Correu</h4>
+                        <ul class="card-list">
+                            <li>Avaluació riscos <span class="badge-dev">Dev</span></li>
+                            <li>Mesures protecció <span class="badge-dev">Dev</span></li>
+                            <li>Correu segur <span class="badge-dev">Dev</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon gradient-4">U4</div>
+                        </div>
+                        <h4>Aplicacions Mòbils</h4>
+                        <ul class="card-list">
+                            <li>Seguretat apps <span class="badge-dev">Dev</span></li>
+                            <li>Ofuscació codi <span class="badge-dev">Dev</span></li>
+                            <li>Monitoratge <span class="badge-dev">Dev</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+        <div class="mouse">
+            <div class="wheel"></div>
+        </div>
+    </div>
+
+    <script src="js/indexM03-script.js"></script>
+</body>
+
+</html>
