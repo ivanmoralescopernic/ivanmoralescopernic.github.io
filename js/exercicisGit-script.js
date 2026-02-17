@@ -62,6 +62,26 @@ document.addEventListener('DOMContentLoaded', () => {
 // Exercicis Git - Sortable List Logic
 // ===================================
 
+let currentDifficulty = 'hard';
+
+function setDifficulty(level) {
+    currentDifficulty = level;
+
+    // Actualitzar estils dels botons
+    document.querySelectorAll('.diff-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.level === level);
+    });
+
+    // Reiniciar tots els exercicis amb la nova dificultat
+    Object.keys(exercisesData).forEach(id => {
+        initExercise(parseInt(id));
+        const resultDiv = document.getElementById(`result-${id}`);
+        if (resultDiv) resultDiv.classList.remove('show');
+    });
+
+    console.log(`🎮 Dificultat canviada a: ${level}`);
+}
+
 // Configuració dels exercicis
 const exercisesData = {
     1: {
@@ -114,8 +134,60 @@ const exercisesData = {
             'F': 'Corregir errors si n’hi ha',
             'G': 'Revisar canvis amb git status'
         }
+    },
+    5: {
+        correctOrder: ['A', 'B', 'C', 'E', 'F', 'D', 'G', 'H'],
+        steps: {
+            'A': 'Desenvolupar a feature',
+            'B': 'Merge feature → dev',
+            'C': 'Executar tests',
+            'D': 'Merge dev → main',
+            'E': 'CI executa pipeline',
+            'F': 'Validar que tot està en verd',
+            'G': 'Desplegar',
+            'H': 'Monitorar'
+        }
+    },
+    6: {
+        correctOrder: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+        steps: {
+            'A': 'Crear branca hotfix',
+            'B': 'Escriure test que reprodueixi el problema',
+            'C': 'Executar test (falla)',
+            'D': 'Implementar correcció',
+            'E': 'Executar test (passa)',
+            'F': 'Commit',
+            'G': 'Merge a main',
+            'H': 'Desplegar urgentment'
+        }
+    },
+    7: {
+        correctOrder: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        steps: {
+            'A': 'git clone URL',
+            'B': 'Entrar a la carpeta del projecte',
+            'C': 'git checkout main',
+            'D': 'git pull origin main',
+            'E': 'Crear branca feature',
+            'F': 'Desenvolupar funcionalitat',
+            'G': 'Fer commit'
+        }
+    },
+    8: {
+        correctOrder: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+        steps: {
+            'A': 'Definir requisit',
+            'B': 'Escriure test',
+            'C': 'Escriure codi',
+            'D': 'Executar tests',
+            'E': 'Commit',
+            'F': 'Push',
+            'G': 'CI valida',
+            'H': 'Deploy'
+        }
     }
 };
+
 
 // ===================================
 // Inicialització
@@ -132,26 +204,53 @@ function initExercise(id) {
     const list = document.getElementById(`list-${id}`);
     if (!list) return;
 
-    // Generar i barrejar passos
-    const stepIds = [...Object.keys(exercisesData[id].steps)];
-    const shuffledIds = shuffleArray(stepIds);
+    const data = exercisesData[id];
+    const correctOrder = data.correctOrder;
+    const totalSteps = correctOrder.length;
 
-    renderList(list, shuffledIds, id);
+    // Índexs que han d'estar fixats
+    let fixedIndices = [];
+    if (currentDifficulty === 'easy') {
+        fixedIndices = [0, totalSteps - 1];
+    } else if (currentDifficulty === 'medium') {
+        fixedIndices = [0];
+    }
+
+    // Obtenir els IDs que no estan fixats per barrejar-los
+    const nonFixedIds = correctOrder.filter((id, index) => !fixedIndices.includes(index));
+    const shuffledNonFixed = shuffleArray([...nonFixedIds]);
+
+    // Reconstruir la llista barrejada respectant els fixats
+    let finalIds = [];
+    let shufflePtr = 0;
+
+    for (let i = 0; i < totalSteps; i++) {
+        if (fixedIndices.includes(i)) {
+            finalIds.push(correctOrder[i]);
+        } else {
+            finalIds.push(shuffledNonFixed[shufflePtr++]);
+        }
+    }
+
+    renderList(list, finalIds, id, fixedIndices);
 }
 
-function renderList(container, ids, exerciseId) {
+function renderList(container, ids, exerciseId, fixedIndices = []) {
     container.innerHTML = '';
     const steps = exercisesData[exerciseId].steps;
 
     ids.forEach((id, index) => {
         const item = document.createElement('div');
-        item.className = 'sortable-item';
-        item.draggable = true;
+        const isFixed = fixedIndices.includes(index);
+
+        item.className = `sortable-item ${isFixed ? 'fixed' : ''}`;
+        item.draggable = !isFixed;
         item.dataset.id = id;
 
         item.innerHTML = `
             <div class="item-index">${index + 1}</div>
             <div class="item-content">${steps[id]}</div>
+            ${!isFixed ? `
             <div class="drag-handle">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="5" r="1"></circle>
@@ -161,10 +260,12 @@ function renderList(container, ids, exerciseId) {
                     <circle cx="15" cy="12" r="1"></circle>
                     <circle cx="15" cy="19" r="1"></circle>
                 </svg>
-            </div>
+            </div>` : ''}
         `;
 
-        setupDragging(item, container);
+        if (!isFixed) {
+            setupDragging(item, container);
+        }
         container.appendChild(item);
     });
 }

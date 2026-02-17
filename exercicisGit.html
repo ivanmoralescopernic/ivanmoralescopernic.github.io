@@ -80,12 +80,23 @@
             <div class="page-header">
                 <h1 class="page-title">Exercicis Pràctics de Git</h1>
                 <p class="page-subtitle">Arrossega i ordena els passos correctament</p>
+
+                <!-- Dificultat Selector -->
+                <div class="difficulty-selector">
+                    <span class="difficulty-label">Dificultat:</span>
+                    <div class="difficulty-options">
+                        <button class="diff-btn" data-level="easy" onclick="setDifficulty('easy')">Fàcil</button>
+                        <button class="diff-btn" data-level="medium" onclick="setDifficulty('medium')">Mitjana</button>
+                        <button class="diff-btn active" data-level="hard"
+                            onclick="setDifficulty('hard')">Difícil</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Exercici 1 -->
             <section class="exercise-section">
                 <div class="exercise-header">
-                    <h2 class="exercise-title">🔹 Exercici 1 – Afegir una funcionalitat correctament</h2>
+                    <h2 class="exercise-title">◆ Exercici 1 – Afegir una funcionalitat correctament</h2>
                     <p class="exercise-objective"><strong>Objectiu:</strong> Desenvolupar una funcionalitat sense
                         afectar main</p>
                 </div>
@@ -106,7 +117,7 @@
             <!-- Exercici 2 -->
             <section class="exercise-section">
                 <div class="exercise-header">
-                    <h2 class="exercise-title">🔹 Exercici 2 – Resolució d’un conflicte de merge</h2>
+                    <h2 class="exercise-title">◆ Exercici 2 – Resolució d’un conflicte de merge</h2>
                     <p class="exercise-objective"><strong>Objectiu:</strong> Fusionar una branca a dev amb conflicte</p>
                 </div>
 
@@ -126,7 +137,7 @@
             <!-- Exercici 3 -->
             <section class="exercise-section">
                 <div class="exercise-header">
-                    <h2 class="exercise-title">🔹 Exercici 3 – Cicle complet TDD amb Git</h2>
+                    <h2 class="exercise-title">◆ Exercici 3 – Cicle complet TDD amb Git</h2>
                     <p class="exercise-objective"><strong>Objectiu:</strong> Aplicar TDD dins una branca</p>
                 </div>
 
@@ -146,7 +157,7 @@
             <!-- Exercici 4 -->
             <section class="exercise-section">
                 <div class="exercise-header">
-                    <h2 class="exercise-title">🔹 Exercici 4 – Flux segur abans de fer push</h2>
+                    <h2 class="exercise-title">◆ Exercici 4 – Flux segur abans de fer push</h2>
                     <p class="exercise-objective"><strong>Objectiu:</strong> Evitar pujar codi trencat al remot</p>
                 </div>
 
@@ -162,6 +173,80 @@
                 </div>
                 <div class="result-message" id="result-4"></div>
             </section>
+
+            <!-- Exercici 5 -->
+            <section class="exercise-section">
+                <div class="exercise-header">
+                    <h2 class="exercise-title">◆ Exercici 5 – Portar funcionalitat a producció</h2>
+                    <p class="exercise-objective"><strong>Objectiu:</strong> Flux Dev → Main amb validació</p>
+                </div>
+
+                <div class="sortable-container">
+                    <div class="sortable-list" id="list-5" data-exercise="5"></div>
+                </div>
+
+                <div class="exercise-actions">
+                    <button class="btn-check" onclick="checkExercise(5)">Comprovar Resposta</button>
+                    <button class="btn-reset" onclick="resetExercise(5)">Reiniciar i Barrejar</button>
+                </div>
+                <div class="result-message" id="result-5"></div>
+            </section>
+
+            <!-- Exercici 6 -->
+            <section class="exercise-section">
+                <div class="exercise-header">
+                    <h2 class="exercise-title">◆ Exercici 6 – Hotfix urgent</h2>
+                    <p class="exercise-objective"><strong>Escenari:</strong> Vulnerabilitat crítica en producció</p>
+                </div>
+
+                <div class="sortable-container">
+                    <div class="sortable-list" id="list-6" data-exercise="6"></div>
+                </div>
+
+                <div class="exercise-actions">
+                    <button class="btn-check" onclick="checkExercise(6)">Comprovar Resposta</button>
+                    <button class="btn-reset" onclick="resetExercise(6)">Reiniciar i Barrejar</button>
+                </div>
+                <div class="result-message" id="result-6"></div>
+            </section>
+
+            <!-- Exercici 7 -->
+            <section class="exercise-section">
+                <div class="exercise-header">
+                    <h2 class="exercise-title">◆ Exercici 7 – Preparar projecte correctament</h2>
+                    <p class="exercise-objective"><strong>Objectiu:</strong> Començar a treballar en projecte existent
+                    </p>
+                </div>
+
+                <div class="sortable-container">
+                    <div class="sortable-list" id="list-7" data-exercise="7"></div>
+                </div>
+
+                <div class="exercise-actions">
+                    <button class="btn-check" onclick="checkExercise(7)">Comprovar Resposta</button>
+                    <button class="btn-reset" onclick="resetExercise(7)">Reiniciar i Barrejar</button>
+                </div>
+                <div class="result-message" id="result-7"></div>
+            </section>
+
+            <!-- Exercici 8 -->
+            <section class="exercise-section">
+                <div class="exercise-header">
+                    <h2 class="exercise-title">◆ Exercici 8 – Flux mental DevSecOps complet</h2>
+                    <p class="exercise-objective"><strong>Ordena els passos del cicle de vida:</strong></p>
+                </div>
+
+                <div class="sortable-container">
+                    <div class="sortable-list" id="list-8" data-exercise="8"></div>
+                </div>
+
+                <div class="exercise-actions">
+                    <button class="btn-check" onclick="checkExercise(8)">Comprovar Resposta</button>
+                    <button class="btn-reset" onclick="resetExercise(8)">Reiniciar i Barrejar</button>
+                </div>
+                <div class="result-message" id="result-8"></div>
+            </section>
+
 
         </div>
     </main>
