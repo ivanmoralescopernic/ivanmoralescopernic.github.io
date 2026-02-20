@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xarxes Ofensives | Hacking Ètic - Unitat 3</title>
+    <meta name="description"
+        content="Unitat 3: Xarxes Ofensives - El Punt Feble dels Firewalls. Estudi de DNS Tunneling, C2 i Canals Encoberts.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- CSS link -->
+    <link rel="stylesheet" href="css/dnsc2style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/lite-youtube@1/lite-youtube.min.js"></script>
+
+</head>
+
+<body>
+    <div class="stars-container" id="stars"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-at">Hacking Etic</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#intro">Introducció</a></li>
+                <li><a href="#firewall">Firewalls</a></li>
+                <li><a href="#dns">DNS Tunneling</a></li>
+                <li><a href="#c2">C2 & LotL</a></li>
+                <li><a href="#physical">Vector Físic</a></li>
+                <li><a href="#tools" class="nav-connect">Eines</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="badge">Unitat 3: Ciberseguretat Ofensiva</div>
+                <h1 class="hero-title">
+                    Xarxes Ofensives<br>
+                    <span class="accent-text">El Punt Feble dels Firewalls</span>
+                </h1>
+                <p class="hero-subtitle">DNS Tunneling, C2 i Canals Encoberts</p>
+                <div class="scroll-indicator">
+                    <i data-lucide="chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Container -->
+        <div class="main-container">
+
+            <!-- Intro Section -->
+            <section id="intro" class="content-section">
+                <div class="glass-card">
+                    <h2>Introducció</h2>
+                    <p>Sabies que un tallafoc pot bloquejar gairebé tot… però no ho pot bloquejar tot? En el món de la
+                        ciberseguretat ofensiva, entendre com funcionen els protocols essencials d'Internet és klau per
+                        trobar vies d'evasió. Aquesta entrada explora les tècniques utilitzades per saltar-se les
+                        restriccions de xarxa i mantenir el control sobre sistemes compromesos.</p>
+
+                    <div class="video-container">
+                        <lite-youtube videoid="Qfa1isXis6I" videotitle="El punt feble dels firewalls"
+                            posterquality="maxresdefault" autoload></lite-youtube>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <!-- Paradox Section -->
+            <section id="firewall" class="content-section">
+                <div class="glass-card">
+                    <h2>La Paradoxa del Firewall</h2>
+                    <p>Els tallafocs tradicionals basen la seva seguretat en el filtratge per Port, Protocol i IP
+                        origen/destí. Aquest model assumeix que si bloquegem els ports perillosos, la xarxa és segura.
+                        No obstant això, hi ha serveis que són imprescindibles per al funcionament d'Internet:</p>
+
+                    <div class="grid-2">
+                        <div class="info-box">
+                            <h3><i data-lucide="globe"></i> DNS (Domain Name System)</h3>
+                            <p>Sense resolució de noms, no hi ha navegació web. Per tant, el <strong>port 53
+                                    (UDP)</strong> gairebé sempre està obert cap a l'exterior.</p>
+                        </div>
+                        <div class="info-box">
+                            <h3><i data-lucide="lock"></i> HTTPS (Web Segura)</h3>
+                            <p>El tràfic xifrat pel <strong>port 443 (TCP)</strong> és necessari per a la majoria de
+                                l'activitat empresarial.</p>
+                        </div>
+                    </div>
+
+                    <p class="mt-2">Aquest és el punt feble: si un servei és imprescindible i permet l'intercanvi de
+                        dades, es pot convertir en un canal de comunicació encobert per a un atacant.</p>
+
+                    <div class="curriculum-box">
+                        <span class="tag">Context Curricular (RA2 i RA3)</span>
+                        <p>Aquest concepte és fonamental per entendre la interceptació de tràfic i l'anàlisi de
+                            protocols de xarxa en entorns restrictius.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DNS Tunneling -->
+            <section id="dns" class="content-section">
+                <div class="glass-card">
+                    <h2>DNS Tunneling: Encapsulació de Tràfic</h2>
+                    <p>El DNS Tunneling és una tècnica que permet encapsular altres protocols (com TCP/IP) dins de les
+                        consultes i respostes DNS.</p>
+
+                    <div class="steps-container">
+                        <div class="step">
+                            <div class="step-num">1</div>
+                            <div class="step-content">
+                                <strong>Fragmentació:</strong> Les dades que es volen exfiltrar es divideixen en trossos
+                                molt petits.
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">2</div>
+                            <div class="step-content">
+                                <strong>Codificació:</strong> Les dades es codifiquen (sovint en Base64 o Hexadecimal).
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">3</div>
+                            <div class="step-content">
+                                <strong>Transmissió:</strong> S'envien com a "subdominis" d'un domini controlat per
+                                l'atacant (ex: <code>dades-robades.hacker.com</code>).
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="mt-2">El tallafoc interpreta això com una consulta legítima per saber la IP d'un domini,
+                        però en realitat s'està establint un túnel de comunicació bidireccional.</p>
+                </div>
+            </section>
+
+            <!-- C2 & LotL -->
+            <section id="c2" class="content-section">
+                <div class="glass-card">
+                    <h2>Command & Control (C2) i "Living off the Land"</h2>
+                    <p>Un sistema de Command & Control (C2) és la infraestructura que permet a un atacant enviar ordres
+                        a un sistema compromès i rebre'n la resposta.</p>
+
+                    <div class="lotl-box">
+                        <h3>L'estratègia "Living off the Land" (LotL)</h3>
+                        <p>Consisteix a utilitzar eines i serveis que ja existeixen i són de confiança a l'entorn de la
+                            víctima, com l'<strong>API de Telegram</strong>:</p>
+                        <ul class="clean-list">
+                            <li><i data-lucide="check"></i> L'atacant configura un script (malware) que es connecta a
+                                l'API de bots de Telegram.</li>
+                            <li><i data-lucide="check"></i> El tràfic viatja xifrat per HTTPS (Port 443) cap a dominis
+                                legítims com <code>api.telegram.org</code>.</li>
+                            <li><i data-lucide="check"></i> Indistingible d'un usuari legítim xatejant.</li>
+                        </ul>
+                    </div>
+
+                    <div class="curriculum-box">
+                        <span class="tag">Context Curricular (RA4)</span>
+                        <p>Aquesta tècnica es relaciona directament amb la consolidació de sistemes compromesos, la
+                            persistència i l'establiment de portes del darrere (backdoors).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Physical Vector -->
+            <section id="physical" class="content-section">
+                <div class="glass-card">
+                    <h2>El Vector Físic: BadUSB</h2>
+                    <p>No tots els atacs commencent de manera remota. La confiança implícita que els sistemes operatius
+                        tenen en els dispositius HID (Human Interface Device) és una vulnerabilitat explotable.</p>
+
+                    <div class="badusb-card">
+                        <i data-lucide="usb" class="usb-icon"></i>
+                        <div>
+                            <p>Dispositius com el <strong>USB Rubber Ducky</strong> es presenten al sistema com un
+                                teclat, saltant-se les restriccions d'antivirus i "teclejant" scripts a velocitat
+                                sobrehumana per executar payloads.</p>
+                        </div>
+                    </div>
+
+                    <div class="curriculum-box">
+                        <span class="tag">Context Curricular (RA3)</span>
+                        <p>Això correspon a les tècniques d'accés inicial, demostrant com es pot comprometre un sistema
+                            físicament.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tools Section -->
+            <section id="tools" class="content-section">
+                <div class="glass-card">
+                    <h2>Utilitats i Eines</h2>
+                    <div class="tools-grid">
+                        <div class="tool-item">
+                            <i data-lucide="shield"></i>
+                            <div>
+                                <strong>iodine</strong>
+                                <span>Creació de túnels IPv4 via DNS.</span>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <i data-lucide="box"></i>
+                            <div>
+                                <strong>Docker</strong>
+                                <span>Labos segurs i aïllats.</span>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <i data-lucide="activity"></i>
+                            <div>
+                                <strong>Wireshark</strong>
+                                <span>Anàlisi forense de xarxa.</span>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <i data-lucide="message-square"></i>
+                            <div>
+                                <strong>Telegram API</strong>
+                                <span>Canal de C2 encobert.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Footer -->
+            <section class="content-section mb-5">
+                <div class="summary-box">
+                    <h3>Resum Final</h3>
+                    <p>La seguretat perimetral basada únicament en el bloqueig de ports és insuficient. Cal passar d'una
+                        defensa estàtica a una basada en l'anàlisi del comportament i la inspecció profunda de paquets
+                        (DPI).</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Stars generation
+        const starsContainer = document.getElementById('stars');
+        const starCount = 200;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 1.5;
+
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.opacity = Math.random();
+
+            if (Math.random() > 0.9) {
+                star.style.animation = `twinkle ${3 + Math.random() * 4}s infinite`;
+            }
+            starsContainer.appendChild(star);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
