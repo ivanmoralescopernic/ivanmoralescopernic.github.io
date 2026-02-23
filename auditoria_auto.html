@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ca" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Auditoria Automàtica de Seguretat - M03 Posada en Producció Segura">
+    <title>Auditoria Automàtica | M03 PPS</title>
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/auditoria_style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- Background elements -->
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header & Navbar -->
+    <header class="header" style="background: transparent; box-shadow: none;">
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-icon"><span>M3</span></div>
+                <span class="logo-text">Audit. Automàtica</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#intro">Intro</a></li>
+                <li><a href="#auditoria">Auditoria</a></li>
+                <li><a href="#ci">CI/CD</a></li>
+                <li><a href="#asserts">Asserts</a></li>
+                <li><a href="#tools" class="nav-active">Eines</a></li>
+                <li><button id="theme-toggle" class="stars-count" style="border:none; cursor: pointer;">
+                        <i data-lucide="sun-medium"></i> Tema
+                    </button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="badge">Wiki M03 PPS</div>
+                <h1 class="hero-title">
+                    Auditoria Automàtica<br>
+                    <span class="accent-text">Qui vigila al vigilant?</span>
+                </h1>
+                <p class="hero-subtitle">La ciberseguretat operativa depèn de sistemes que s'autovigilen. Benvinguts a
+                    l'era del DevSecOps.</p>
+            </div>
+            <div class="scroll-indicator">
+                <i data-lucide="arrow-down"></i>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <div class="main-container">
+
+            <!-- Intro Section -->
+            <section id="intro" class="content-section">
+                <div class="glass-card">
+                    <div class="section-header">
+                        <i data-lucide="shield-check"></i>
+                        <h2>Seguretat en el Manteniment</h2>
+                    </div>
+                    <div class="wiki-content">
+                        <p>Sabies que la majoria de vulnerabilitats no neixen amb el codi original, sinó que apareixen
+                            durant el manteniment? En el món de la ciberseguretat operativa, no n'hi ha prou amb tancar
+                            un forat; cal posar un "robot" que vigili que ningú el torni a obrir.</p>
+                        <div class="highlight-box">
+                            <p>Aquesta filosofia s'anomena <strong>DevSecOps</strong> i el seu objectiu és el
+                                <strong>"Shift Left Security"</strong>: moure la seguretat al principi del
+                                desenvolupament, convertint els tests en veritables auditories automàtiques.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Auditoria Section -->
+            <section id="auditoria" class="content-section">
+                <div class="glass-card">
+                    <div class="section-header">
+                        <i data-lucide="play-circle"></i>
+                        <h2>L'Execució de l'Auditoria</h2>
+                    </div>
+                    <div class="wiki-content">
+                        <p>La seguretat moderna no depèn de que un humà recordi provar si el login funciona. Depèn de
+                            sistemes que executen milers de comprovacions a cada segon:</p>
+
+                        <div class="tool-grid">
+                            <div class="tool-card">
+                                <strong>TDD (Test Driven)</strong>
+                                <p>Escrivim el test que explota la vulnerabilitat (RED) i després implementem la
+                                    correcció fins que surt verd (GREEN).</p>
+                            </div>
+                            <div class="tool-card">
+                                <strong>Fixtures</strong>
+                                <p>Instantànies de la base de dades (JSON) per fer auditories reproduïbles en entorns
+                                    aïllats i efímers.</p>
+                            </div>
+                            <div class="tool-card">
+                                <strong>Headless Browsing</strong>
+                                <p>Selenium executant Firefox en memòria (<code>MOZ_HEADLESS=1</code>). Sense pantalles,
+                                    només resultats programàtics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CI/CD Section -->
+            <section id="ci" class="content-section">
+                <div class="glass-card">
+                    <div class="section-header">
+                        <i data-lucide="layers"></i>
+                        <h2>Integració Contínua (CI)</h2>
+                    </div>
+                    <div class="wiki-content">
+                        <p>Executar tests a cada "push". GitHub Actions regna al núvol amb el format
+                            <strong>YAML</strong>, mentre que Jenkins és el rei de la infraestructura local.</p>
+
+                        <div class="weather-container">
+                            <div class="weather-item">
+                                <span class="weather-icon">☀️</span>
+                                <strong>Sol</strong>
+                                <p>Sistema Estable</p>
+                            </div>
+                            <div class="weather-item">
+                                <span class="weather-icon">⛈️</span>
+                                <strong>Tempesta</strong>
+                                <p>Vulnerabilitats</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Asserts Section -->
+            <section id="asserts" class="content-section">
+                <div class="glass-card">
+                    <div class="section-header">
+                        <i data-lucide="code-2"></i>
+                        <h2>Assercions de Seguretat</h2>
+                    </div>
+                    <div class="wiki-content">
+                        <p>Dins de Selenium, els Asserts actuen com els nostres jutges automàtics. No mirem la pantalla,
+                            el codi decideix:</p>
+
+                        <div class="code-block">
+                            <code
+                                class="code-line"><span class="code-keyword">assertEqual</span>(page.title, "Perfil de l'Usuari")</code>
+                            <code
+                                class="code-line"><span class="code-keyword">assertNotEqual</span>(page.title, "Panell d'Admin")</code>
+                        </div>
+
+                        <p>Si la condició no es compleix, el desplegament es bloqueja i l'auditoria denega el pas a
+                            producció.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tools Section -->
+            <section id="tools" class="content-section">
+                <div class="glass-card">
+                    <div class="section-header">
+                        <i data-lucide="box"></i>
+                        <h2>Stack Tecnològic</h2>
+                    </div>
+                    <div class="tool-grid">
+                        <div class="tool-card"><strong>Selenium</strong> - Driver auto</div>
+                        <div class="tool-card"><strong>dumpdata</strong> - Dades JSON</div>
+                        <div class="tool-card"><strong>YAML</strong> - Pipelines CI</div>
+                        <div class="tool-card"><strong>Docker</strong> - Aïllament</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Summary -->
+            <section class="summary-box">
+                <i data-lucide="award" style="width: 60px; height: 60px; margin-bottom: 2rem;"></i>
+                <h2>Resum de Seguretat</h2>
+                <p>Implementar una Pipeline de Seguretat amb tests funcionals headless és l'única manera de garantir que
+                    el software que arriba a producció és resistent als atacs coneguts de manera permanent.</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer style="padding: 6rem 0; text-align: center; color: var(--text-muted); opacity: 0.8;">
+        <p>&copy; 2025 M03 PPS — Institut Nicolau Copèrnic</p>
+        <a href="indexM03.html"
+            style="color: var(--accent-secondary); text-decoration: none; display: inline-block; margin-top: 1rem; font-weight: 700;">←
+            Tornar a l'Inici</a>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/auditoria_script.js"></script>
+</body>
+
+</html>
