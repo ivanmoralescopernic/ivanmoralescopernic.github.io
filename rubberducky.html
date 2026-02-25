@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubber Ducky: Guia Completa | M03 PPS</title>
+    <meta name="description"
+        content="Guia completa sobre el Rubber Ducky: què és, com funciona i com programar payloads amb DuckyScript.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- CSS link -->
+    <link rel="stylesheet" href="css/rubberducky_style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="stars-container" id="stars"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-at">Rubber Ducky</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="dnsc2.html">Tornar a Xarxes</a></li>
+                <li><a href="#part1">Introducció</a></li>
+                <li><a href="#part2">DuckyScript</a></li>
+                <li><a href="#part3">Keylogger</a></li>
+                <li><a href="#resources" class="nav-connect">Recursos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="badge">Dispositius HID Ofensius</div>
+                <h1 class="hero-title">
+                    Rubber Ducky<br>
+                    <span class="accent-text">Guia Completa</span>
+                </h1>
+                <p class="hero-subtitle">De la introducció a la implementació de payloads avançats</p>
+                <div class="scroll-indicator">
+                    <i data-lucide="chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Container -->
+        <div class="main-container">
+
+            <!-- Part I -->
+            <section id="part1" class="content-section">
+                <div class="glass-card">
+                    <h2 class="part-header">Part I: Introducció</h2>
+
+                    <h3>Què és el Rubber Ducky?</h3>
+                    <p>És un dispositiu USB que simula ser un emmagatzematge però en realitat és un <strong>HID (Human
+                            Interface Device)</strong>. Actua com un teclat.</p>
+                    <p>La seva funció principal és executar un <strong>payload</strong> (càrrega útil) que, de forma
+                        automàtica, simula les pulsacions de tecles d'un usuari. La versió de 2022 incorpora connectors
+                        <strong>USB A + USB C</strong>.
+                    </p>
+
+                    <div class="image-placeholder">
+                        <img src="images/ruberducky/rubber_connectors.jpg" alt="Connectors Rubber Ducky">
+                        <p>[IMATGE 1: Fotografia del dispositiu Rubber Ducky on es vegin els dos connectors, l'A i el C]
+                        </p>
+                    </div>
+
+                    <h3>Components del dispositiu</h3>
+                    <ul class="clean-list">
+                        <li><i data-lucide="cpu"></i> Microprocessador.</li>
+                        <li><i data-lucide="database"></i> Lector de targetes Micro SD.</li>
+                        <li><i data-lucide="usb"></i> Port USB tipus A.</li>
+                        <li><i data-lucide="usb"></i> Port USB tipus C.</li>
+                        <li><i data-lucide="circle-dot"></i> Botó de reseteig / canvi de funció.</li>
+                        <li><i data-lucide="zap"></i> Indicador LED.</li>
+                        <li><i data-lucide="box"></i> Carcassa que simula ser un USB convencional.</li>
+                    </ul>
+
+                    <div class="image-placeholder">
+                        <img src="images/ruberducky/flow_rubber.jpg" alt="Diagrama Components Rubber Ducky">
+                        <p>[IMATGE 2: Diagrama o foto del dispositiu obert amb fletxes apuntant als components]</p>
+                    </div>
+
+                    <h3>Estats del LED</h3>
+                    <div class="grid-2">
+                        <div class="info-box" style="border-top: 4px solid #10b981;">
+                            <h3>Verd estable</h3>
+                            <p>El dispositiu està ociós (en espera).</p>
+                        </div>
+                        <div class="info-box" style="border-top: 4px solid #34d399;">
+                            <h3>Verd parpellejant</h3>
+                            <p>S'està executant un payload.</p>
+                        </div>
+                        <div class="info-box" style="border-top: 4px solid #ef4444;">
+                            <h3>Vermell (Error)</h3>
+                            <p>Problema de lectura, falta de <code>inject.bin</code> o format incorrecte.</p>
+                        </div>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <img src="images/ruberducky/led_rubber.jpg" alt="Estats LED Rubber Ducky">
+                        <p>[IMATGE 3: Gràfic simple amb els estats del LED: verd fix, parpellejant i vermell]</p>
+                    </div>
+
+                    <h3>Funcionament i Codificació</h3>
+                    <p><strong>Conceptes clau:</strong></p>
+                    <ul>
+                        <li><strong>Payload:</strong> La tasca o seqüència que hem programat.</li>
+                        <li><strong>DuckyScript:</strong> El llenguatge imperatiu emprat per escriure els payloads.</li>
+                        <li><strong>Duck Encoder:</strong> L'eina que compila el DuckyScript a un fitxer binari anomenat
+                            <code>inject.bin</code>.
+                        </li>
+                        <li><strong>Firmware:</strong> El sistema intern que processa el fitxer binari.</li>
+                    </ul>
+
+                    <div class="image-placeholder">
+                        <img src="images/ruberducky/workflow.jpg" alt="Flux de treball Rubber Ducky">
+                        <p>[IMATGE 4: Infografia del flux de treball: Editor -> Encoder -> inject.bin -> Micro SD ->
+                            Víctima]</p>
+                    </div>
+
+                    <h3>Procés de Codificació</h3>
+                    <p>S'utilitza un editor de text per escriure el DuckyScript. S'executa l'eina de codificació
+                        indicant el fitxer i la configuració del teclat (mapeig segons idioma). El resultat es guarda
+                        com <code>inject.bin</code> a l'arrel de la Micro SD.</p>
+
+                    <div class="lotl-box">
+                        <h3>Mapejos de teclat i Firmware</h3>
+                        <p>PayloadStudio Community no permet canviar mapejos (es requereix versió PRO). Existeixen
+                            alternatives com <strong>JS Encoder</strong> que suporten mapejos a mida. El firmware és
+                            obert, però canviar-lo pot invalidar la garantia.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part II -->
+            <section id="part2" class="content-section">
+                <div class="glass-card">
+                    <h2 class="part-header">Part II: DuckyScript</h2>
+
+                    <h3>Introducció a la sintaxi</h3>
+                    <p>Basada en el llenguage <strong>BASIC</strong>. Els comandaments s'han d'introduir en
+                        <strong>MAJÚSCULES</strong>.
+                    </p>
+                    <p><code>REM</code>: Indica que la línia és un comentari.</p>
+
+                    <h3>Comandaments Principals</h3>
+                    <ul class="clean-list">
+                        <li><strong>ATTACKMODE:</strong> Configura el mode (HID, STORAGE, OFF).</li>
+                        <li><strong>DELAY:</strong> Provoca un retard en mil·lisegons (ex. <code>DELAY 2000</code>).
+                        </li>
+                        <li><strong>STRING / STRINGLN:</strong> Tecleja text (STRINGLN prem ENTER al final).</li>
+                        <li><strong>GUI / WINDOWS:</strong> Prem la tecla de sistema (sovint usada amb <code>r</code>).
+                        </li>
+                    </ul>
+
+                    <h3>Exemple pràctic</h3>
+                    <p>Objectiu: Llançar un PowerShell, escriure-hi i tancar-lo.</p>
+                    <div class="code-block">
+                        <span class="code-comment">REM Obre la finestra Executar</span><br>
+                        <span class="code-keyword">GUI r</span><br>
+                        <span class="code-keyword">DELAY 500</span><br>
+                        <span class="code-comment">REM Obre powershell</span><br>
+                        <span class="code-keyword">STRING</span> powershell<br>
+                        <span class="code-keyword">ENTER</span><br>
+                        <span class="code-keyword">DELAY 1000</span><br>
+                        <span class="code-comment">REM Escriu missatge</span><br>
+                        <span class="code-keyword">STRINGLN</span> Write-Host "Hola!!!"<br>
+                        <span class="code-comment">REM Tanca finestra</span><br>
+                        <span class="code-keyword">ALT F4</span>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <img src="images/ruberducky/code_example.jpg" alt="Exemple de Codi DuckyScript">
+                        <p>[IMATGE 5: Captura d'un editor amb DuckyScript ressaltat]</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part III -->
+            <section id="part3" class="content-section">
+                <div class="glass-card">
+                    <h2 class="part-header">Part III: Implementació d'un Keylogger</h2>
+
+                    <p>El Rubber Ducky no llegeix l'entrada directament; deleguem en un programa extern com un script de
+                        <strong>PowerShell</strong> descarregat en el moment de l'atac.
+                    </p>
+
+                    <div class="info-box" style="background: rgba(168, 85, 247, 0.05);">
+                        <h3>Procés d'Atac</h3>
+                        <ol>
+                            <li>Llançament de PowerShell minimitzat (<code>-WindowStyle hidden</code>).</li>
+                            <li>Descàrrega via <code>Net.WebClient</code> des d'una URL (ex: GitHub Gist).</li>
+                            <li>Execució del script .ps1.</li>
+                        </ol>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <img src="images/ruberducky/keylogger_flow.jpg" alt="Flux de Keylogger">
+                        <p>[IMATGE 6: Esquema d'atrac: Rubber Ducky -> Descàrrega de GitHub -> Execució]</p>
+                    </div>
+
+                    <div class="curriculum-box">
+                        <span class="tag">Millores Avançades</span>
+                        <p>Versions com la de Cosmodium CS incorporen el keylogger internament, intenten deshabilitar
+                            Windows Defender i envien els logs per correu electrònic automàticament.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources -->
+            <section id="resources" class="content-section">
+                <div class="glass-card">
+                    <h2>Referències i Recursos</h2>
+                    <div class="tools-grid">
+                        <a href="https://docs.hak5.org/hak5-usb-rubber-ducky/" target="_blank" class="tool-item"
+                            style="text-decoration: none; color: inherit;">
+                            <i data-lucide="book"></i>
+                            <div><strong>Documentació Hak5</strong><span>Manual oficial.</span></div>
+                        </a>
+                        <a href="https://payloadstudio.hak5.org/community/" target="_blank" class="tool-item"
+                            style="text-decoration: none; color: inherit;">
+                            <i data-lucide="code"></i>
+                            <div><strong>Payload Studio</strong><span>Editor i codificador.</span></div>
+                        </a>
+                        <a href="https://github.com/hak5/usbrubberducky-payloads" target="_blank" class="tool-item"
+                            style="text-decoration: none; color: inherit;">
+                            <i data-lucide="github"></i>
+                            <div><strong>Biblioteca Payloads</strong><span>Exemples reals.</span></div>
+                        </a>
+                        <a href="https://ducktoolkit.com/" target="_blank" class="tool-item"
+                            style="text-decoration: none; color: inherit;">
+                            <i data-lucide="wrench"></i>
+                            <div><strong>Duck Toolkit</strong><span>Eines no oficials.</span></div>
+                        </a>
+                    </div>
+
+                    <div class="image-placeholder" style="border: none; background: transparent;">
+                        <img src="images/ruberducky/logos_footer.jpg" alt="Logos Hak5 i Rubber Ducky">
+                        <p>[IMATGE 7: Logotips de Hak5 i Rubber Ducky]</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Footer -->
+            <section class="content-section mb-5">
+                <div class="summary-box">
+                    <h3>Resum Final</h3>
+                    <p>El Rubber Ducky és una eina extremadament poderosa per a l'auditoria física. La seva simplicitat
+                        i efectivitat recorden que la seguretat del maquinari és tan vital com la de la xarxa.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- JS Scripts -->
+    <script src="js/rubberducky_script.js"></script>
+</body>
+
+</html>
