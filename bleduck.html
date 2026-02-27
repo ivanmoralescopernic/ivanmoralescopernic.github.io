@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLEDuck Standalone S3 | Manual d'Auditoria</title>
+    <meta name="description" content="Manual complet per al injector HID BLEDuck Standalone S3 basat en ESP32-S3.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/bleduck-style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="stars-container" id="stars"></div>
+
+    <main class="main-container">
+        <!-- Header Section -->
+        <header class="content-section">
+            <span class="status-tag tag-warning">Standalone HID Injector</span>
+            <h1>BLEDuck Standalone S3</h1>
+            <p>Aquest projecte converteix una placa ESP32-S3 N16R8 en una potent eina d'auditoria de seguretat. A
+                diferència d'altres projectes, aquest funciona de manera autònoma (Standalone).</p>
+        </header>
+
+        <!-- Características -->
+        <section class="content-section">
+            <div class="glass-card">
+                <h2><i data-lucide="zap"></i> ✨ Característiques</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i data-lucide="monitor"></i>
+                        <h3>Interfície Visual</h3>
+                        <p>Pantalla OLED SSD1306 amb menú interactiu i efecte lupa per al payload seleccionat.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i data-lucide="mouse-pointer-2"></i>
+                        <h3>Navegació Física</h3>
+                        <p>Control total mitjançant un Encoder Rotatiu HW-040 (ruleta) per navegar pels fitxers.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i data-lucide="languages"></i>
+                        <h3>Teclat Int.</h3>
+                        <p>Configurat per a Espanyol (España) amb suport per a símbols complexos (/, _, {, }, @).</p>
+                    </div>
+                    <div class="feature-item">
+                        <i data-lucide="eye-off"></i>
+                        <h3>Mode Sigil</h3>
+                        <p>Oculta la unitat de disc i la consola sèrie en connectar-se per evitar la detecció.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components -->
+        <section class="content-section">
+            <h2><i data-lucide="cpu"></i> 🛠️ Components Necessaris</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Model Recomanat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Microcontrolador</td>
+                            <td>ESP32-S3 N16R8 (Placa YD-ESP32-S3 amb doble USB-C)</td>
+                        </tr>
+                        <tr>
+                            <td>Pantalla</td>
+                            <td>OLED 0.96" I2C (SSD1306)</td>
+                        </tr>
+                        <tr>
+                            <td>Control</td>
+                            <td>Encoder Rotatiu HW-040</td>
+                        </tr>
+                        <tr>
+                            <td>Alimentació</td>
+                            <td>Bateria LiPo o Powerbank (via pin 5V o USB secundari)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Pinout -->
+        <section class="content-section">
+            <div class="glass-card">
+                <h2><i data-lucide="plug-2"></i> 🔌 Diagrama de Connexió (Pinout)</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pin Component</th>
+                                <th>Pin ESP32-S3 (GPIO)</th>
+                                <th>Ubicació Física</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>OLED VCC</td>
+                                <td>3V3</td>
+                                <td>Part superior esquerra</td>
+                            </tr>
+                            <tr>
+                                <td>OLED GND</td>
+                                <td>GND (G)</td>
+                                <td>Qualsevol pin G</td>
+                            </tr>
+                            <tr>
+                                <td>OLED SCL</td>
+                                <td>GPIO 9</td>
+                                <td>Fila esquerra, part inferior</td>
+                            </tr>
+                            <tr>
+                                <td>OLED SDA</td>
+                                <td>GPIO 8</td>
+                                <td>Fila esquerra, sobre el pin 9</td>
+                            </tr>
+                            <tr>
+                                <td>Encoder CLK</td>
+                                <td>GPIO 4</td>
+                                <td>Fila esquerra</td>
+                            </tr>
+                            <tr>
+                                <td>Encoder DT</td>
+                                <td>GPIO 5</td>
+                                <td>Fila esquerra</td>
+                            </tr>
+                            <tr>
+                                <td>Encoder SW</td>
+                                <td>GPIO 6</td>
+                                <td>Fila esquerra</td>
+                            </tr>
+                            <tr>
+                                <td>Encoder + (VCC)</td>
+                                <td>3V3</td>
+                                <td>Part superior esquerra</td>
+                            </tr>
+                            <tr>
+                                <td>Encoder GND</td>
+                                <td>GND (G)</td>
+                                <td>Qualsevol pin G</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>Nota:</strong> El cable USB per a l'atac s'ha de connectar sempre al port <strong>USB
+                        Natiu</strong> (el de l'esquerra a la placa YD-S3).</p>
+            </div>
+        </section>
+
+        <!-- Estructura de Fitxers -->
+        <section class="content-section">
+            <h2><i data-lucide="folder-tree"></i> 📂 Estructura de Fitxers</h2>
+            <p>Perquè el sistema funcioni, la unitat <code>CIRCUITPY</code> ha de tenir exactament aquesta organització:
+            </p>
+            <pre><code>CIRCUITPY/
+├── boot.py             # Gestió de sigil i manteniment
+├── code.py             # Programa principal i motor HID
+├── splash.bin          # Imatge d'inici (86x60 px)
+├── payloads/           # Carpeta amb els teus scripts d'atac
+│   ├── 01_Notepad.txt
+│   ├── 02_WiFi_Telegram.txt
+│   └── 03_Linux_Bench.txt
+└── lib/
+    ├── adafruit_ssd1306.mpy
+    ├── keyboard_layout_base.py     # Base de Neradoc
+    ├── keyboard_layout_win_es.mpy  # Layout Espanya
+    └── adafruit_hid/                # Llibreria Adafruit
+        ├── keyboard.mpy
+        └── keycode.mpy</code></pre>
+        </section>
+
+        <!-- Instal·lació -->
+        <section class="content-section">
+            <div class="glass-card">
+                <h2><i data-lucide="rocket"></i> 🚀 Instal·lació i Configuració</h2>
+                <ul class="step-list">
+                    <li><strong>Instal·lar CircuitPython:</strong> Descarrega el fitxer .bin oficial per a ESP32-S3 i
+                        càrrega'l a la teva placa.</li>
+                    <li><strong>Copiar Llibreries:</strong> Copia els fitxers esmentats a la carpeta <code>lib</code>.
+                    </li>
+                    <li><strong>Important:</strong> Utilitza el <code>keyboard_layout_base.py</code> de Neradoc per
+                        assegurar el suport de símbols.</li>
+                    <li><strong>Carregar fitxers:</strong> Copia el <code>boot.py</code> (sigil) i el
+                        <code>code.py</code> (menú i motor HID).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Sintaxi -->
+        <section class="content-section">
+            <h2><i data-lucide="terminal"></i> 📜 Sintaxi dels Payloads</h2>
+            <p>El motor HID utilitza una sintaxi optimitzada:</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Comanda</th>
+                            <th>Descripció</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>TYPE [text]</code></td>
+                            <td>Escriu text literal (suporta ñ i accents).</td>
+                        </tr>
+                        <tr>
+                            <td><code>WAIT [ms]</code></td>
+                            <td>Pausa en mil·lisegons (ex: WAIT 500).</td>
+                        </tr>
+                        <tr>
+                            <td><code>[TECLA]</code></td>
+                            <td>Prem tecla o combinació (ex: ENTER, GUI r).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="code-header"><span>Exemple.txt</span><span>DuckScript</span></div>
+            <pre><code>WAIT 2000
+GUI r
+WAIT 500
+TYPE notepad
+ENTER
+WAIT 1000
+TYPE Hola món! Aquest Duck parla Català i Espanyol.</code></pre>
+        </section>
+
+        <!-- Ús -->
+        <section class="content-section">
+            <div class="glass-card">
+                <h2><i data-lucide="wrench"></i> 🛠️ Ús del Dispositiu</h2>
+                <ul class="step-list">
+                    <li><strong>Mode Manteniment:</strong> Mantén premuda la ruleta en connectar el USB per accedir a la
+                        unitat.</li>
+                    <li><strong>Selecció:</strong> Gira la ruleta per triar el payload (es mostrarà en gran).</li>
+                    <li><strong>Armat:</strong> Prem la ruleta. La pantalla dirà "ESPERANDO CONEXION".</li>
+                    <li><strong>Atac:</strong> Connecta al PC víctima. S'injectarà en detectar la connexió.</li>
+                </ul>
+                <div class="status-tag tag-success">Finalització: Pantalla "EXITO" i LED verd.</div>
+            </div>
+        </section>
+
+        <!-- Ética -->
+        <section class="content-section">
+            <div class="warning-box">
+                <h3><i data-lucide="alert-triangle"></i> ⚖️ Advertiment Ètic</h3>
+                <p>Aquest projecte ha estat creat exclusivament amb finalitats educatives i d'auditoria ètica. L'ús
+                    d'aquesta eina per accedir a sistemes sense autorització és il·legal i recau sota la responsabilitat
+                    de l'usuari final.</p>
+            </div>
+        </section>
+
+        <footer style="text-align: center; margin-top: 4rem; opacity: 0.5;">
+            <p>&copy; 2026 Manual BLEDuck Standalone S3</p>
+        </footer>
+    </main>
+
+    <!-- Project Scripts -->
+    <script src="js/bleduck-script.js" defer></script>
+</body>
+
+</html>

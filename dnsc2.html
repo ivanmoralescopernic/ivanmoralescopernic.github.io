@@ -211,6 +211,10 @@
                                 <strong>iodine</strong>
                                 <span>Creació de túnels IPv4 via DNS.</span>
                             </div>
+                            <a href="https://github.com/yarrick/iodine" target="_blank" class="tool-link"
+                                title="GitHub Iodine">
+                                <img src="images/menu/link.svg" class="link-icon" alt="Link">
+                            </a>
                         </div>
                         <div class="tool-item">
                             <i data-lucide="box"></i>
@@ -218,6 +222,10 @@
                                 <strong>Docker</strong>
                                 <span>Labos segurs i aïllats.</span>
                             </div>
+                            <a href="https://docs.docker.com/network/" target="_blank" class="tool-link"
+                                title="Documentació Xarxes Docker">
+                                <img src="images/menu/link.svg" class="link-icon" alt="Link">
+                            </a>
                         </div>
                         <div class="tool-item">
                             <i data-lucide="activity"></i>
@@ -232,6 +240,30 @@
                                 <strong>Telegram API</strong>
                                 <span>Canal de C2 encobert.</span>
                             </div>
+                            <a href="https://core.telegram.org/api" target="_blank" class="tool-link"
+                                title="API Telegram">
+                                <img src="images/menu/link.svg" class="link-icon" alt="Link">
+                            </a>
+                        </div>
+                        <div class="tool-item">
+                            <i data-lucide="usb"></i>
+                            <div>
+                                <strong>USB Rubber Ducky</strong>
+                                <span>HID Injecció de tecles.</span>
+                            </div>
+                            <a href="rubberducky.html" class="tool-link" title="Veure Rubber Ducky">
+                                <img src="images/menu/link.svg" class="link-icon" alt="Link">
+                            </a>
+                        </div>
+                        <div class="tool-item">
+                            <i data-lucide="monitor"></i>
+                            <div>
+                                <strong>BLEDuck Standalone</strong>
+                                <span>Injectors amb ESP32-S3.</span>
+                            </div>
+                            <a href="bleduck.html" class="tool-link" title="Manual BLEDuck">
+                                <img src="images/menu/link.svg" class="link-icon" alt="Link">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -249,43 +281,7 @@
         </div>
     </main>
 
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-
-        // Stars generation
-        const starsContainer = document.getElementById('stars');
-        const starCount = 200;
-
-        for (let i = 0; i < starCount; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
-            const size = Math.random() * 1.5;
-
-            star.style.left = `${x}%`;
-            star.style.top = `${y}%`;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.opacity = Math.random();
-
-            if (Math.random() > 0.9) {
-                star.style.animation = `twinkle ${3 + Math.random() * 4}s infinite`;
-            }
-            starsContainer.appendChild(star);
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    <script src="js/dnsc2-script.js" defer></script>
 </body>
 
 </html>
