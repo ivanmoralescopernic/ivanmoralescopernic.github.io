@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Mòdul 2: Control de Versions i Treball en Equip amb Git - M03 Posada en Producció Segura">
+    <title>M03 U2·M2 – Control de Versions i Git</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><span>M3</span></div>
+            <span class="logo-text">U2·M2 – Control de Versions</span>
+        </div>
+        <nav class="nav">
+            <a href="teoriaM03U2Index.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Teoria</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">MÒDUL 2</div>
+                <h1 class="page-title">Control de Versions i Treball en Equip (Git)</h1>
+                <p class="page-subtitle">Si volem implementar proves automàtiques i treballar en equip, no podem anar
+                    passant-nos el codi en fitxers ZIP. Necessitem un Sistema de Control de Versions (VCS).</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 2.1 ===== -->
+            <section class="theory-section" id="section-1">
+                <div class="section-header-tag">
+                    <span class="section-number">2.1</span>
+                    <h2 class="section-title">Fonaments de Git i per què domina el mercat</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="highlight-banner">
+                        <div class="highlight-banner-icon">🐧</div>
+                        <div>
+                            <strong>Origen:</strong> Git va ser creat el <strong>2007</strong> per
+                            <strong>Linus Torvalds</strong> (el creador de Linux) perquè necessitava gestionar el codi
+                            del nucli de Linux amb milers de col·laboradors.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank"
+                            rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir article sobre Control de Versions">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/git-centralitzat-vs-distribuït.png"
+                                    alt="Sistema centralitzat vs distribuït" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Centralitzat (SVN/CVS) vs Distribuït (Git)</span>
+                                    <small>images/teoriaM03/git-centralitzat-vs-distribuït.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: About Version Control — git-scm.com</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <p class="section-text">
+                        A diferència dels sistemes antics (com <code>SVN</code> o <code>CVS</code>) que depenien d'un
+                        servidor central, Git és un sistema <strong>Distribuït (Peer-to-Peer)</strong>. Cada
+                        desenvolupador té una còpia exacta i completa de tot l'historial del projecte al seu ordinador.
+                    </p>
+
+                    <div class="advantages-grid">
+                        <div class="advantage-item adv-green">
+                            <div class="adv-icon">📶</div>
+                            <div class="adv-content">
+                                <h3>Sense internet contínuament</h3>
+                                <p>Pots treballar <strong>offline</strong>. L'historial sencer és al teu ordinador.</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item adv-blue">
+                            <div class="adv-icon">🛡️</div>
+                            <div class="adv-content">
+                                <h3>Còpia de seguretat distribuïda</h3>
+                                <p>Si el servidor central cau, <strong>qualsevol ordinador de l'equip</strong> té la
+                                    còpia completa.</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item adv-purple">
+                            <div class="adv-icon">⚡</div>
+                            <div class="adv-content">
+                                <h3>Extremadament ràpid</h3>
+                                <p>Git és molt eficient unint codis (<strong>fent merges</strong>) gràcies al seu
+                                    model intern.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 2.2 ===== -->
+            <section class="theory-section" id="section-2">
+                <div class="section-header-tag">
+                    <span class="section-number">2.2</span>
+                    <h2 class="section-title">Conceptes Clau de Git</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="definition-stack">
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-orange">🗄️</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Repositori</h3>
+                                <p>La carpeta màgica o el <strong>"magatzem"</strong> on viuen els teus arxius i tot el
+                                    seu historial. Tot i ser distribuït, s'acostuma a tenir un
+                                    <strong>Repositori Central</strong> (a GitHub o GitLab) com a punt de trobada per a
+                                    tot l'equip.
+                                </p>
+                                <div class="def-callout">
+                                    💡 Tenir un repositori central millora la seguretat perquè evita revelar les IPs
+                                    dels ordinadors personals dels treballadors.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-green">📸</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Commit</h3>
+                                <p>Com fer una <strong>fotografia instantània</strong> al teu codi en un moment concret.
+                                    Cada fotografia rep un identificador únic (un <strong>codi hash</strong>). Sempre
+                                    podràs <strong>viatjar en el temps</strong> a qualsevol commit anterior.</p>
+                            </div>
+                        </div>
+
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-purple">👆</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>HEAD</h3>
+                                <p>Un <strong>punter</strong> (com el cursor del ratolí) que li diu a Git a quina versió
+                                    exacta estàs mirant o treballant <strong>actualment</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History" target="_blank"
+                            rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir article sobre l'Historial de Commits">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/git-commit-history.png" alt="Historial de commits amb HEAD"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Historial de commits i HEAD</span>
+                                    <small>images/teoriaM03/git-commit-history.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Viewing the Commit History — git-scm.com</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 2.3 ===== -->
+            <section class="theory-section" id="section-3">
+                <div class="section-header-tag">
+                    <span class="section-number">2.3</span>
+                    <h2 class="section-title">Treballant amb Branques (Branches)</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Les branques són la <strong>superpotència de Git</strong>. Permeten crear una
+                        <strong>realitat paral·lela</strong> del teu codi on pots treballar de manera aïllada.
+                    </p>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell" target="_blank"
+                            rel="noopener" class="img-link-wrapper" aria-label="Obrir article sobre Branques a Git">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/git-branques.png" alt="Diagrama de branques Git"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Branques main i feature</span>
+                                    <small>images/teoriaM03/git-branques.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Branches in a Nutshell — git-scm.com</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="branch-concept">
+                        <div class="branch-pill branch-main">
+                            <span class="branch-icon">🌳</span>
+                            <span><code>main</code> (o <code>master</code>)</span>
+                        </div>
+                        <p class="section-text">La branca principal on hi ha el codi bo i testejat. Si vols afegir un
+                            botó nou, crees una branca nova (ex:
+                            <code>feature/nou-boto</code>). Si t'equivoques, la branca <code>main</code>
+                            <strong>no es veu afectada</strong>.
+                        </p>
+                    </div>
+
+                    <h3 class="subsection-title">El cicle de treball bàsic</h3>
+
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">1</div>
+                            <div class="workflow-step-body">
+                                <h4><code>Init</code> / <code>Clone</code></h4>
+                                <p>Creem un repositori buit o en descarreguem un d'existent del servidor.</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector">↓</div>
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">2</div>
+                            <div class="workflow-step-body">
+                                <h4><code>Commit</code></h4>
+                                <p>Guardem els nostres canvis locals en el nostre historial personal (snapshot).</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector">↓</div>
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">3</div>
+                            <div class="workflow-step-body">
+                                <h4><code>Fetch</code></h4>
+                                <p>Descarreguem els canvis dels companys del servidor central, però <strong>sense
+                                        aplicar-los</strong> encara, només per veure'ls.</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector">↓</div>
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">4</div>
+                            <div class="workflow-step-body">
+                                <h4><code>Merge</code> (Fusió)</h4>
+                                <p>Integrem el codi dels companys amb el nostre.</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector warning-connector">⚡</div>
+                        <div class="workflow-step step-warning">
+                            <div class="workflow-step-num num-warn">!</div>
+                            <div class="workflow-step-body">
+                                <h4>Conflictes</h4>
+                                <p>Si tu i la teva companya heu modificat la <strong>mateixa línia de codi</strong>,
+                                    Git demanarà intervenció humana per resoldre-ho.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-amber">
+                        <span class="callout-icon">⚠️</span>
+                        <div>
+                            <strong>Regla d'or:</strong> Després d'un merge, cal executar <strong>TOTS els tests de
+                                nou</strong>. De vegades el teu codi funciona, el de la teva companya també, però
+                            junts provoquen un error.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 2.4 ===== -->
+            <section class="theory-section" id="section-4">
+                <div class="section-header-tag">
+                    <span class="section-number">2.4</span>
+                    <h2 class="section-title">Què SÍ i què NO s'ha de pujar a Git — El fitxer <code>.gitignore</code>
+                    </h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Hi ha arxius que <strong>mai s'han de pujar</strong> a un repositori, especialment si és públic
+                        en línia. Per evitar ensurts, creem un arxiu anomenat <code>.gitignore</code> a l'arrel del
+                        projecte.
+                    </p>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir documentació oficial sobre .gitignore">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/gitignore-exemple.png" alt="Exemple de fitxer .gitignore"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Exemple: contingut d'un fitxer .gitignore</span>
+                                    <small>images/teoriaM03/gitignore-exemple.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Documentació oficial .gitignore — git-scm.com</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3 class="subsection-title">Què hem d'ignorar i per què?</h3>
+
+                    <div class="ignore-list">
+                        <div class="ignore-item">
+                            <div class="ignore-severity sev-critical">🔴 CRÍTIC</div>
+                            <div class="ignore-content">
+                                <h3>Credencials</h3>
+                                <p>Fitxers com els <code>.env</code> que contenen <strong>contrasenyes de bases de
+                                        dades o claus API</strong>. És una bretxa de seguretat enorme si es pugen
+                                    accidentalment.</p>
+                                <div class="ignore-examples"><code>.env</code> <code>secrets.json</code>
+                                    <code>config.ini</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ignore-item">
+                            <div class="ignore-severity sev-high">🟠 IMPORTANT</div>
+                            <div class="ignore-content">
+                                <h3>Biblioteques de tercers</h3>
+                                <p>Carpetes com <code>node_modules/</code> o l'entorn virtual <code>env/</code>. Pesen
+                                    moltíssim. Millor passar un llistat de dependències i que cada ordinador les
+                                    descarregui.</p>
+                                <div class="ignore-examples"><code>node_modules/</code> <code>env/</code>
+                                    <code>venv/</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ignore-item">
+                            <div class="ignore-severity sev-medium">🟡 RECOMANAT</div>
+                            <div class="ignore-content">
+                                <h3>Arxius temporals o memòria cau</h3>
+                                <p>Arxius generats pel sistema automàticament. No aporten res i embruten l'historial
+                                    del repositori.</p>
+                                <div class="ignore-examples"><code>__pycache__/</code> <code>*.pyc</code>
+                                    <code>.DS_Store</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ignore-item">
+                            <div class="ignore-severity sev-medium">🟡 RECOMANAT</div>
+                            <div class="ignore-content">
+                                <h3>Bases de dades locals</h3>
+                                <p>Com el fitxer <code>db.sqlite3</code>. Cadascú ha de tenir les seves pròpies
+                                    <strong>dades de prova</strong> al seu ordinador.
+                                </p>
+                                <div class="ignore-examples"><code>db.sqlite3</code> <code>*.db</code>
+                                    <code>local.db</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <h2>🗂️ Resum Ràpid — Mòdul 2</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Git = Distribuït</span>
+                        <span class="summary-desc">Cada dev té una còpia completa. No depèn d'un servidor
+                            central.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Repositori</span>
+                        <span class="summary-desc">El magatzem del projecte. GitHub/GitLab s'usen com a punt de
+                            trobada.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Commit</span>
+                        <span class="summary-desc">Fotografia del codi en un moment. Té un hash únic. Permet viatjar en
+                            el temps.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Branques</span>
+                        <span class="summary-desc">Realitats paral·leles. La <code>main</code> conté el codi estable i
+                            testejat.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Merge → Tests!</span>
+                        <span class="summary-desc">Após un merge sempre cal re-executar TOTS els tests.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">.gitignore</span>
+                        <span class="summary-desc">Ignora .env, node_modules, __pycache__, db.sqlite3, etc.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>

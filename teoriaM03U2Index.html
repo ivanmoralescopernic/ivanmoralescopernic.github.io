@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Índex de Teoria Unitat 2 - M03 Posada en Producció Segura">
+    <title>Teoria U2 - M03 PPS</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03U2Index-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><span>M3</span></div>
+            <span class="logo-text">U2 – Teoria de Programari</span>
+        </div>
+        <nav class="nav">
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <div class="page-tag">UNITAT 2</div>
+                <h1 class="page-title">Índex de Teoria</h1>
+                <p class="page-subtitle">Explora els mòduls de la Unitat 2: Proves de Programari, Automatització i
+                    DevOps.</p>
+            </div>
+
+            <div class="theory-index-grid">
+                <!-- M1 -->
+                <a href="teoriaM03U2m1.html" class="theory-module-card">
+                    <div class="module-number">M1</div>
+                    <div class="module-info">
+                        <h3>Introducció a les Proves Auto</h3>
+                        <p>Què estem provant? Conceptes de Caixa Blanca, Caixa Negra i la piràmide de tests.</p>
+                        <div class="view-link">
+                            Veure Teoria
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14"></path>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M2 -->
+                <a href="teoriaM03U2m2.html" class="theory-module-card">
+                    <div class="module-number">M2</div>
+                    <div class="module-info">
+                        <h3>Fonaments de Pytest</h3>
+                        <p>Aprendre la sintaxi neta de Pytest, el poder dels asserts i l'agrupació de tests.</p>
+                        <div class="view-link">
+                            Veure Teoria
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14"></path>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M3 -->
+                <a href="teoriaM03U2m3.html" class="theory-module-card">
+                    <div class="module-number">M3</div>
+                    <div class="module-info">
+                        <h3>Tests d'Integració i Mocking</h3>
+                        <p>Com provar components que parlen entre ells (bases de dades, APIs) sense trencar res real.
+                        </p>
+                        <div class="view-link">
+                            Veure Teoria
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14"></path>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M4 -->
+                <a href="teoriaM03U2m4.html" class="theory-module-card">
+                    <div class="module-number">M4</div>
+                    <div class="module-info">
+                        <h3>Persistència i ORM</h3>
+                        <p>Models, CRUD i migracions segures per mantenir la integritat de les dades.</p>
+                        <div class="view-link">
+                            Veure Teoria
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14"></path>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M5 -->
+                <a href="teoriaM03U2m5.html" class="theory-module-card">
+                    <div class="module-number">M5</div>
+                    <div class="module-info">
+                        <h3>Automatització Web (Selenium)</h3>
+                        <p>Robotització del navegador amb Selenium WebDriver i el mode Headless per servidors.</p>
+                        <div class="view-link">
+                            Veure Teoria
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14"></path>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M6 -->
+                <a href="teoriaM03U2m6.html" class="theory-module-card">
+                    <div class="module-number">M6</div>
+                    <div class="module-info">
+                        <h3>DevOps i GitHub Actions</h3>
+                        <p>Integració Contínua (CI): pipelines que executen els tests automàticament a cada push.</p>
+                        <div class="view-link">
+                            Veure Teoria
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14"></path>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M7 -->
+                <a href="teoriaM03U2m7.html" class="theory-module-card">
+                    <div class="module-number">M7</div>
+                    <div class="module-info">
+                        <h3>Testing Mòbil (Appium)</h3>
+                        <p>Appium, emuladors i testing en Android/iOS des d'una perspectiva de Caixa Negra.</p>
+                        <div class="view-link">
+                            Veure Teoria
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14"></path>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>

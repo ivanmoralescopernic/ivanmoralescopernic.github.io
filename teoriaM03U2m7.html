@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Mòdul 7: Testing en Aplicacions Mòbils amb Appium - M03 Posada en Producció Segura">
+    <title>M03 U2·M7 – Testing Mòbil amb Appium</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><span>M3</span></div>
+            <span class="logo-text">U2·M7 – Testing Mòbil</span>
+        </div>
+        <nav class="nav">
+            <a href="teoriaM03U2Index.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Teoria</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+
+            <div class="page-header">
+                <div class="page-tag">MÒDUL 7</div>
+                <h1 class="page-title">Testing en Aplicacions Mòbils</h1>
+                <p class="page-subtitle">El món del mòbil té regles diferents del web. El mercat està dividit en dues
+                    grans plataformes amb arquitectures molt diferents.</p>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- Intro plataformes -->
+            <section class="theory-section" id="section-intro">
+                <div class="section-header-tag">
+                    <span class="section-number" style="font-size:0.85rem;">INTRO</span>
+                    <h2 class="section-title">Les dues grans plataformes</h2>
+                </div>
+                <div class="section-body">
+                    <div class="two-col-cards">
+                        <div class="concept-card"
+                            style="background:rgba(61,176,91,0.07); border-color:rgba(61,176,91,0.3);">
+                            <div class="concept-card-icon">🤖</div>
+                            <h3>Android (Google)</h3>
+                            <p>Arquitectura <strong>oberta</strong>. Domina ~<strong>80% del mercat global</strong>. Es
+                                desenvolupa amb <strong>Android Studio</strong> usant Java o Kotlin.</p>
+                        </div>
+                        <div class="concept-card"
+                            style="background:rgba(100,100,100,0.06); border-color:rgba(120,120,120,0.25);">
+                            <div class="concept-card-icon">🍎</div>
+                            <h3>iOS (Apple)</h3>
+                            <p>Ecosistema <strong>privat i molt tancat</strong>. Es desenvolupa amb
+                                <strong>Xcode</strong> usant Objective-C o Swift.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 7.1 ===== -->
+            <section class="theory-section" id="section-1">
+                <div class="section-header-tag">
+                    <span class="section-number">7.1</span>
+                    <h2 class="section-title">L'Entorn: Android Studio i l'Emulador</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">Per programar o provar coses en Android, necessitem l'entorn oficial:
+                        <strong>Android Studio</strong>.
+                    </p>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://developer.android.com/studio/intro" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Llegir article sobre Android Studio">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/android-studio-emulador.jpg"
+                                    alt="Android Studio amb l'emulador virtual" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Captura: Android Studio amb emulador i Logcat</span>
+                                    <small>images/teoriaM03/android-studio-emulador.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: Meet Android Studio — developer.android.com</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="definition-stack">
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-green">📱</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Emulador Virtual</h3>
+                                <p>Obre una finestra al teu ordinador amb una pantalla de mòbil tàctil simulada.
+                                    Funciona com un mòbil físic sense necessitat d'endollar el telèfon real.</p>
+                            </div>
+                        </div>
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-orange">📋</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Logcat</h3>
+                                <p>Panell integrat a Android Studio per llegir els <strong>missatges interns d'error del
+                                        sistema</strong> del telèfon en temps real.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 7.2 ===== -->
+            <section class="theory-section" id="section-2">
+                <div class="section-header-tag">
+                    <span class="section-number">7.2</span>
+                    <h2 class="section-title">L'Anatomia del disseny i el Testing</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">Les aplicacions mòbils no tenen pàgines HTML, tenen
+                        <strong>Activities</strong> (finestres úniques de la interfície d'usuari). Aquestes pantalles
+                        s'estructuren amb fitxers <strong>XML</strong> on definim la posició dels botons (amb
+                        <code>ConstraintLayout</code> per adaptar-se a tauletes i mòbils de mides diverses).
+                    </p>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://developer.android.com/guide/topics/ui/declaring-layout" target="_blank"
+                            rel="noopener" class="img-link-wrapper"
+                            aria-label="Llegir article sobre Activities i layouts Android">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/android-activity-xml.png"
+                                    alt="Activity Android amb XML i android:id" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Exemple XML d'una Activity amb android:id</span>
+                                    <small>images/teoriaM03/android-activity-xml.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: Layouts in Android — developer.android.com</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="info-callout callout-amber">
+                        <span class="callout-icon">⚠️</span>
+                        <div>
+                            <strong>Regla d'or pel Testing de mòbils:</strong> Tots els ginys visuals (textos, botons,
+                            llistes) dins del fitxer XML han de tenir obligatòriament la propietat
+                            <code>android:id</code> (ex: <code>@+id/boto_login</code>). El robot de testing el buscarà
+                            per fer clic simulant el dit humà.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 7.3 ===== -->
+            <section class="theory-section" id="section-3">
+                <div class="section-header-tag">
+                    <span class="section-number">7.3</span>
+                    <h2 class="section-title">Appium: El "Selenium" dels mòbils</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">Així com fem servir Selenium pels navegadors, per a mòbils fem servir
+                        <strong>Appium</strong>.
+                    </p>
+
+                    <div class="info-callout callout-blue">
+                        <span class="callout-icon">🎯</span>
+                        <div><strong>Aproximació de Caixa Negra:</strong> No ens importa si l'app la va fer l'equip amb
+                            Java, Kotlin o React Native. Com a testers, <strong>no necessitem tocar el codi</strong> de
+                            l'aplicació. Escrivim els tests en Python.</div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://appium.io/docs/en/about-appium/intro/" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Llegir article sobre Appium">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/appium-arquitectura.png"
+                                    alt="Arquitectura Client-Servidor d'Appium" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: arquitectura Client → Servidor Appium → Dispositiu</span>
+                                    <small>images/teoriaM03/appium-arquitectura.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: Introduction to Appium — appium.io</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3 class="subsection-title">L'Arquitectura Client-Servidor d'Appium (3 parts)</h3>
+                    <div class="appium-arch">
+                        <div class="appium-part ap-client">
+                            <div class="ap-icon">🐍</div>
+                            <h3>Client</h3>
+                            <p>El nostre script en <strong>Python</strong>. Diu: "fes clic al botó X".</p>
+                        </div>
+                        <div class="appium-connector">→ WebSocket →</div>
+                        <div class="appium-part ap-server">
+                            <div class="ap-icon">⚙️</div>
+                            <h3>Servidor Appium</h3>
+                            <p>Programa en <strong>NodeJS</strong>. Recull el "clic" de Python i el tradueix al
+                                llenguatge natiu del mòbil.</p>
+                        </div>
+                        <div class="appium-connector">→ ADB/XCTest →</div>
+                        <div class="appium-part ap-device">
+                            <div class="ap-icon">📱</div>
+                            <h3>Dispositiu</h3>
+                            <p><strong>Emulador</strong> (o mòbil real). Rep la instrucció i executa l'acció mecànica
+                                del clic.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 7.4 ===== -->
+            <section class="theory-section" id="section-4">
+                <div class="section-header-tag">
+                    <span class="section-number">7.4</span>
+                    <h2 class="section-title">Escrivint el primer test d'Appium</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">Abans que l'script pugui obrir el mòbil, cal definir quin mòbil hem
+                        d'atacar. Això es fa creant un diccionari Python anomenat <strong>Capabilities</strong>:</p>
+
+                    <div class="theory-code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-filename">test_app.py</span>
+                        </div>
+                        <pre><code>capabilities = {
+    <span class="str">"platformName"</span>: <span class="str">"Android"</span>,
+    <span class="str">"deviceName"</span>: <span class="str">"emulator"</span>,
+    <span class="str">"appPackage"</span>: <span class="str">"com.nom.aplicacio"</span>  <span class="comment"># El "DNI" intern de l'app</span>
+}</code></pre>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://appium.io/docs/en/2.0/quickstart/" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Llegir tutorial Appium primer test">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/appium-primer-test.jpg"
+                                    alt="Exemple de primer test escrit amb Appium" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Exemple: script complet de primer test Appium</span>
+                                    <small>images/teoriaM03/appium-primer-test.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: Appium Quickstart — appium.io</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <p class="section-text">Un cop connectats, Appium buscarà elements usant el seu
+                        <code>android:id</code> o mitjançant arbres de cerca anomenats <strong>XPATH</strong> (per
+                        exemple, cercar el text "Bateria" al menú de configuració de l'Android) i automatitzem
+                        seqüències per validar que l'aplicació navega correctament.
+                    </p>
+                </div>
+            </section>
+
+            <div class="summary-card">
+                <h2>🗂️ Resum Ràpid — Mòdul 7</h2>
+                <div class="summary-grid">
+                    <div class="summary-item"><span class="summary-label">Android vs iOS</span><span
+                            class="summary-desc">Android ~80% mercat, obert. iOS, tancat. Entorns: Android Studio /
+                            Xcode.</span></div>
+                    <div class="summary-item"><span class="summary-label">Emulador</span><span
+                            class="summary-desc">Mòbil virtual a l'ordinador. No cal telèfon físic per fer
+                            proves.</span></div>
+                    <div class="summary-item"><span class="summary-label">Activity</span><span
+                            class="summary-desc">Equivalent a una "pàgina web" en Android. Definida amb XML +
+                            ConstraintLayout.</span></div>
+                    <div class="summary-item"><span class="summary-label">android:id</span><span
+                            class="summary-desc">Obligatori a tots els elements. El robot el fa servir per trobar i
+                            interactuar amb ells.</span></div>
+                    <div class="summary-item"><span class="summary-label">Appium</span><span class="summary-desc">El
+                            "Selenium" dels mòbils. Caixa Negra. Tests escrits en Python.</span></div>
+                    <div class="summary-item"><span class="summary-label">Capabilities</span><span
+                            class="summary-desc">Diccionari Python que defineix quin dispositiu i quina app ha d'atacar
+                            Appium.</span></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>

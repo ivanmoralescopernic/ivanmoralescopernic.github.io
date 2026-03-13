@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mòdul 6: Integració Contínua i DevOps CI/CD - M03 Posada en Producció Segura">
+    <title>M03 U2·M6 – CI/CD i GitHub Actions</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><span>M3</span></div>
+            <span class="logo-text">U2·M6 – CI/CD i DevOps</span>
+        </div>
+        <nav class="nav">
+            <a href="teoriaM03U2Index.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Teoria</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+
+            <div class="page-header">
+                <div class="page-tag">MÒDUL 6</div>
+                <h1 class="page-title">Integració Contínua i DevOps (CI/CD)</h1>
+                <p class="page-subtitle">Tenim els tests. Els executem al nostre ordinador i van bé. Però som humans i
+                    ens podem descuidar d'executar-los. Hem d'automatitzar-ho tot.</p>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 6.1 ===== -->
+            <section class="theory-section" id="section-1">
+                <div class="section-header-tag">
+                    <span class="section-number">6.1</span>
+                    <h2 class="section-title">Filosofia DevOps i Entorns</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        La filosofia <strong>DevOps</strong> (Development + Operations) busca connectar el
+                        desenvolupament del codi amb el seu llançament al servidor de manera <strong>fluida i
+                            segura</strong>.
+                    </p>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://www.manageengine.com/products/service-desk/itsm/devops-lifecycle-and-pipeline.html"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Llegir article sobre DevOps">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/devops-pipeline.png" alt="Pipeline DevOps Dev → Pre → Pro"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: cicle Dev ➔ Pre-producció ➔ Producció</span>
+                                    <small>images/teoriaM03/devops-pipeline.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: The DevOps Lifecycle and DevOps Pipeline Explained</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="devops-flow">
+                        <div class="devops-env env-dev">
+                            <div class="env-icon">💻</div>
+                            <h3>Dev (Local)</h3>
+                            <p>El programador treballa aquí. Crea codi i executa tests al seu ordinador.</p>
+                        </div>
+                        <div class="devops-arrow">➔</div>
+                        <div class="devops-env env-pre">
+                            <div class="env-icon">🔬</div>
+                            <h3>Pre-producció</h3>
+                            <p>Servidor idèntic al real. Els robots passen <strong>tots els tests</strong> de cop
+                                automàticament.</p>
+                        </div>
+                        <div class="devops-arrow">➔<br><small class="arrow-cond">✅ Verd</small></div>
+                        <div class="devops-env env-pro">
+                            <div class="env-icon">🚀</div>
+                            <h3>Producció</h3>
+                            <p>Només s'autoritza el codi si tots els semàfors estan en <strong>Verd</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 6.2 ===== -->
+            <section class="theory-section" id="section-2">
+                <div class="section-header-tag">
+                    <span class="section-number">6.2</span>
+                    <h2 class="section-title">Integració Contínua (CI) amb GitHub Actions</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        La <strong>Integració Contínua</strong> configura els tests perquè s'executin
+                        <strong>absolutament sols</strong> cada vegada que un desenvolupador fa un <code>push</code>
+                        enviant codi nou a GitHub. GitHub ens presta gratuïtament els seus servidors (<em>Runners
+                            efímers</em>) per executar i analitzar el codi.
+                    </p>
+
+                    <div class="info-callout callout-blue">
+                        <span class="callout-icon">📁</span>
+                        <div>Tot es configura amb un fitxer <strong>YAML</strong> que col·loquem a la carpeta
+                            <code>.github/workflows/</code> del repositori.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Llegir article sobre GitHub Actions">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/github-actions-yaml.png"
+                                    alt="Exemple fitxer YAML GitHub Actions" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Exemple: fitxer YAML de GitHub Actions</span>
+                                    <small>images/teoriaM03/github-actions-yaml.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: Understanding GitHub Actions — github.com</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3 class="subsection-title">L'Anatomia de la Pipeline (el YAML)</h3>
+
+                    <div class="theory-code-block">
+                        <div class="code-header">
+                            <span class="code-lang">YAML</span>
+                            <span class="code-filename">.github/workflows/tests.yml</span>
+                        </div>
+                        <pre><code><span class="kw">on</span>: [push]          <span class="comment"># Gallet: s'executa a cada push</span>
+
+<span class="kw">jobs</span>:
+  <span class="kw">test</span>:
+    <span class="kw">runs-on</span>: ubuntu-latest   <span class="comment"># Servidor Ubuntu de GitHub</span>
+    <span class="kw">steps</span>:
+      - <span class="kw">name</span>: Checkout        <span class="comment"># Descarrega el repositori</span>
+        <span class="kw">uses</span>: actions/checkout@v3
+
+      - <span class="kw">name</span>: Setup Python
+        <span class="kw">uses</span>: actions/setup-python@v4
+
+      - <span class="kw">name</span>: Install dependencies
+        <span class="kw">run</span>: pip install -r requirements.txt
+
+      - <span class="kw">name</span>: Run Tests        <span class="comment"># Mode headless!</span>
+        <span class="kw">run</span>: python manage.py test</code></pre>
+                    </div>
+
+                    <div class="yaml-explained">
+                        <div class="yaml-item">
+                            <code class="yaml-key">on: [push]</code>
+                            <p>El <strong>gallet o disparador</strong>. Quan s'activarà el robot? Cada cop que fem push.
+                            </p>
+                        </div>
+                        <div class="yaml-item">
+                            <code class="yaml-key">runs-on: ubuntu-latest</code>
+                            <p>Quin ordinador remot demanem a GitHub? Un servidor Ubuntu de Linux.</p>
+                        </div>
+                        <div class="yaml-item">
+                            <code class="yaml-key">Install dependencies</code>
+                            <p>Llegeix el <code>requirements.txt</code> i instal·la Django i Selenium al servidor remot.
+                            </p>
+                        </div>
+                        <div class="yaml-item">
+                            <code class="yaml-key">Run Tests</code>
+                            <p>Llança les proves. En mode headless perquè el servidor Ubuntu no té pantalla.</p>
+                        </div>
+                    </div>
+
+                    <div class="result-indicators">
+                        <div class="result-ind result-ok">
+                            <span class="result-dot">🟢</span>
+                            <div><strong>Disc Verd</strong> — Codi segur. El desplegament s'autoritza.</div>
+                        </div>
+                        <div class="result-ind result-fail">
+                            <span class="result-dot">🔴</span>
+                            <div><strong>Disc Vermell</strong> — Error introduït. El desplegament s'avorta. Cal revisar
+                                els logs de la consola.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="summary-card">
+                <h2>🗂️ Resum Ràpid — Mòdul 6</h2>
+                <div class="summary-grid">
+                    <div class="summary-item"><span class="summary-label">DevOps</span><span
+                            class="summary-desc">Connecta Dev ↔ Pre-producció ↔ Producció de manera fluida i
+                            automatitzada.</span></div>
+                    <div class="summary-item"><span class="summary-label">CI (Integració Contínua)</span><span
+                            class="summary-desc">Tests que s'executen sols a cada <code>push</code>, sense intervenció
+                            humana.</span></div>
+                    <div class="summary-item"><span class="summary-label">GitHub Actions</span><span
+                            class="summary-desc">Servidors gratuïts de GitHub (Runners) que executen el nostre
+                            YAML.</span></div>
+                    <div class="summary-item"><span class="summary-label">on: [push]</span><span class="summary-desc">El
+                            gallet: activa la pipeline a cada push al repositori.</span></div>
+                    <div class="summary-item"><span class="summary-label">requirements.txt</span><span
+                            class="summary-desc">El servidor remot l'utilitza per instal·lar les dependències
+                            necessàries.</span></div>
+                    <div class="summary-item"><span class="summary-label">🟢 / 🔴</span><span class="summary-desc">Verd
+                            = codi segur. Vermell = error, desplegament bloquejat.</span></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>

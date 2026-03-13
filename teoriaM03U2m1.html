@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Teoria sobre Testing i Qualitat del Programari - M03 Posada en Producció Segura">
+    <title>M03 U2·M1 – Testing i SQA</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <span>M3</span>
+            </div>
+            <span class="logo-text">U2·M1 – Testing i SQA</span>
+        </div>
+
+        <nav class="nav">
+            <a href="teoriaM03U2Index.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Teoria</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">TEORIA</div>
+                <h1 class="page-title">Introducció al Testing i Conceptes Bàsics</h1>
+                <p class="page-subtitle">Abans de començar a picar codi, hem d'entendre què busquem quan provem un
+                    programari.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 1.1 ===== -->
+            <section class="theory-section" id="section-1">
+                <div class="section-header-tag">
+                    <span class="section-number">1.1</span>
+                    <h2 class="section-title">Què és el Testing i la Qualitat del Programari (SQA)?</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        El <strong>Testing</strong> engloba totes aquelles accions empíriques (basades en l'experiència
+                        i l'execució) per assegurar la funcionalitat, validar i verificar el comportament del
+                        programari. L'objectiu és tenir una visió objectiva dels riscos abans de llançar un producte i
+                        <strong>prevenir els defectes</strong>.
+                    </p>
+                    <p class="section-text">
+                        Hem de diferenciar-ho del <strong>SQA (Software Quality Assurance)</strong>, que és un concepte
+                        més ampli. El SQA inclou la millora dels processos de treball, auditories i normatives; el
+                        testing només n'és l'eina pràctica.
+                    </p>
+
+                    <!-- Image placeholder — clicable amb link a l'article -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://medium.com/@hamza.abbas4947/sqa-vs-software-testing-understanding-the-difference-9fe03fa71ee8"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir article sobre SQA vs Software Testing">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/testing-vs-sqa.png" alt="Diagrama Testing vs SQA"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Testing vs SQA</span>
+                                    <small>images/teoriaM03/testing-vs-sqa.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: SQA vs Software Testing — medium.com</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="two-col-cards">
+                        <div class="concept-card card-blue">
+                            <div class="concept-card-icon">🤲</div>
+                            <h3>Testing Manual</h3>
+                            <p>Executat de forma tradicional per persones (testers) que naveguen per l'aplicació
+                                buscant errors.</p>
+                        </div>
+                        <div class="concept-card card-purple">
+                            <div class="concept-card-icon">🤖</div>
+                            <h3>Testing Automatitzat</h3>
+                            <p>Execució de scripts que proven la nostra aplicació sense intervenció humana. Estalvia
+                                temps, redueix errors humans i és clau en projectes complexos i en el Programari
+                                Lliure.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 1.2 ===== -->
+            <section class="theory-section" id="section-2">
+                <div class="section-header-tag">
+                    <span class="section-number">1.2</span>
+                    <h2 class="section-title">La Metodologia TDD (Test Driven Development)</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        El <strong>TDD</strong> és una filosofia de treball que capgira la manera tradicional de
+                        programar: s'escriuen els tests <em>abans</em> que el codi de l'aplicació. Això ens obliga a
+                        pensar com s'ha de comportar el programa abans de crear-lo.
+                    </p>
+
+                    <!-- Image placeholder — clicable amb link a l'article -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://www.nimblework.com/agile/test-driven-development-tdd/" target="_blank"
+                            rel="noopener" class="img-link-wrapper" aria-label="Obrir article sobre TDD">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/tdd-cycle.png" alt="Cicle Red-Green-Refactor del TDD"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Cicle Red-Green-Refactor</span>
+                                    <small>images/teoriaM03/tdd-cycle.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: Test Driven Development (TDD) — nimblework.com</span>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <p class="section-text">El cicle de vida del TDD és estricte i es coneix com a
+                        <strong>Red-Green-Refactor</strong>:
+                    </p>
+
+                    <div class="tdd-cycle">
+                        <div class="tdd-step step-red">
+                            <div class="tdd-step-circle">🔴</div>
+                            <div class="tdd-step-content">
+                                <h3>RED <span class="tdd-step-sub">(Vermell)</span></h3>
+                                <p>Es crea el test per a una nova funcionalitat. Si l'executem, el test <strong>fallarà
+                                        (vermell)</strong> perquè el codi encara no existeix.</p>
+                            </div>
+                        </div>
+                        <div class="tdd-arrow">→</div>
+                        <div class="tdd-step step-green">
+                            <div class="tdd-step-circle">🟢</div>
+                            <div class="tdd-step-content">
+                                <h3>GREEN <span class="tdd-step-sub">(Verd)</span></h3>
+                                <p>S'escriu el codi <strong>mínim i necessari</strong> perquè el test passi i es posi en
+                                    verd. No busquem la perfecció, només que funcioni.</p>
+                            </div>
+                        </div>
+                        <div class="tdd-arrow">→</div>
+                        <div class="tdd-step step-refactor">
+                            <div class="tdd-step-circle">🔄</div>
+                            <div class="tdd-step-content">
+                                <h3>REFACTOR <span class="tdd-step-sub">(Refacció)</span></h3>
+                                <p>Amb el test com a xarxa de seguretat, <strong>netegem, modularitzem i
+                                        optimitzem</strong> el codi sense por a trencar res.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 1.3 ===== -->
+            <section class="theory-section" id="section-3">
+                <div class="section-header-tag">
+                    <span class="section-number">1.3</span>
+                    <h2 class="section-title">Enfocaments de Proves: Caixa Negra vs. Caixa Blanca</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Depenent del coneixement que tinguem de les entranyes del sistema, aplicarem un enfocament o un
+                        altre:
+                    </p>
+
+                    <!-- Image placeholder — clicable amb link a l'article -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://www.sdetunicorns.com/blog/white-box-vs-black-box-testing" target="_blank"
+                            rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir article sobre Caixa Negra vs Blanca">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/caixa-negra-blanca.jpeg"
+                                    alt="Comparació Caixa Negra i Caixa Blanca" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Caixa Negra vs Caixa Blanca</span>
+                                    <small>images/teoriaM03/caixa-negra-blanca.jpeg</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: White-box vs Black-box Testing — sdetunicorns.com</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="two-col-cards">
+                        <div class="concept-card card-dark">
+                            <div class="concept-card-icon">⬛</div>
+                            <h3>Caixa Negra</h3>
+                            <p>No ens importa com està programat el codi internament. Simulem ser un usuari que
+                                introdueix unes <strong>entrades</strong> i espera un resultat concret
+                                (<strong>sortides</strong>).</p>
+                        </div>
+                        <div class="concept-card card-light">
+                            <div class="concept-card-icon">⬜</div>
+                            <h3>Caixa Blanca <small>(Estructural)</small></h3>
+                            <p>Som els programadors i coneixem el codi. L'objectiu és crear proves que passin per tots
+                                els camins lògics possibles: <code>if/else</code>, bucles, tractaments d'errors. La
+                                qualitat es mesura amb la <strong>Cobertura de Codi</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-blue">
+                        <span class="callout-icon">💡</span>
+                        <div>
+                            <strong>Cobertura de Codi:</strong> Percentatge del nostre codi que ha estat executat pels
+                            tests. Com més alta, més seguretat tenim que el codi funciona correctament.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 1.4 ===== -->
+            <section class="theory-section" id="section-4">
+                <div class="section-header-tag">
+                    <span class="section-number">1.4</span>
+                    <h2 class="section-title">Tipus de Proves Funcionals</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Aquestes proves asseguren que el sistema fa allò que les especificacions diuen que ha de fer:
+                    </p>
+
+                    <div class="test-types-grid">
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-red">⚠️ Crítica</div>
+                            <h3>Proves de Regressió</h3>
+                            <p>Asseguren que en afegir una funcionalitat nova, <strong>no hem trencat una
+                                    funcionalitat vella</strong> que ja anava bé. Són les més crítiques.</p>
+                        </div>
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-orange">⚡ Ràpida</div>
+                            <h3>Proves de Fum <small>(Smoke Tests)</small></h3>
+                            <p>Proves rapidíssimes per descartar errors catastròfics. El nom ve de l'electrònica: "Si
+                                l'endollo, surt fum?". Exemple: comprovar si la base de dades connecta.</p>
+                        </div>
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-blue">🎯 Focus</div>
+                            <h3>Proves de Sanitat <small>(Sanity)</small></h3>
+                            <p>Semblants a les de regressió però enfocades en una <strong>àrea molt concreta</strong>
+                                de l'aplicació per validar-la ràpidament.</p>
+                        </div>
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-green">🧭 Lliure</div>
+                            <h3>Proves Exploratòries</h3>
+                            <p>El tester actua com un "turista" navegant lliurement <strong>sense guió previ</strong>
+                                per trobar errors d'usabilitat o de lògica inesperats.</p>
+                        </div>
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-purple">🐒 Caos</div>
+                            <h3>Proves de Mico <small>(Monkey)</small></h3>
+                            <p>Provar opcions, fer clics i introduir textos de manera <strong>totalment
+                                    aleatòria</strong> i ràpida fins a intentar "penjar" l'aplicació.</p>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder — clicable amb link a l'article -->
+                    <div class="image-placeholder image-placeholder-linked" style="margin-top: 2rem;">
+                        <a href="https://www.accelq.com/blog/software-functional-testing/" target="_blank"
+                            rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir article sobre Software Functional Testing">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/functional-testing-types.jpeg"
+                                    alt="Resum tipus de proves funcionals" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Taula resum: Tipus de proves funcionals</span>
+                                    <small>images/teoriaM03/functional-testing-types.jpeg</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: Software Functional Testing — accelq.com</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 1.5 ===== -->
+            <section class="theory-section" id="section-5">
+                <div class="section-header-tag">
+                    <span class="section-number">1.5</span>
+                    <h2 class="section-title">Tipus de Proves No Funcionals</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Aquestes proves no miren <em>què</em> fa el sistema, sinó <strong>com ho fa</strong>
+                        (rendiment, infraestructura):
+                    </p>
+
+                    <div class="nonfunc-list">
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-1">🔥</div>
+                            <div class="nonfunc-content">
+                                <h3>Càrrega i Estrès</h3>
+                                <p>Com respon el servidor si s'hi connecten <strong>10.000 usuaris de cop</strong>? Què
+                                    passa quan s'esgota la memòria RAM? Aquestes proves busquen els límits del sistema.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-2">⏳</div>
+                            <div class="nonfunc-content">
+                                <h3>Estabilitat</h3>
+                                <p>Deixar el sistema funcionant durant <strong>dies de forma ininterrompuda</strong> per
+                                    detectar si hi ha fuites de memòria o degradació del rendiment.</p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-3">🧑‍💻</div>
+                            <div class="nonfunc-content">
+                                <h3>Usabilitat</h3>
+                                <p>Mesurar si la <strong>interfície és intuïtiva</strong> per a l'usuari final. No tot
+                                    el que funciona tècnicament és fàcil d'usar.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-amber">
+                        <span class="callout-icon">⚠️</span>
+                        <div>
+                            <strong>Recorda:</strong> Un software pot passar tots els tests funcionals i, aun i així,
+                            ser lent, inestable o difícil d'usar. Les proves no funcionals són igual d'importants!
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <h2>🗂️ Resum Ràpid</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Testing vs SQA</span>
+                        <span class="summary-desc">Testing és l'eina pràctica; SQA és el concepte global de
+                            qualitat.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">TDD</span>
+                        <span class="summary-desc">Test primer, codi després. Cicle: 🔴 RED → 🟢 GREEN → 🔄
+                            REFACTOR</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Caixa Negra</span>
+                        <span class="summary-desc">Tests sense conèixer el codi intern. Entrades → Sortides.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Caixa Blanca</span>
+                        <span class="summary-desc">Tests coneixent el codi. Cobertura de tots els camins lògics.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Funcionals</span>
+                        <span class="summary-desc">Regressió, Fum, Sanitat, Exploratòries, Mico.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">No Funcionals</span>
+                        <span class="summary-desc">Càrrega/Estrès, Estabilitat, Usabilitat.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>

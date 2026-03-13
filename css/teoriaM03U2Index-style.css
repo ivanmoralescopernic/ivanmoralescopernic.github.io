@@ -1,0 +1,133 @@
+/* ===================================
+   Teoria U2 Index - Estils específics
+   =================================== */
+
+.theory-index-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 1rem;
+}
+
+.theory-module-card {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.theory-module-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: var(--gradient-primary);
+    transform: scaleY(0);
+    transition: transform 0.4s ease;
+}
+
+.theory-module-card:hover {
+    transform: translateX(12px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-secondary);
+    background: var(--bg-primary);
+}
+
+.theory-module-card:hover::before {
+    transform: scaleY(1);
+}
+
+.module-number {
+    width: 66px;
+    height: 66px;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+}
+
+.theory-module-card:hover .module-number {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.module-info {
+    flex-grow: 1;
+}
+
+.module-info h3 {
+    font-size: 1.5rem;
+    font-weight: 850;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+.module-info p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.view-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--accent-secondary);
+    margin-top: 1.25rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.theory-module-card:hover .view-link {
+    gap: 1rem;
+    color: var(--text-primary);
+}
+
+.view-link svg {
+    transition: transform 0.3s ease;
+}
+
+.theory-module-card:hover .view-link svg {
+    transform: translateX(6px);
+}
+
+@media (max-width: 768px) {
+    .theory-module-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1.75rem;
+    }
+
+    .theory-module-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .module-info h3 {
+        font-size: 1.3rem;
+    }
+}

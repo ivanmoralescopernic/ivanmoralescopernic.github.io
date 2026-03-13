@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mòdul 3: Entorn Web, Frameworks i Biblioteques - M03 Posada en Producció Segura">
+    <title>M03 U2·M3 – Frameworks i Ecosistema Python</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><span>M3</span></div>
+            <span class="logo-text">U2·M3 – Frameworks Web</span>
+        </div>
+        <nav class="nav">
+            <a href="teoriaM03U2Index.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Teoria</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">MÒDUL 3</div>
+                <h1 class="page-title">Entorn Web, Frameworks i Biblioteques</h1>
+                <p class="page-subtitle">En el desenvolupament web modern no programem des de zero — fem servir
+                    estructures ja creades que ens estalvien temps i ens donen seguretat.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 3.1 ===== -->
+            <section class="theory-section" id="section-1">
+                <div class="section-header-tag">
+                    <span class="section-number">3.1</span>
+                    <h2 class="section-title">Què és un Framework Web?</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Un <strong>framework</strong> és un conjunt de biblioteques, eines i regles de disseny ja
+                        preparades que ens faciliten la creació d'una aplicació.
+                    </p>
+
+                    <div class="two-col-cards">
+                        <div class="concept-card card-blue">
+                            <div class="concept-card-icon">✅</div>
+                            <h3>Per què fer-los servir?</h3>
+                            <ul class="concept-list">
+                                <li>Eviten el <strong>"codi espaguetti"</strong> (desendreçat i impossible de
+                                    mantenir)</li>
+                                <li>Estructura estàndard: un nou treballador entén l'arquitectura el <strong>primer
+                                        dia</strong></li>
+                                <li>Ja incorporen mecanismes contra atacs: <strong>injeccions SQL, CSRF</strong>,
+                                    etc.</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card card-dark"
+                            style="border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.04);">
+                            <div class="concept-card-icon">📈</div>
+                            <h3>Inconvenient</h3>
+                            <p>Tenen una <strong>corba d'aprenentatge</strong>. Requereixen temps d'estudi abans de ser
+                                productiu.</p>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Web_frameworks"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir article sobre Frameworks Web">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/frameworks-comparativa.png"
+                                    alt="Comparativa de frameworks web" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Imatge: Logotips dels frameworks principals</span>
+                                    <small>images/teoriaM03/frameworks-comparativa.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Introduction to server-side frameworks — MDN</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3 class="subsection-title">Comparativa de Frameworks populars</h3>
+
+                    <div class="frameworks-table">
+                        <div class="fw-row fw-header">
+                            <div class="fw-cell fw-lang">Llenguatge</div>
+                            <div class="fw-cell fw-name">Framework</div>
+                            <div class="fw-cell fw-desc">Descripció</div>
+                        </div>
+
+                        <div class="fw-row fw-highlight">
+                            <div class="fw-cell fw-lang">
+                                <span class="lang-badge lang-python">🐍 Python</span>
+                            </div>
+                            <div class="fw-cell fw-name"><strong>Django</strong></div>
+                            <div class="fw-cell fw-desc">Molt complet, madur, ideal per projectes mitjans/grans.
+                                <strong>L'utilitzarem en aquest curs</strong> pel seu excel·lent ecosistema de testing.
+                            </div>
+                        </div>
+
+                        <div class="fw-row">
+                            <div class="fw-cell fw-lang">
+                                <span class="lang-badge lang-python">🐍 Python</span>
+                            </div>
+                            <div class="fw-cell fw-name"><strong>Flask</strong></div>
+                            <div class="fw-cell fw-desc">Microframework molt lleuger, ideal per a coses ràpides o APIs
+                                simples.</div>
+                        </div>
+
+                        <div class="fw-row">
+                            <div class="fw-cell fw-lang">
+                                <span class="lang-badge lang-php">🐘 PHP</span>
+                            </div>
+                            <div class="fw-cell fw-name"><strong>Laravel</strong></div>
+                            <div class="fw-cell fw-desc">El rei actual del PHP modern. Molt elegant i productiu.</div>
+                        </div>
+
+                        <div class="fw-row">
+                            <div class="fw-cell fw-lang">
+                                <span class="lang-badge lang-js">⚡ JavaScript</span>
+                            </div>
+                            <div class="fw-cell fw-name"><strong>Express</strong></div>
+                            <div class="fw-cell fw-desc">S'executa amb NodeJS. Va ser pioner en portar JS al servidor.
+                            </div>
+                        </div>
+
+                        <div class="fw-row">
+                            <div class="fw-cell fw-lang">
+                                <span class="lang-badge lang-java">☕ Java</span>
+                            </div>
+                            <div class="fw-cell fw-name"><strong>Spring</strong></div>
+                            <div class="fw-cell fw-desc">Compilat, fortament tipat. Molt usat en grans corporacions.
+                            </div>
+                        </div>
+
+                        <div class="fw-row">
+                            <div class="fw-cell fw-lang">
+                                <span class="lang-badge lang-ruby">💎 Ruby</span>
+                            </div>
+                            <div class="fw-cell fw-name"><strong>Ruby on Rails</strong></div>
+                            <div class="fw-cell fw-desc">Un referent històric. Va popularitzar el concepte de
+                                "Convention over Configuration".</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 3.2 ===== -->
+            <section class="theory-section" id="section-2">
+                <div class="section-header-tag">
+                    <span class="section-number">3.2</span>
+                    <h2 class="section-title">L'ecosistema Python: Aïllament i Dependències</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Quan programem, utilitzem codi d'altra gent (biblioteques). Instal·lar aquestes biblioteques
+                        directament al sistema operatiu (<strong>instal·lació global</strong>) és un greu error.
+                    </p>
+
+                    <div class="info-callout callout-amber">
+                        <span class="callout-icon">☠️</span>
+                        <div>
+                            <strong>Dependency Hell:</strong> Diferents projectes poden necessitar versions
+                            <em>incompatibles</em> de la mateixa llibreria. Instal·lar-ho tot junt al sistema pot fins
+                            i tot <strong>trencar aplicacions del propi Sistema Operatiu</strong>.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://docs.python.org/3/library/venv.html" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir documentació sobre entorns virtuals">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/entorn-virtual-python.png"
+                                    alt="Diagrama d'entorns virtuals Python" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Sistema global vs Entorns virtuals aïllats</span>
+                                    <small>images/teoriaM03/entorn-virtual-python.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Creation of virtual environments — python.org</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3 class="subsection-title">La solució: Entorns Virtuals i Gestors de Paquets</h3>
+
+                    <div class="eco-trio">
+                        <div class="eco-card">
+                            <div class="eco-card-top eco-venv">
+                                <div class="eco-badge">venv</div>
+                                <div class="eco-card-icon">🫧</div>
+                            </div>
+                            <div class="eco-card-body">
+                                <h3>Entorns Virtuals</h3>
+                                <p>Eina integrada a Python. Crea <strong>"bombolles" aïllades</strong> per a cada
+                                    projecte. El projecte A tindrà el seu propi Python i les seves pròpies
+                                    biblioteques, separades del projecte B.</p>
+                                <div class="eco-cmd"><code>python -m venv env</code></div>
+                            </div>
+                        </div>
+
+                        <div class="eco-card">
+                            <div class="eco-card-top eco-pip">
+                                <div class="eco-badge">pip</div>
+                                <div class="eco-card-icon">📦</div>
+                            </div>
+                            <div class="eco-card-body">
+                                <h3>Gestor de Paquets</h3>
+                                <p>Automatitza la <strong>descàrrega i instal·lació</strong> de biblioteques des dels
+                                    repositoris oficials d'internet (PyPI).</p>
+                                <div class="eco-cmd"><code>pip install django==4.2</code></div>
+                            </div>
+                        </div>
+
+                        <div class="eco-card">
+                            <div class="eco-card-top eco-req">
+                                <div class="eco-badge">requirements</div>
+                                <div class="eco-card-icon">📋</div>
+                            </div>
+                            <div class="eco-card-body">
+                                <h3>requirements.txt</h3>
+                                <p>Llista en text pla de totes les biblioteques i les seves <strong>versions
+                                        exactes</strong>. Permet que qualsevol company pugui reproduir l'entorn.</p>
+                                <div class="eco-cmd"><code>pip install -r requirements.txt</code></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-blue">
+                        <span class="callout-icon">💡</span>
+                        <div>
+                            <strong>Equivalent a NodeJS:</strong> El fitxer <code>requirements.txt</code> de Python
+                            és equivalent al <code>package.json</code> de Node.js. La carpeta <code>node_modules/</code>
+                            és equivalent a <code>env/</code>. <strong>Ambdues carpetes s'han d'ignorar al
+                                .gitignore!</strong>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://pip.pypa.io/en/stable/user_guide/#requirements-files" target="_blank"
+                            rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir documentació sobre requirements.txt">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/requirements-txt-exemple.png"
+                                    alt="Exemple de fitxer requirements.txt" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Exemple: contingut d'un requirements.txt</span>
+                                    <small>images/teoriaM03/requirements-txt-exemple.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: User Guide: Requirements Files — pip.pypa.io</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <h2>🗂️ Resum Ràpid — Mòdul 3</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Framework</span>
+                        <span class="summary-desc">Estructura + eines + regles. Evita codi espaguetti i inclou
+                            seguretat.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Django</span>
+                        <span class="summary-desc">Framework Python complet. L'usarem en el curs pel seu testing
+                            excel·lent.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Dependency Hell</span>
+                        <span class="summary-desc">Conflicte entre versions. Solució: entorns virtuals aïllats amb
+                            <code>venv</code>.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">venv</span>
+                        <span class="summary-desc">Crea una "bombolla" Python aïllada per projecte.
+                            <code>python -m venv env</code></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">pip</span>
+                        <span class="summary-desc">Instal·la biblioteques. <code>pip install django==4.2</code></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">requirements.txt</span>
+                        <span class="summary-desc">Llista de dependències exactes. Equivalent al
+                            <code>package.json</code> de Node.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>
