@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Model d'Amenaces i Riscos en Entorns Web - M03 U3 Posada en Producció Segura">
+    <title>M03 U3·M2 – Amenaces i Riscos Web</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <span>M3</span>
+            </div>
+            <span class="logo-text">U3·M2 – Amenaces i Riscos Web</span>
+        </div>
+
+        <nav class="nav">
+            <a href="teoriaM03U3m1.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>M1</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">TEORIA</div>
+                <h1 class="page-title">Model d'Amenaces i Riscos en Entorns Web</h1>
+                <p class="page-subtitle">Identifiquem com, on i per què una aplicació web pot ser atacada: de la
+                    teoria a l'anàlisi pràctica de vulnerabilitats.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 1 ===== -->
+            <section class="theory-section" id="section-1">
+                <div class="section-header-tag">
+                    <span class="section-number">1</span>
+                    <h2 class="section-title">Superfícies d'Atac: Client vs. Servidor</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        En un entorn web hem de protegir <strong>dos fronts clarament diferenciats</strong>. Cada costat
+                        té els seus propis objectius d'atac i vulnerabilitats característiques:
+                    </p>
+
+                    <div class="two-col-cards">
+                        <!-- Client side -->
+                        <div class="concept-card card-blue">
+                            <div class="concept-card-icon">🖥️</div>
+                            <h3>Seguretat en el Client <small>(Frontend)</small></h3>
+                            <ul class="concept-list">
+                                <li><strong>Focus:</strong> L'usuari final i el seu navegador.</li>
+                                <li><strong>Objectiu de l'atacant:</strong> Robar cookies de sessió, suplantar la
+                                    identitat o redirigir a l'exterior.</li>
+                                <li><strong>Atacs clau:</strong> Cross-Site Scripting (XSS), Cross-Site Request Forgery
+                                    (CSRF) i Clickjacking.</li>
+                            </ul>
+                        </div>
+                        <!-- Server side -->
+                        <div class="concept-card card-purple">
+                            <div class="concept-card-icon">🗄️</div>
+                            <h3>Seguretat en el Servidor <small>(Backend)</small></h3>
+                            <ul class="concept-list">
+                                <li><strong>Focus:</strong> La infraestructura, el servidor d'aplicacions i la base de
+                                    dades.</li>
+                                <li><strong>Objectiu de l'atacant:</strong> Accedir a dades massives, executar ordres al
+                                    SO o deixar el servei inoperatiu.</li>
+                                <li><strong>Atacs clau:</strong> Injecció SQL, Buffer Overflow i DoS/DDoS.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank"
+                            rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir OWASP Web Security Testing Guide">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03U3/client-server-attack.png"
+                                    alt="Diagrama superfícies d'atac Client vs Servidor" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Superfícies d'Atac Client vs Servidor</span>
+                                    <small>images/teoriaM03U3/client-server-attack.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir guia: OWASP Web Security Testing Guide — owasp.org</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 2 ===== -->
+            <section class="theory-section" id="section-2">
+                <div class="section-header-tag">
+                    <span class="section-number">2</span>
+                    <h2 class="section-title">Vectors d'Atac Comuns</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Els <strong>vectors d'atac</strong> són els mètodes que fan servir els ciberdelinqüents per
+                        explotar les vulnerabilitats d'un sistema:
+                    </p>
+
+                    <div class="nonfunc-list">
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-1">🧠</div>
+                            <div class="nonfunc-content">
+                                <h3>Enginyeria Social</h3>
+                                <p>Manipulació psicològica per obtenir dades sensibles. Un atacant es fa passar per
+                                    suport tècnic per aconseguir credencials. Inclou tècniques com el
+                                    <strong>pretexting</strong> o el <strong>baiting</strong>.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-2">🎣</div>
+                            <div class="nonfunc-content">
+                                <h3>Phishing</h3>
+                                <p>Suplantació d'identitat mitjançant <strong>correus o webs falses</strong> dissenyades
+                                    per capturar credencials de l'usuari de forma enganyosa.</p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-3">💣</div>
+                            <div class="nonfunc-content">
+                                <h3>Malware i Ransomware</h3>
+                                <p>Software maliciós que compromet sistemes o <strong>xifra fitxers</strong> per demanar
+                                    un rescat econòmic (extorsió). És un dels atacs més lucratius per als
+                                    ciberdelinqüents.</p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-auth">🐛</div>
+                            <div class="nonfunc-content">
+                                <h3>Vulnerabilitats de Software</h3>
+                                <p>Errors en el codi (com els recollits per <strong>OWASP</strong>) que permeten
+                                    l'explotació tècnica directa de l'aplicació o la infraestructura.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 3 ===== -->
+            <section class="theory-section" id="section-3">
+                <div class="section-header-tag">
+                    <span class="section-number">3</span>
+                    <h2 class="section-title">OWASP Top 10: Vulnerabilitats Crítiques</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        L'estàndard d'<strong>OWASP</strong> classifica els 10 riscos més importants per a les
+                        aplicacions web, ordenats per impacte i probabilitat. Aquí els més rellevants per a les
+                        pràctiques:
+                    </p>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://owasp.org/Top10/" target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir OWASP Top 10 oficial">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03U3/owasp-top10.png" alt="OWASP Top 10 2021"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: OWASP Top 10</span>
+                                    <small>images/teoriaM03U3/owasp-top10.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir estàndard: OWASP Top 10 — owasp.org</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- OWASP Cards grid -->
+                    <div class="test-types-grid">
+
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-red">A01</div>
+                            <h3>Broken Access Control</h3>
+                            <p>No es validen correctament els permisos d'usuari. Un usuari autentat modifica la URL per
+                                accedir a dades d'un altre client <em>(IDOR)</em>.</p>
+                            <div class="def-callout" style="margin-top:0.75rem;">
+                                <strong>Mitigació:</strong> Validar permisos al servidor. Principi de menor privilegi.
+                            </div>
+                        </div>
+
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-orange">A02</div>
+                            <h3>Cryptographic Failures</h3>
+                            <p>Contrasenyes en text pla o protocols obsolets com HTTP o TLS 1.0 exposen dades
+                                sensibles.</p>
+                            <div class="def-callout" style="margin-top:0.75rem;">
+                                <strong>Mitigació:</strong> HTTPS/TLS 1.3 i hash forts (Argon2, Bcrypt).
+                            </div>
+                        </div>
+
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-red">A03</div>
+                            <h3>Injection</h3>
+                            <p>Dades no fiables executades com a ordres. <strong>SQL Injection:</strong>
+                                <code>' OR '1'='1</code>. <strong>XSS:</strong> Scripts al navegador de la víctima.
+                            </p>
+                            <div class="def-callout" style="margin-top:0.75rem;">
+                                <strong>Mitigació:</strong> Consultes parametritzades i sanejament d'entrades.
+                            </div>
+                        </div>
+
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-blue">A04</div>
+                            <h3>Insecure Design</h3>
+                            <p>Manca de controls de seguretat ja en la fase de disseny de l'aplicació, no en la
+                                implementació.</p>
+                            <div class="def-callout" style="margin-top:0.75rem;">
+                                <strong>Mitigació:</strong> Cicle SSDLC i modelat d'amenaces des del primer dia.
+                            </div>
+                        </div>
+
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-orange">A06</div>
+                            <h3>Vulnerable Components</h3>
+                            <p>Ús de llibreries o frameworks amb fallades conegudes. <strong>Cas real:</strong> Equifax
+                                va ser vulnerat per un Apache Struts sense parchear.</p>
+                            <div class="def-callout" style="margin-top:0.75rem;">
+                                <strong>Mitigació:</strong> Actualitzar dependències i auditar el SBOM.
+                            </div>
+                        </div>
+
+                        <div class="test-type-card">
+                            <div class="test-type-badge badge-purple">A07</div>
+                            <h3>Auth Failures</h3>
+                            <p>Problemes en la verificació d'identitat: contrasenyes febles o sense protecció contra
+                                atacs de força bruta.</p>
+                            <div class="def-callout" style="margin-top:0.75rem;">
+                                <strong>Mitigació:</strong> Autenticació Multifactor (MFA).
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="info-callout callout-blue">
+                        <span class="callout-icon">💡</span>
+                        <div>
+                            <strong>Recordatori:</strong> L'OWASP Top 10 no és una llista de bugs concrets sinó de
+                            <strong>categories de riscos</strong>. Aplicar les seves mitigacions de forma sistemàtica és
+                            la base de qualsevol auditoria de seguretat web.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 4 ===== -->
+            <section class="theory-section" id="section-4">
+                <div class="section-header-tag">
+                    <span class="section-number">4</span>
+                    <h2 class="section-title">Avaluació de Riscos i Mitigació</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Davant de qualsevol amenaça identificada, hem de seguir un procés estructurat de
+                        <strong>tres fases</strong>:
+                    </p>
+
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">1</div>
+                            <div class="workflow-step-body">
+                                <h4>🗂️ Identificació d'Actius</h4>
+                                <p>Llistar els elements crítics del sistema: <strong>bases de dades, credencials,
+                                        APIs</strong> i qualsevol dada de valor per a l'empresa o els usuaris.</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector">▼</div>
+
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">2</div>
+                            <div class="workflow-step-body">
+                                <h4>🔍 Anàlisi de Vulnerabilitats</h4>
+                                <p>Identificar quins atacs de l'OWASP podrien afectar els actius. Exemple: <em>"La base
+                                        de dades és vulnerable a SQL Injection (A03)".</em></p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector">▼</div>
+
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">3</div>
+                            <div class="workflow-step-body">
+                                <h4>🛡️ Plans de Mitigació</h4>
+                                <p>Definir accions concretes per reduir el risc: <strong>còpies de seguretat
+                                        xifrades</strong>, <strong>segmentació de xarxa</strong> i
+                                    <strong>validació estricta d'entrades</strong>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-amber" style="margin-top: 1.5rem;">
+                        <span class="callout-icon">⚠️</span>
+                        <div>
+                            <strong>Recorda:</strong> La mitigació no elimina el risc al 100%, sinó que el
+                            <strong>redueix fins a un nivell acceptable</strong>. L'objectiu és gestionar el risc
+                            residual de forma conscient i documentada.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://www.isaca.org/resources/isaca-journal/issues/2016/volume-4/risk-management-and-information-security"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir recurs ISACA sobre gestió de riscos">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03U3/risk-assessment.png"
+                                    alt="Diagrama avaluació de riscos i mitigació" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Avaluació de Riscos i Mitigació</span>
+                                    <small>images/teoriaM03U3/risk-assessment.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir recurs: Risk Management — isaca.org</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <h2>🗂️ Resum Ràpid</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Superfície Client</span>
+                        <span class="summary-desc">XSS, CSRF, Clickjacking → Robar sessions i suplantar
+                            identitats.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Superfície Servidor</span>
+                        <span class="summary-desc">SQL Injection, Buffer Overflow, DoS → Accés massiu i
+                            inoperativitat.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Vectors d'Atac</span>
+                        <span class="summary-desc">Enginyeria Social · Phishing · Malware/Ransomware ·
+                            Vulnerabilitats.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">OWASP A01–A07</span>
+                        <span class="summary-desc">Broken Access Control, Crypto Failures, Injection, Insecure
+                            Design...</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Avaluació de Riscos</span>
+                        <span class="summary-desc">Identificar Actius → Analitzar Vulnerabilitats → Plans de
+                            Mitigació.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Risc Residual</span>
+                        <span class="summary-desc">Mai s'elimina al 100%. L'objectiu és gestionar-lo de forma
+                            conscient.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>

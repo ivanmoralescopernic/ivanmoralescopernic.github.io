@@ -1679,6 +1679,373 @@
     width: 100%;
 }
 
+/* ===== Compare Banner (U3M1 – Ciberseguretat vs Seg. Info) ===== */
+.compare-banner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.compare-side {
+    padding: 1.75rem;
+    border-radius: 18px;
+    border: 2px solid;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.compare-side:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.compare-cyber {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.compare-info {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(52, 211, 153, 0.08) 100%);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.compare-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+}
+
+.compare-side h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+}
+
+.compare-side p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.compare-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    color: white;
+    font-weight: 900;
+    font-size: 0.85rem;
+    box-shadow: var(--shadow-md);
+}
+
+/* ===== CIA Triad Cards (U3M1) ===== */
+.cia-triad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.cia-card {
+    padding: 1.75rem;
+    border-radius: 20px;
+    border: 2px solid;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cia-card::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    opacity: 0.07;
+    transition: all 0.4s ease;
+}
+
+.cia-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.cia-card:hover::before {
+    transform: scale(1.5);
+    opacity: 0.12;
+}
+
+.cia-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.85rem;
+}
+
+.cia-card h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+}
+
+.cia-card > p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+}
+
+.cia-example {
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    background: var(--bg-primary);
+    border-left: 3px solid;
+}
+
+.example-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+
+.cia-example p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.cia-confidentiality {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.06) 0%, rgba(220, 38, 38, 0.04) 100%);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+.cia-confidentiality::before { background: #ef4444; }
+.cia-confidentiality .cia-example { border-color: rgba(239, 68, 68, 0.5); }
+.cia-confidentiality .example-label { color: #ef4444; }
+
+.cia-integrity {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(5, 150, 105, 0.04) 100%);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+.cia-integrity::before { background: #10b981; }
+.cia-integrity .cia-example { border-color: rgba(16, 185, 129, 0.5); }
+.cia-integrity .example-label { color: #10b981; }
+
+.cia-availability {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.06) 0%, rgba(37, 99, 235, 0.04) 100%);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+.cia-availability::before { background: #3b82f6; }
+.cia-availability .cia-example { border-color: rgba(59, 130, 246, 0.5); }
+.cia-availability .example-label { color: #3b82f6; }
+
+/* ===== Extended nonfunc-icon variants (U3M1) ===== */
+.nf-icon-auth {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.nf-icon-authz {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+.nf-icon-audit {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* ===== McCumber States (U3M1) ===== */
+.mccumber-states {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.state-card {
+    padding: 1.5rem;
+    border-radius: 18px;
+    border: 2px solid;
+    transition: all 0.3s ease;
+}
+
+.state-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.state-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+}
+
+.state-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.state-labels {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.state-tag {
+    font-weight: 900;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.state-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.state-card > p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+}
+
+.state-measure {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    background: var(--bg-primary);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-left: 3px solid;
+}
+
+.measure-label {
+    font-weight: 800;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.state-storage {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.07) 0%, rgba(251, 191, 36, 0.05) 100%);
+    border-color: rgba(245, 158, 11, 0.3);
+}
+.state-storage .state-measure { border-color: rgba(245, 158, 11, 0.5); }
+
+.state-transmission {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.07) 0%, rgba(96, 165, 250, 0.05) 100%);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+.state-transmission .state-measure { border-color: rgba(59, 130, 246, 0.5); }
+
+.state-processing {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.07) 0%, rgba(167, 139, 250, 0.05) 100%);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+.state-processing .state-measure { border-color: rgba(139, 92, 246, 0.5); }
+
+/* ===== NIST Cycle (U3M1) ===== */
+.nist-cycle {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0.5rem 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nist-step {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.4rem 1.75rem;
+    border-radius: 18px;
+    border: 2px solid;
+    transition: all 0.3s ease;
+}
+
+.nist-step:hover {
+    transform: translateX(10px);
+    box-shadow: var(--shadow-md);
+}
+
+.nist-connector {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    padding: 0.15rem 0;
+    line-height: 1;
+}
+
+.nist-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.nist-content h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.nist-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.nist-identify {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.07) 0%, rgba(139, 92, 246, 0.05) 100%);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+.nist-identify .nist-number { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+
+.nist-protect {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.07) 0%, rgba(52, 211, 153, 0.05) 100%);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+.nist-protect .nist-number { background: linear-gradient(135deg, #10b981, #34d399); }
+
+.nist-detect {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.07) 0%, rgba(251, 191, 36, 0.05) 100%);
+    border-color: rgba(245, 158, 11, 0.3);
+}
+.nist-detect .nist-number { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+
+.nist-respond {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.07) 0%, rgba(252, 165, 165, 0.05) 100%);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+.nist-respond .nist-number { background: linear-gradient(135deg, #ef4444, #f87171); }
+
+.nist-recover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.07) 0%, rgba(96, 165, 250, 0.05) 100%);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+.nist-recover .nist-number { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
     .two-col-cards {
@@ -1747,6 +2114,28 @@
     .appium-connector {
         transform: rotate(90deg);
     }
+
+    /* U3M1 responsive */
+    .cia-triad {
+        grid-template-columns: 1fr;
+    }
+
+    .compare-banner {
+        grid-template-columns: 1fr;
+    }
+
+    .compare-divider {
+        margin: 0 auto;
+        transform: rotate(90deg);
+    }
+
+    .mccumber-states {
+        grid-template-columns: 1fr;
+    }
+
+    .nist-step:hover {
+        transform: translateY(-4px);
+    }
 }
 
 @media (max-width: 768px) {
@@ -1780,5 +2169,17 @@
 
     .container {
         padding: 1rem 1.25rem 5rem 1.25rem;
+    }
+
+    /* U3M1 responsive */
+    .nist-step {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+
+    .nist-step:hover {
+        transform: none;
+        box-shadow: var(--shadow-md);
     }
 }

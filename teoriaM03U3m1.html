@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Teoria sobre Fonaments de Seguretat en Aplicacions Web - M03 Posada en Producció Segura">
+    <title>M03 U3·M1 – Seguretat en Aplicacions Web</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <span>M3</span>
+            </div>
+            <span class="logo-text">U3·M1 – Seguretat Web</span>
+        </div>
+
+        <nav class="nav">
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">TEORIA</div>
+                <h1 class="page-title">Fonaments de Seguretat en Aplicacions Web</h1>
+                <p class="page-subtitle">Establim les bases teòriques de la ciberseguretat: protegir els actius de
+                    negoci front a amenaces en sistemes interconnectats.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 1.1 ===== -->
+            <section class="theory-section" id="section-1">
+                <div class="section-header-tag">
+                    <span class="section-number">1.1</span>
+                    <h2 class="section-title">Què és la Ciberseguretat? (Concepte ISACA)</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Segons l'estàndard <strong>ISACA</strong>, la ciberseguretat és la
+                        <strong>protecció dels actius d'informació</strong> front a les amenaces que la processen,
+                        emmagatzemen i transporten mitjançant sistemes interconnectats.
+                    </p>
+                    <p class="section-text">
+                        Per aplicar-la correctament, hem de conèixer dos factors clau:
+                    </p>
+
+                    <div class="two-col-cards">
+                        <div class="concept-card card-blue">
+                            <div class="concept-card-icon">🏢</div>
+                            <h3>Plans de negoci i entorn empresarial</h3>
+                            <p>Què volem protegir i per què. Exemples: el prestigi d'un banc o la base de dades d'una
+                                botiga online.</p>
+                        </div>
+                        <div class="concept-card card-purple">
+                            <div class="concept-card-icon">🛠️</div>
+                            <h3>Tecnologia disponible</h3>
+                            <p>Quines eines tenim a l'entitat per fer front a les amenaces i implementar les controls de
+                                seguretat necessaris.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ciberseguretat vs Seguretat info -->
+                    <div class="compare-banner">
+                        <div class="compare-side compare-cyber">
+                            <div class="compare-icon">💻</div>
+                            <h3>Ciberseguretat</h3>
+                            <p>Es limita exclusivament a la protecció d'<strong>actius digitals</strong>: informació
+                                digital, hardware i xarxes.</p>
+                        </div>
+                        <div class="compare-divider">
+                            <span>vs</span>
+                        </div>
+                        <div class="compare-side compare-info">
+                            <div class="compare-icon">🛡️</div>
+                            <h3>Seguretat de la Informació</h3>
+                            <p>Concepte <strong>més global</strong> que inclou els actius digitals i també els actius en
+                                paper o físics.</p>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://www.isaca.org/resources/isaca-journal/issues/2014/volume-6/cybersecurity-all-in-the-mind"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir recurs ISACA sobre ciberseguretat">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03U3/isaca-cybersecurity.png"
+                                    alt="Diagrama concepte ciberseguretat ISACA" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Ciberseguretat ISACA</span>
+                                    <small>images/teoriaM03U3/isaca-cybersecurity.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir recurs: Cybersecurity — isaca.org</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 1.2 ===== -->
+            <section class="theory-section" id="section-2">
+                <div class="section-header-tag">
+                    <span class="section-number">1.2</span>
+                    <h2 class="section-title">La Tríada CIA: Les 3 Dimensions Clau</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        La seguretat de la informació es basa en un conjunt de mesures <strong>preventives i
+                            reactives</strong> per resguardar la informació mantenint tres dimensions fonamentals:
+                    </p>
+
+                    <!-- CIA Triangle visual -->
+                    <div class="cia-triad">
+                        <div class="cia-card cia-confidentiality">
+                            <div class="cia-icon">🔒</div>
+                            <h3>Confidencialitat</h3>
+                            <p>Garantir que la informació només sigui accessible per aquells que tenen el
+                                <strong>permís corresponent</strong>.
+                            </p>
+                            <div class="cia-example">
+                                <span class="example-label">Exemple pràctic</span>
+                                <p>Que un atacant no pugui llegir els números de targeta de crèdit de la base de dades
+                                    de l'e-commerce.</p>
+                            </div>
+                        </div>
+
+                        <div class="cia-card cia-integrity">
+                            <div class="cia-icon">✅</div>
+                            <h3>Integritat</h3>
+                            <p>Protegir l'<strong>exactitud i completitud</strong> de les dades contra alteracions no
+                                autoritzades.</p>
+                            <div class="cia-example">
+                                <span class="example-label">Exemple pràctic</span>
+                                <p>Que un usuari no pugui modificar el saldo del seu compte bancari a l'App Fintech
+                                    mitjançant una injecció de codi.</p>
+                            </div>
+                        </div>
+
+                        <div class="cia-card cia-availability">
+                            <div class="cia-icon">🕒</div>
+                            <h3>Disponibilitat</h3>
+                            <p>Assegurar que els sistemes i la informació estiguin <strong>accessibles i operatius</strong>
+                                sempre que siguin necessaris.</p>
+                            <div class="cia-example">
+                                <span class="example-label">Exemple pràctic</span>
+                                <p>Que la web no caigui durant un atac de Denegació de Servei (DoS), permetent que els
+                                    clients continuïn comprant.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://www.nist.gov/cybersecurity" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir recurs NIST sobre la Tríada CIA">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03U3/cia-triad.png" alt="Diagrama Tríada CIA" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: La Tríada CIA</span>
+                                    <small>images/teoriaM03U3/cia-triad.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir recurs: Cybersecurity Framework — nist.gov</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 1.3 ===== -->
+            <section class="theory-section" id="section-3">
+                <div class="section-header-tag">
+                    <span class="section-number">1.3</span>
+                    <h2 class="section-title">Dimensions Esteses (Seguretat Informàtica)</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Més enllà de la tríada clàssica, per a una <strong>auditoria completa</strong> cal considerar
+                        tres dimensions addicionals:
+                    </p>
+
+                    <div class="nonfunc-list">
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-auth">👤</div>
+                            <div class="nonfunc-content">
+                                <h3>Autenticació</h3>
+                                <p>Verificar la <strong>identitat real</strong> dels usuaris o sistemes. La pregunta
+                                    clau és: <em>"Qui dius que ets?"</em></p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-authz">🔑</div>
+                            <div class="nonfunc-content">
+                                <h3>Autorització</h3>
+                                <p>Controlar els <strong>permisos segons la identitat</strong>. La pregunta clau és:
+                                    <em>"Què tens permès fer?"</em> Un error aquí provoca el risc
+                                    <strong>OWASP A01: Broken Access Control</strong>.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-audit">📜</div>
+                            <div class="nonfunc-content">
+                                <h3>Auditoria</h3>
+                                <p>El <strong>registre d'esdeveniments i monitoratge</strong> per detectar accessos no
+                                    autoritzats i saber què ha passat després d'un incident.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-amber">
+                        <span class="callout-icon">⚠️</span>
+                        <div>
+                            <strong>OWASP A01 – Broken Access Control:</strong> Un error en la implementació de
+                            l'autorització és la vulnerabilitat més comuna a les aplicacions web. Permet que un usuari
+                            accedeixi a recursos o funcionalitats per als quals no té permís.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 1.4 ===== -->
+            <section class="theory-section" id="section-4">
+                <div class="section-header-tag">
+                    <span class="section-number">1.4</span>
+                    <h2 class="section-title">El Cub de McCumber (1991) i els Estats de la Dada</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        La seguretat no és una foto fixa, sinó que depèn de <strong>l'estat en què es troba la
+                            informació</strong>. El Cub de McCumber ens obliga a avaluar la Tríada CIA en tres estats:
+                    </p>
+
+                    <div class="mccumber-states">
+                        <div class="state-card state-storage">
+                            <div class="state-header">
+                                <span class="state-icon">🗄️</span>
+                                <div class="state-labels">
+                                    <span class="state-tag">Emmagatzematge</span>
+                                    <span class="state-sub">Dades en repòs · Storage</span>
+                                </div>
+                            </div>
+                            <p>Protecció de la base de dades on es guarden els números de compte.</p>
+                            <div class="state-measure">
+                                <span class="measure-label">Mesura:</span>
+                                <span>Xifrat de disc (Criptografia)</span>
+                            </div>
+                        </div>
+
+                        <div class="state-card state-transmission">
+                            <div class="state-header">
+                                <span class="state-icon">📡</span>
+                                <div class="state-labels">
+                                    <span class="state-tag">Transmissió</span>
+                                    <span class="state-sub">Dades en trànsit · Transmission</span>
+                                </div>
+                            </div>
+                            <p>Protecció de la dada mentre viatja des de l'App mòbil fins al servidor del banc.</p>
+                            <div class="state-measure">
+                                <span class="measure-label">Mesura:</span>
+                                <span>Ús de protocols segurs com HTTPS/TLS</span>
+                            </div>
+                        </div>
+
+                        <div class="state-card state-processing">
+                            <div class="state-header">
+                                <span class="state-icon">⚙️</span>
+                                <div class="state-labels">
+                                    <span class="state-tag">Processament</span>
+                                    <span class="state-sub">Dades en ús · Processing</span>
+                                </div>
+                            </div>
+                            <p>Protecció de la dada mentre el servidor la fa servir per realitzar un càlcul o
+                                transferència.</p>
+                            <div class="state-measure">
+                                <span class="measure-label">Mesura:</span>
+                                <span>Memòria segura i neteja de variables temporals</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://en.wikipedia.org/wiki/McCumber_cube" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir article sobre el Cub de McCumber">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03U3/mccumber-cube.png" alt="El Cub de McCumber"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: El Cub de McCumber</span>
+                                    <small>images/teoriaM03U3/mccumber-cube.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir article: McCumber Cube — wikipedia.org</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 1.5 ===== -->
+            <section class="theory-section" id="section-5">
+                <div class="section-header-tag">
+                    <span class="section-number">1.5</span>
+                    <h2 class="section-title">Les 5 Funcions Clau per a Actius Digitals (NIST)</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">
+                        Per protegir els actius digitals d'una empresa, el marc del <strong>NIST</strong> proposa un
+                        cicle de 5 funcions:
+                    </p>
+
+                    <div class="nist-cycle">
+                        <div class="nist-step nist-identify">
+                            <div class="nist-number">01</div>
+                            <div class="nist-content">
+                                <h3>🔍 Identificar</h3>
+                                <p>Conèixer quins actius tenim: servidors, APIs, dades de clients.</p>
+                            </div>
+                        </div>
+                        <div class="nist-connector">▼</div>
+
+                        <div class="nist-step nist-protect">
+                            <div class="nist-number">02</div>
+                            <div class="nist-content">
+                                <h3>🛡️ Proteger</h3>
+                                <p>Implementar les salvaguardes: firewalls, xifrat, controls d'accés.</p>
+                            </div>
+                        </div>
+                        <div class="nist-connector">▼</div>
+
+                        <div class="nist-step nist-detect">
+                            <div class="nist-number">03</div>
+                            <div class="nist-content">
+                                <h3>👁️ Detectar</h3>
+                                <p>Monitoritzar per trobar activitats sospitoses ràpidament.</p>
+                            </div>
+                        </div>
+                        <div class="nist-connector">▼</div>
+
+                        <div class="nist-step nist-respond">
+                            <div class="nist-number">04</div>
+                            <div class="nist-content">
+                                <h3>⚡ Responder</h3>
+                                <p>Actuar quan es confirma un atac per minimitzar l'impacte.</p>
+                            </div>
+                        </div>
+                        <div class="nist-connector">▼</div>
+
+                        <div class="nist-step nist-recover">
+                            <div class="nist-number">05</div>
+                            <div class="nist-content">
+                                <h3>♻️ Recuperar</h3>
+                                <p>Restaurar les dades i serveis afectats per tornar a la normalitat.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder -->
+                    <div class="image-placeholder image-placeholder-linked" style="margin-top: 2rem;">
+                        <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir marc NIST Cybersecurity Framework">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03U3/nist-framework.png"
+                                    alt="NIST Cybersecurity Framework - 5 Funcions" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: NIST Cybersecurity Framework</span>
+                                    <small>images/teoriaM03U3/nist-framework.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir marc: NIST Cybersecurity Framework — nist.gov</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <h2>🗂️ Resum Ràpid</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Ciberseguretat (ISACA)</span>
+                        <span class="summary-desc">Protecció d'actius digitals front amenaces en sistemes
+                            interconnectats.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Tríada CIA</span>
+                        <span class="summary-desc">🔒 Confidencialitat · ✅ Integritat · 🕒 Disponibilitat</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Dimensions Esteses</span>
+                        <span class="summary-desc">👤 Autenticació · 🔑 Autorització · 📜 Auditoria</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Cub de McCumber</span>
+                        <span class="summary-desc">🗄️ Repòs · 📡 Trànsit · ⚙️ Processament</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Marc NIST</span>
+                        <span class="summary-desc">Identificar → Proteger → Detectar → Responder → Recuperar</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">OWASP A01</span>
+                        <span class="summary-desc">Broken Access Control: error en autorització, vulnerabilitat
+                            #1.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>
