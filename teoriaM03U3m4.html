@@ -215,27 +215,42 @@
                     <div class="nist-cycle">
                         <div class="nist-step nist-identify">
                             <div class="nist-number">01</div>
-                            <div class="nist-content"><h3>🔍 Identificar</h3><p>Conèixer els actius: servidors, APIs, dades de clients.</p></div>
+                            <div class="nist-content">
+                                <h3>🔍 Identificar</h3>
+                                <p>Conèixer els actius: servidors, APIs, dades de clients.</p>
+                            </div>
                         </div>
                         <div class="nist-connector">▼</div>
                         <div class="nist-step nist-protect">
                             <div class="nist-number">02</div>
-                            <div class="nist-content"><h3>🛡️ Proteger</h3><p>Implementar salvaguardes: firewalls, xifrat, controls d'accés.</p></div>
+                            <div class="nist-content">
+                                <h3>🛡️ Proteger</h3>
+                                <p>Implementar salvaguardes: firewalls, xifrat, controls d'accés.</p>
+                            </div>
                         </div>
                         <div class="nist-connector">▼</div>
                         <div class="nist-step nist-detect">
                             <div class="nist-number">03</div>
-                            <div class="nist-content"><h3>👁️ Detectar</h3><p>Monitoritzar per trobar activitats sospitoses ràpidament.</p></div>
+                            <div class="nist-content">
+                                <h3>👁️ Detectar</h3>
+                                <p>Monitoritzar per trobar activitats sospitoses ràpidament.</p>
+                            </div>
                         </div>
                         <div class="nist-connector">▼</div>
                         <div class="nist-step nist-respond">
                             <div class="nist-number">04</div>
-                            <div class="nist-content"><h3>⚡ Respondre</h3><p>Actuar quan es confirma un atac per minimitzar l'impacte.</p></div>
+                            <div class="nist-content">
+                                <h3>⚡ Respondre</h3>
+                                <p>Actuar quan es confirma un atac per minimitzar l'impacte.</p>
+                            </div>
                         </div>
                         <div class="nist-connector">▼</div>
                         <div class="nist-step nist-recover">
                             <div class="nist-number">05</div>
-                            <div class="nist-content"><h3>♻️ Recuperar</h3><p>Restaurar serveis i dades per tornar a la normalitat.</p></div>
+                            <div class="nist-content">
+                                <h3>♻️ Recuperar</h3>
+                                <p>Restaurar serveis i dades per tornar a la normalitat.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -273,37 +288,45 @@
                             <div class="test-type-badge badge-red">A01</div>
                             <h3>Broken Access Control</h3>
                             <p>Fallades en la validació de permisos que permeten accedir a dades d'altri.</p>
-                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Principi de menor privilegi. Validar sempre al servidor.</div>
+                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Principi de menor
+                                privilegi. Validar sempre al servidor.</div>
                         </div>
                         <div class="test-type-card">
                             <div class="test-type-badge badge-orange">A02</div>
                             <h3>Cryptographic Failures</h3>
-                            <p>MD5, SHA-1 o HTTP exposen dades sensibles. <strong>Solució:</strong> TLS 1.3 + Argon2/Bcrypt.</p>
-                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Xifrat en repòs i trànsit. Hash forts obligatoris.</div>
+                            <p>MD5, SHA-1 o HTTP exposen dades sensibles. <strong>Solució:</strong> TLS 1.3 +
+                                Argon2/Bcrypt.</p>
+                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Xifrat en repòs i
+                                trànsit. Hash forts obligatoris.</div>
                         </div>
                         <div class="test-type-card">
                             <div class="test-type-badge badge-red">A03</div>
                             <h3>Injection</h3>
                             <p>Dades no fiables executades com a ordres: SQL Injection (<code>' OR '1'='1</code>).</p>
-                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Consultes parametritzades i sanejament d'entrades.</div>
+                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Consultes
+                                parametritzades i sanejament d'entrades.</div>
                         </div>
                         <div class="test-type-card">
                             <div class="test-type-badge badge-blue">A04</div>
                             <h3>Insecure Design</h3>
                             <p>Deficiències que neixen en el disseny i arquitectura de l'aplicació.</p>
-                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> SSDLC i modelat d'amenaces des del primer dia.</div>
+                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> SSDLC i modelat
+                                d'amenaces des del primer dia.</div>
                         </div>
                         <div class="test-type-card">
                             <div class="test-type-badge badge-orange">A06</div>
                             <h3>Vulnerable Components</h3>
-                            <p>Llibreries amb vulnerabilitats conegudes no actualitzades. <em>Cas: Equifax–Struts.</em></p>
-                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Auditar SBOM i actualitzar dependències.</div>
+                            <p>Llibreries amb vulnerabilitats conegudes no actualitzades. <em>Cas: Equifax–Struts.</em>
+                            </p>
+                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Auditar SBOM i
+                                actualitzar dependències.</div>
                         </div>
                         <div class="test-type-card">
                             <div class="test-type-badge badge-purple">A07</div>
                             <h3>Auth Failures</h3>
                             <p>Contrasenyes febles, sense protecció de força bruta o sense MFA.</p>
-                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Autenticació Multifactor (MFA) obligatori.</div>
+                            <div class="def-callout" style="margin-top:0.75rem;"><strong>Fix:</strong> Autenticació
+                                Multifactor (MFA) obligatori.</div>
                         </div>
                     </div>
                 </div>
@@ -322,17 +345,20 @@
                         <div class="test-type-card">
                             <div class="test-type-badge badge-red">⬛ Negra</div>
                             <h3>Caixa Negra</h3>
-                            <p>L'auditor <strong>no coneix el codi</strong>. Simula un atacant extern real sense informació prèvia.</p>
+                            <p>L'auditor <strong>no coneix el codi</strong>. Simula un atacant extern real sense
+                                informació prèvia.</p>
                         </div>
                         <div class="test-type-card">
                             <div class="test-type-badge badge-green">⬜ Blanca</div>
                             <h3>Caixa Blanca</h3>
-                            <p>L'auditor té <strong>accés total al codi font</strong> i documentació. És la més exhaustiva.</p>
+                            <p>L'auditor té <strong>accés total al codi font</strong> i documentació. És la més
+                                exhaustiva.</p>
                         </div>
                         <div class="test-type-card">
                             <div class="test-type-badge badge-blue">🔲 Grisa</div>
                             <h3>Caixa Grisa</h3>
-                            <p>L'auditor té <strong>permisos parcials</strong>, simulant un usuari intern o un client autenticat.</p>
+                            <p>L'auditor té <strong>permisos parcials</strong>, simulant un usuari intern o un client
+                                autenticat.</p>
                         </div>
                     </div>
 
@@ -346,9 +372,12 @@
                                 <h3>ASVS — Application Security Verification Standard</h3>
                                 <p>Defineix <strong>tres nivells de seguretat</strong>:</p>
                                 <ul class="concept-list" style="margin-top:0.6rem;">
-                                    <li><strong>Nivell 1 — Bàsic:</strong> Defenses mínimes per a qualsevol aplicació.</li>
-                                    <li><strong>Nivell 2 — Estàndard:</strong> Per a aplicacions que gestionen dades sensibles de negoci.</li>
-                                    <li><strong>Nivell 3 — Avançat/Crític:</strong> Per a aplicacions d'alta criticitat (bancs, salut).</li>
+                                    <li><strong>Nivell 1 — Bàsic:</strong> Defenses mínimes per a qualsevol aplicació.
+                                    </li>
+                                    <li><strong>Nivell 2 — Estàndard:</strong> Per a aplicacions que gestionen dades
+                                        sensibles de negoci.</li>
+                                    <li><strong>Nivell 3 — Avançat/Crític:</strong> Per a aplicacions d'alta criticitat
+                                        (bancs, salut).</li>
                                 </ul>
                             </div>
                         </div>
@@ -358,7 +387,8 @@
                             </div>
                             <div class="def-content-col">
                                 <h3>WSTG — Web Security Testing Guide</h3>
-                                <p>La <strong>guia tècnica d'OWASP</strong> per realitzar pentesting metòdic sobre aplicacions web. És la referència pràctica de qualsevol auditor.</p>
+                                <p>La <strong>guia tècnica d'OWASP</strong> per realitzar pentesting metòdic sobre
+                                    aplicacions web. És la referència pràctica de qualsevol auditor.</p>
                             </div>
                         </div>
                         <div class="definition-card">
@@ -367,7 +397,8 @@
                             </div>
                             <div class="def-content-col">
                                 <h3>OSSTMM — Open Source Security Testing Methodology Manual</h3>
-                                <p>Metodologia <strong>científica i estandarditzada</strong> per auditar la seguretat operativa i generar informes de resultats quantificables.</p>
+                                <p>Metodologia <strong>científica i estandarditzada</strong> per auditar la seguretat
+                                    operativa i generar informes de resultats quantificables.</p>
                             </div>
                         </div>
                     </div>
@@ -378,7 +409,8 @@
                             <div class="workflow-step-num">1</div>
                             <div class="workflow-step-body">
                                 <h4>🔎 Recopilació d'informació</h4>
-                                <p>Reconeixement passiu i actiu: dominis, tecnologies, ports oberts, empleats exposats (OSINT).</p>
+                                <p>Reconeixement passiu i actiu: dominis, tecnologies, ports oberts, empleats exposats
+                                    (OSINT).</p>
                             </div>
                         </div>
                         <div class="workflow-connector">▼</div>
@@ -386,7 +418,8 @@
                             <div class="workflow-step-num">2</div>
                             <div class="workflow-step-body">
                                 <h4>🔍 Escaneig i anàlisi de vulnerabilitats</h4>
-                                <p>Ús d'eines automatitzades (Nmap, ZAP, Nikto) per identificar vulnerabilitats candidates.</p>
+                                <p>Ús d'eines automatitzades (Nmap, ZAP, Nikto) per identificar vulnerabilitats
+                                    candidates.</p>
                             </div>
                         </div>
                         <div class="workflow-connector">▼</div>
@@ -394,7 +427,8 @@
                             <div class="workflow-step-num">3</div>
                             <div class="workflow-step-body">
                                 <h4>💥 Explotació</h4>
-                                <p>Confirmació del risc real: demostrar que la vulnerabilitat és explotable en condicions reals.</p>
+                                <p>Confirmació del risc real: demostrar que la vulnerabilitat és explotable en
+                                    condicions reals.</p>
                             </div>
                         </div>
                         <div class="workflow-connector">▼</div>
@@ -402,7 +436,8 @@
                             <div class="workflow-step-num">4</div>
                             <div class="workflow-step-body">
                                 <h4>📄 Informe</h4>
-                                <p>Documentació tècnica (per a l'equip de dev) i executiva (per a la direcció) amb recomanacions de mitigació.</p>
+                                <p>Documentació tècnica (per a l'equip de dev) i executiva (per a la direcció) amb
+                                    recomanacions de mitigació.</p>
                             </div>
                         </div>
                     </div>
@@ -423,14 +458,18 @@
                             <div class="nonfunc-icon nf-icon-auth">🇪🇺</div>
                             <div class="nonfunc-content">
                                 <h3>RGPD / LOPDGDD</h3>
-                                <p>Regula el tractament de dades personals. Exigeix la <strong>notificació de bretxes en 72 hores</strong>. Sancions de fins al <strong>4% del volum de negoci anual</strong>.</p>
+                                <p>Regula el tractament de dades personals. Exigeix la <strong>notificació de bretxes en
+                                        72 hores</strong>. Sancions de fins al <strong>4% del volum de negoci
+                                        anual</strong>.</p>
                             </div>
                         </div>
                         <div class="nonfunc-item">
                             <div class="nonfunc-icon nf-icon-authz">🛒</div>
                             <div class="nonfunc-content">
                                 <h3>LSSI-CE</h3>
-                                <p>Regula els serveis d'Internet i el comerç electrònic a Espanya. Exigeix l'<strong>Avís Legal</strong> (identificació del titular) i regula les comunicacions comercials (<strong>consentiment exprés opt-in</strong>).</p>
+                                <p>Regula els serveis d'Internet i el comerç electrònic a Espanya. Exigeix
+                                    l'<strong>Avís Legal</strong> (identificació del titular) i regula les comunicacions
+                                    comercials (<strong>consentiment exprés opt-in</strong>).</p>
                             </div>
                         </div>
                     </div>
@@ -440,17 +479,20 @@
                         <div class="test-type-card">
                             <div class="test-type-badge badge-red">PCI-DSS</div>
                             <h3>Seguretat en Pagaments</h3>
-                            <p>Obligatori per a qualsevol empresa que processi targetes de pagament. Xifrat del PAN obligatori.</p>
+                            <p>Obligatori per a qualsevol empresa que processi targetes de pagament. Xifrat del PAN
+                                obligatori.</p>
                         </div>
                         <div class="test-type-card">
                             <div class="test-type-badge badge-blue">ENS</div>
                             <h3>Sector Públic</h3>
-                            <p>Esquema Nacional de Seguretat. Marc <strong>obligatori</strong> per a les Administracions Públiques i els seus proveïdors TIC.</p>
+                            <p>Esquema Nacional de Seguretat. Marc <strong>obligatori</strong> per a les Administracions
+                                Públiques i els seus proveïdors TIC.</p>
                         </div>
                         <div class="test-type-card">
                             <div class="test-type-badge badge-green">ISO 27001</div>
                             <h3>SGSI</h3>
-                            <p>Estàndard per implementar un Sistema de Gestió de la Seguretat de la Informació amb millora contínua.</p>
+                            <p>Estàndard per implementar un Sistema de Gestió de la Seguretat de la Informació amb
+                                millora contínua.</p>
                         </div>
                     </div>
 
@@ -460,21 +502,24 @@
                             <span class="adv-icon">🔐</span>
                             <div class="adv-content">
                                 <h3>SSDLC</h3>
-                                <p>Secure Software Development Lifecycle: integració de la seguretat en cada fase del desenvolupament (disseny, codificació i proves).</p>
+                                <p>Secure Software Development Lifecycle: integració de la seguretat en cada fase del
+                                    desenvolupament (disseny, codificació i proves).</p>
                             </div>
                         </div>
                         <div class="advantage-item adv-green">
                             <span class="adv-icon">⚙️</span>
                             <div class="adv-content">
                                 <h3>DevSecOps</h3>
-                                <p>Automatització de les proves de seguretat (SAST, DAST) dins del pipeline de desplegament CI/CD.</p>
+                                <p>Automatització de les proves de seguretat (SAST, DAST) dins del pipeline de
+                                    desplegament CI/CD.</p>
                             </div>
                         </div>
                         <div class="advantage-item adv-purple">
                             <span class="adv-icon">🏆</span>
                             <div class="adv-content">
                                 <h3>Bug Bounty</h3>
-                                <p>Programes de recompenses per a hackers ètics que troben errors un cop l'aplicació ja és a producció.</p>
+                                <p>Programes de recompenses per a hackers ètics que troben errors un cop l'aplicació ja
+                                    és a producció.</p>
                             </div>
                         </div>
                     </div>
@@ -497,19 +542,23 @@
                 <div class="summary-grid">
                     <div class="summary-item">
                         <span class="summary-label">Tríada CIA + Extensions</span>
-                        <span class="summary-desc">Confidencialitat, Integritat, Disponibilitat + Autenticació, Autorització, Auditoria.</span>
+                        <span class="summary-desc">Confidencialitat, Integritat, Disponibilitat + Autenticació,
+                            Autorització, Auditoria.</span>
                     </div>
                     <div class="summary-item">
                         <span class="summary-label">Cub de McCumber</span>
-                        <span class="summary-desc">Creuant Objectius (CIA) × Estats (Storage/Tx/Processing) × Salvaguardes.</span>
+                        <span class="summary-desc">Creuant Objectius (CIA) × Estats (Storage/Tx/Processing) ×
+                            Salvaguardes.</span>
                     </div>
                     <div class="summary-item">
                         <span class="summary-label">OWASP Top 10</span>
-                        <span class="summary-desc">A01 Accés · A02 Crypto · A03 Injection · A04 Disseny · A06 Components · A07 Auth.</span>
+                        <span class="summary-desc">A01 Accés · A02 Crypto · A03 Injection · A04 Disseny · A06 Components
+                            · A07 Auth.</span>
                     </div>
                     <div class="summary-item">
                         <span class="summary-label">Pentesting</span>
-                        <span class="summary-desc">Caixa Negra/Blanca/Grisa. Fases: Reconeixement → Escaneig → Explotació → Informe.</span>
+                        <span class="summary-desc">Caixa Negra/Blanca/Grisa. Fases: Reconeixement → Escaneig →
+                            Explotació → Informe.</span>
                     </div>
                     <div class="summary-item">
                         <span class="summary-label">Marc Legal</span>
@@ -517,7 +566,8 @@
                     </div>
                     <div class="summary-item">
                         <span class="summary-label">Cicle Segur</span>
-                        <span class="summary-desc">SSDLC (disseny) + DevSecOps (pipeline) + Bug Bounty (producció).</span>
+                        <span class="summary-desc">SSDLC (disseny) + DevSecOps (pipeline) + Bug Bounty
+                            (producció).</span>
                     </div>
                 </div>
             </div>
