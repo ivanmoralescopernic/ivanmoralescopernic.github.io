@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Criptografia i Identitat Digital - M03 U3 Posada en Producció Segura">
+    <title>M03 U3·M7 – Criptografia i Identitat Digital</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><span>M3</span></div>
+            <span class="logo-text">U3·M7 – Criptografia i Identitat</span>
+        </div>
+        <nav class="nav">
+            <a href="teoriaM03U3Index.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Índex U3</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">TEORIA · SEGURETAT DADES</div>
+                <h1 class="page-title">Mòdul 7: Criptografia i Identitat Digital</h1>
+                <p class="page-subtitle">Implementació de canals segurs mitjançant HTTPS, gestió de certificats digitals
+                    i sistemes d'autenticació mútua.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 7.1 ===== -->
+            <section class="theory-section" id="section-7-1">
+                <div class="section-header-tag">
+                    <span class="section-number">7.1</span>
+                    <h2 class="section-title">HTTPS i TLS 1.3</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">L'HTTPS és el protocol estàndard per a la transmissió segura de dades a la
+                        web. Es basa en dues propietats fonamentals:</p>
+
+                    <div class="cia-triad">
+                        <div class="cia-card cia-confidentiality">
+                            <div class="cia-icon">🔒</div>
+                            <h3>Confidencialitat</h3>
+                            <p>Ofuscació de les dades mitjançant l'ús de <strong>clau pública i privada</strong>. Només
+                                el receptor pot llegir el missatge.</p>
+                        </div>
+                        <div class="cia-card cia-integrity">
+                            <div class="cia-icon">✅</div>
+                            <h3>Integritat</h3>
+                            <p>Garanteix que el missatge <strong>no ha estat manipulat</strong> durant el trànsit per la
+                                xarxa gràcies als algorismes de hash.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-blue" style="margin-top:1.5rem;">
+                        <span class="callout-icon">🚀</span>
+                        <div>
+                            <strong>TLS 1.3 i Port 443:</strong> És la versió més recent i segura del protocol, que
+                            opera normalment sobre el <strong>port 443</strong>. Millora la velocitat (reduint el nombre
+                            de "handshakes") i elimina algorismes de xifrat antics que havien esdevingut vulnerables.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder TLS 1.3 -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://www.cloudflare.com/learning/ssl/what-is-tls-1.3/" target="_blank"
+                            rel="noopener" class="img-link-wrapper" aria-label="Obrir recurs sobre TLS 1.3">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/tls-1-3-handshake.png" alt="Comparativa TLS 1.2 vs 1.3"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: TLS 1.3 Handshake (Speed & Security)</span>
+                                    <small>images/teoriaM03/tls-1-3-handshake.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: What is TLS 1.3? — cloudflare.com</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <p class="subsection-title">Automatització amb Let's Encrypt</p>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">1</div>
+                            <div class="workflow-step-body">
+                                <h4>🤖 Protocol ACME</h4>
+                                <p>Let's Encrypt automatitza l'obtenció de certificats gratuïts.</p>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">2</div>
+                            <div class="workflow-step-body">
+                                <h4>⚙️ Certbot</h4>
+                                <p>L'eina de referència per gestionar la renovació automàtica del certificat al
+                                    servidor.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 7.2 ===== -->
+            <section class="theory-section" id="section-7-2">
+                <div class="section-header-tag">
+                    <span class="section-number">7.2</span>
+                    <h2 class="section-title">El Procés de Certificació (CSR)</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">Per obtenir un certificat oficial, cal seguir un procés estandarditzat de
+                        sol·licitud i validació:</p>
+
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">1</div>
+                            <div class="workflow-step-body">
+                                <h4>🔑 Generació local</h4>
+                                <p>Es genera una clau privada que <strong>mai ha de sortir</strong> del servidor.</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector">▼</div>
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">2</div>
+                            <div class="workflow-step-body">
+                                <h4>📝 CSR (Certificate Signing Request)</h4>
+                                <p>Es crea una petició amb les dades del domini i la clau pública.</p>
+                            </div>
+                        </div>
+                        <div class="workflow-connector">▼</div>
+                        <div class="workflow-step">
+                            <div class="workflow-step-num">3</div>
+                            <div class="workflow-step-body">
+                                <h4>🏢 Validació de la CA</h4>
+                                <p>L'Autoritat de Certificació valida la propietat (Challenge) i signa el certificat
+                                    final.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder CSR -->
+                    <div class="image-placeholder image-placeholder-linked" style="margin-top: 2rem;">
+                        <a href="https://certbot.eff.org/" target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir Certbot">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/csr-workflow.png" alt="Flux de treball del CSR"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Esquema: Procés de CSR i Signatura</span>
+                                    <small>images/teoriaM03/csr-workflow.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Certbot (ACME Client) — certbot.eff.org</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="two-col-cards" style="margin-top: 2rem;">
+                        <div class="concept-card card-orange">
+                            <div class="concept-card-icon">📜</div>
+                            <h3>Tipus de Certificats</h3>
+                            <p><strong>DV:</strong> Validació de domini (bàsic).<br><strong>OV/EV:</strong> Validació
+                                d'organització/extesa (més confiança).</p>
+                        </div>
+                        <div class="concept-card card-red">
+                            <div class="concept-card-icon">🚨</div>
+                            <h3>OCSP</h3>
+                            <p>Protocol per verificar en <strong>temps real</strong> si un certificat ha estat revocat
+                                (per robatori de claus o pèrdua de confiança).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 7.3 ===== -->
+            <section class="theory-section" id="section-7-3">
+                <div class="section-header-tag">
+                    <span class="section-number">7.3</span>
+                    <h2 class="section-title">Identitat Digital i Autenticació Mútua (mTLS)</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="highlight-banner">
+                        <div class="highlight-banner-icon">🤝</div>
+                        <div>L'<strong>Autenticació Mútua</strong> garanteix que tant el servidor com el client
+                            s'identifiquen un a l'altre mitjançant certificats.</div>
+                    </div>
+
+                    <p class="section-text">A diferència de l'HTTPS convencional (on només t'assegures que la web és qui
+                        diu ser), el <strong>mTLS</strong> demana que l'usuari també presenti el seu propi certificat
+                        digital.</p>
+
+                    <p class="subsection-title">Exemples reals d'ús:</p>
+                    <div class="advantages-grid">
+                        <div class="advantage-item adv-purple">
+                            <span class="adv-icon">🏛️</span>
+                            <div class="adv-content">
+                                <h3>Administració Pública</h3>
+                                <p>L'ús del <strong>DNIe</strong>, l'<strong>idCAT</strong> o el certificat de la
+                                    <strong>FNMT</strong> per realitzar tràmits oficials amb la màxima seguretat legal.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="advantage-item adv-blue">
+                            <span class="adv-icon">🏦</span>
+                            <div class="adv-content">
+                                <h3>Banca i Cl@ve</h3>
+                                <p>Sistemes de signatura electrònica i accés a dades bancàries o fiscals on no es depèn
+                                    només d'una contrasenya (que pot ser robada).</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item adv-green">
+                            <span class="adv-icon">⚙️</span>
+                            <div class="adv-content">
+                                <h3>Zero Trust i APIs</h3>
+                                <p>Comunicació <strong>Microservei a Microservei</strong>. En infraestructures modernes,
+                                    els servidors s'identifiquen entre ells amb mTLS per evitar moviments laterals d'un
+                                    atacant.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-blue" style="margin-top:1.5rem;">
+                        <span class="callout-icon">💡</span>
+                        <div>
+                            <strong>Conclusió:</strong> L'autenticació basada en certificats és el nivell més alt de
+                            seguretat actual, ja que és immune al <em>phishing</em> tradicional de contrasenyes.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder mTLS -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://www.cloudflare.com/learning/access-management/what-is-mtls/" target="_blank"
+                            rel="noopener" class="img-link-wrapper" aria-label="Obrir recurs sobre mTLS">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/mtls-diagram.png" alt="Diagrama d'autenticació mútua mTLS"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: mTLS (Client ⟷ Server)</span>
+                                    <small>images/teoriaM03/mtls-diagram.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: What is Mutual TLS (mTLS)? — cloudflare.com</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 7.4 ===== -->
+            <section class="theory-section" id="section-7-4">
+                <div class="section-header-tag">
+                    <span class="section-number">7.4</span>
+                    <h2 class="section-title">Validació Final</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="highlight-banner">
+                        <div class="highlight-banner-icon">🔍</div>
+                        <div>Com sabem que el xifratge funciona realment?</div>
+                    </div>
+                    <p class="section-text" style="margin-top: 1rem;">La millor forma de comprovar-ho és utilitzar un
+                        sniffer de xarxa com <strong>Wireshark</strong>. Si el xifratge està ben configurat, Wireshark
+                        no serà capaç de llegir el contingut dels paquets, ja que apareixeran com a dades xifrades
+                        intel·ligibles.</p>
+
+                    <!-- Image placeholder Wireshark -->
+                    <div class="image-placeholder image-placeholder-linked" style="margin-top: 2rem;">
+                        <a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir Qualys SSL Test">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/wireshark-tls-capture.jpeg"
+                                    alt="Captura de Wireshark amb trànsit TLS" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Captura de dades xifrades</span>
+                                    <small>images/teoriaM03/wireshark-tls-capture.jpeg</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Eina: SSL Server Test — ssllabs.com</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <h2>🗂️ Resum: Criptografia i Identitat</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">TLS 1.3</span>
+                        <span class="summary-desc">Més ràpid i segur. Confidencialitat (claus) + Integritat
+                            (hash).</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Let's Encrypt</span>
+                        <span class="summary-desc">Certificats gratuïts i automàtics via protocol ACME i Certbot.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">CSR</span>
+                        <span class="summary-desc">Petició de signatura enviada a la CA sense revelar la clau
+                            privada.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">OCSP</span>
+                        <span class="summary-desc">Verificació en temps real de la revocació de certificats.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">mTLS</span>
+                        <span class="summary-desc">Autenticació bidireccional (DNIe, idCAT, FNMT, Microserveis).</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>

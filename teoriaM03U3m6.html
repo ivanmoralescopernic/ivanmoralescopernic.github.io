@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hardening d'Infraestructura Web - M03 U3 Posada en Producció Segura">
+    <title>M03 U3·M6 – Hardening d'Infraestructura Web</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><span>M3</span></div>
+            <span class="logo-text">U3·M6 – Hardening d'Infraestructura</span>
+        </div>
+        <nav class="nav">
+            <a href="teoriaM03U3Index.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Índex U3</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">TEORIA · INFRAESTRUCTURA</div>
+                <h1 class="page-title">Mòdul 6: Hardening d'Infraestructura Web</h1>
+                <p class="page-subtitle">Mesures de protecció a nivell de servidor d'aplicacions i xarxa per garantir un
+                    entorn de producció robust i segur.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 6.1 ===== -->
+            <section class="theory-section" id="section-6-1">
+                <div class="section-header-tag">
+                    <span class="section-number">6.1</span>
+                    <h2 class="section-title">Elecció de Frameworks i Servidors</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="two-col-cards">
+                        <div class="concept-card card-blue">
+                            <div class="concept-card-icon">🗓️</div>
+                            <h3>Versions LTS</h3>
+                            <p>En producció sempre s'han de triar versions <strong>LTS (Long Term Support)</strong> per
+                                garantir parxes de seguretat durant 3-5 anys.</p>
+                        </div>
+                        <div class="concept-card card-purple">
+                            <div class="concept-card-icon">🚀</div>
+                            <h3>Servidors d'Aplicacions</h3>
+                            <p>No s'usa el servidor de desenvolupament. S'utilitzen <strong>uWSGI, Gunicorn o
+                                    PHP-FPM</strong> amb especificacions WSGI/ASGI.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-amber" style="margin-top:1.5rem;">
+                        <span class="callout-icon">⚠️</span>
+                        <div>
+                            <strong>Regla d'or:</strong> Mai utilitzis servidors com <code>Django runserver</code> o
+                            <code>PHP -S</code> en entorns de producció; no estan dissenyats per ser segurs ni
+                            escalables.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder LTS -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://en.wikipedia.org/wiki/Long-term_support" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir recurs sobre LTS">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/lts-lifecycle.png" alt="Cicle de vida de versions LTS"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Cicle de vida LTS</span>
+                                    <small>images/teoriaM03/lts-lifecycle.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Long-term support — wikipedia.org</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 6.2 ===== -->
+            <section class="theory-section" id="section-6-2">
+                <div class="section-header-tag">
+                    <span class="section-number">6.2</span>
+                    <h2 class="section-title">Proxy Invers i WAF</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="compare-banner">
+                        <div class="compare-side compare-cyber">
+                            <div class="compare-icon">🛡️</div>
+                            <h3>Proxy Invers (Nginx/Apache)</h3>
+                            <p>Amaga la IP real del backend i centralitza SSL. Directiva clau: <code>proxy_pass</code>.</p>
+                        </div>
+                        <div class="compare-divider"><span>+</span></div>
+                        <div class="compare-side compare-info">
+                            <div class="compare-icon">🧱</div>
+                            <h3>WAF (Web Application Firewall)</h3>
+                            <p>Filtra peticions HTTP sospitoses (SQLi, XSS) usant eines com
+                                <strong>ModSecurity</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-blue" style="margin-top:1.5rem;">
+                        <span class="callout-icon">💡</span>
+                        <div>
+                            <strong>Eina de referència:</strong> ModSecurity amb el <strong>Core Rule Set (CRS)
+                                d'OWASP</strong> (signatures de patrons d'atac). Registra els atacs a <code>modsec_audit.log</code>.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder Proxy/WAF -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/" target="_blank"
+                            rel="noopener" class="img-link-wrapper" aria-label="Obrir recurs sobre Proxy Invers">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/Arquitectura-con-WAF-Nginx-Controller.webp"
+                                    alt="Esquema Proxy Invers i WAF" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Esquema: Proxy Invers + WAF</span>
+                                    <small>images/teoriaM03/Arquitectura-con-WAF-Nginx-Controller.webp</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: NGINX Reverse Proxy — nginx.com</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 6.3 ===== -->
+            <section class="theory-section" id="section-6-3">
+                <div class="section-header-tag">
+                    <span class="section-number">6.3</span>
+                    <h2 class="section-title">Rate Limiting i Docker</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="highlight-banner" style="margin-bottom: 1.5rem;">
+                        <div class="highlight-banner-icon">⏳</div>
+                        <div><strong>Rate Limiting (Nginx):</strong> Protecció contra abusos i DoS. Es configura amb <code>limit_req_zone</code> per definir el límit de peticions per IP.</div>
+                    </div>
+
+                    <div class="highlight-banner">
+                        <div class="highlight-banner-icon">📦</div>
+                        <div>L'ús de contenidors permet <strong>aïllar l'aplicació</strong> del sistema operatiu host,
+                            reduint la superfície d'atac.</div>
+                    </div>
+
+                    <p class="subsection-title">Bones pràctiques de seguretat en Docker:</p>
+                    <div class="nonfunc-list">
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-auth">🚫</div>
+                            <div class="nonfunc-content">
+                                <h3>No executar com a root</h3>
+                                <p>Configurar l'usuari <code>USER</code> dins del Dockerfile per evitar privilegis
+                                    excessius en cas de bretxa.</p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-authz">✅</div>
+                            <div class="nonfunc-content">
+                                <h3>Imatges oficials</h3>
+                                <p>Utilitzar imatges base verificades i mantenir-les actualitzades per evitar
+                                    vulnerabilitats conegudes.</p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-audit">🔑</div>
+                            <div class="nonfunc-content">
+                                <h3>Docker Secrets</h3>
+                                <p>Gestionar claus i dades sensibles mitjançant <strong>Secrets</strong> en lloc de
+                                    variables d'entorn en text pla.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder Docker Security -->
+                    <div class="image-placeholder image-placeholder-linked" style="margin-top: 2rem;">
+                        <a href="https://docs.docker.com/engine/security/" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir recurs sobre seguretat Docker">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/docker-security.png" alt="Seguretat en contenidors Docker"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Docker Security layers</span>
+                                    <small>images/teoriaM03/docker-security.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Docker Engine Security — docker.com</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <h2>🗂️ Resum: Hardening d'Infraestructura</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">LTS</span>
+                        <span class="summary-desc">Versions de suport a llarg termini (3-5 anys) per a producció.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">WSGI/ASGI</span>
+                        <span class="summary-desc">Servidors d'aplicacions robustos (Gunicorn, uWSGI) en lloc dels de
+                            dev.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Proxy Invers</span>
+                        <span class="summary-desc">Nginx/Apache per ocultar el backend i gestionar SSL de forma
+                            centralitzada.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">WAF</span>
+                        <span class="summary-desc">ModSecurity + OWASP CRS per filtrar atacs HTTP comuns (SQLi,
+                            XSS).</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Docker</span>
+                        <span class="summary-desc">Aïllament, usuaris non-root i gestió segura de secrets.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>

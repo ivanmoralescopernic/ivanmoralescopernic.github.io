@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Auditoria i Eines Pràctiques - M03 U3 Posada en Producció Segura">
+    <title>M03 U3·M8 – Auditoria i Eines (Ampliació Pràctica)</title>
+    <link rel="stylesheet" href="css/indexM03-style.css">
+    <link rel="stylesheet" href="css/teoriaM03-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><span>M3</span></div>
+            <span class="logo-text">U3·M8 – Auditoria i Eines</span>
+        </div>
+        <nav class="nav">
+            <a href="teoriaM03U3Index.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Índex U3</span>
+            </a>
+            <a href="indexM03.html" class="stars-count">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Inici</span>
+            </a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">TEORIA · AMPLIACIÓ PRÀCTICA</div>
+                <h1 class="page-title">Mòdul 8: Auditoria i Eines</h1>
+                <p class="page-subtitle">Diccionari tècnic de funcions de mitigació, metodologies de pentesting i
+                    l'estàndard OWASP ASVS per a la verificació de seguretat.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <!-- ===== SECCIÓ 8.1 ===== -->
+            <section class="theory-section" id="section-8-1">
+                <div class="section-header-tag">
+                    <span class="section-number">8.1</span>
+                    <h2 class="section-title">El concepte de Proxy Interceptor</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="highlight-banner">
+                        <div class="highlight-banner-icon">📡</div>
+                        <div>Aquestes eines es posicionen enmig de la comunicació
+                            (<strong>Man-in-the-Middle</strong>) entre el navegador de l'usuari i el servidor web.
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-amber" style="margin-top:1.5rem;">
+                        <span class="callout-icon">🔐</span>
+                        <div>
+                            <strong>Requisit per a HTTPS:</strong> Per poder veure el trànsit xifrat, cal instal·lar
+                            el <strong>Certificat Arrel (Root CA)</strong> de l'eina (ZAP o Burp) al navegador.
+                            Sense aquest pas, el navegador bloquejarà la connexió per seguretat.
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder Proxy -->
+                    <div class="image-placeholder image-placeholder-linked">
+                        <a href="https://portswigger.net/burp/documentation/desktop/getting-started/proxy-setup"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir guia de configuració de Proxy">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/proxy-interceptor.png" alt="Esquema de Proxy Interceptor"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Man-in-the-Middle Proxy</span>
+                                    <small>images/teoriaM03/proxy-interceptor.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Configuring your browser — portswigger.net</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 8.2 ===== -->
+            <section class="theory-section" id="section-8-2">
+                <div class="section-header-tag">
+                    <span class="section-number">8.2</span>
+                    <h2 class="section-title">OWASP ZAP (Zed Attack Proxy)</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">És l'eina de codi obert més popular per realitzar escanejos de seguretat
+                        automàtics i manuals.</p>
+
+                    <div class="definition-stack">
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-blue">🕷️</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Spider (Crawl)</h3>
+                                <p>Recorre la web automàticament per trobar tots els fitxers, formularis i rutes
+                                    ocultes, creant un mapa del lloc.</p>
+                            </div>
+                        </div>
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-red">⚡</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Active Scan (Audit)</h3>
+                                <p>Llança atacs reals (SQLi, XSS, Path Traversal) contra l'aplicació per verificar
+                                    si les vulnerabilitats són explotables.</p>
+                            </div>
+                        </div>
+                        <div class="definition-card">
+                            <div class="def-icon-col">
+                                <div class="def-icon def-icon-orange">🚨</div>
+                            </div>
+                            <div class="def-content-col">
+                                <h3>Alertes</h3>
+                                <p>Classifica automàticament els errors trobats segons la seva gravetat:
+                                    <strong>Alt, Mitjà, Baix i Informatiu</strong>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image placeholder ZAP -->
+                    <div class="image-placeholder image-placeholder-linked" style="margin-top: 2rem;">
+                        <a href="https://www.zaproxy.org/getting-started/" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir guia d'inici de ZAP">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/owasp-zap-alerts.jpg" alt="Interfície d'alertes d'OWASP ZAP"
+                                    class="theory-img"
+                                    onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Alertes i Spider a ZAP</span>
+                                    <small>images/teoriaM03/owasp-zap-alerts.jpg</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>Llegir més: Getting Started — zaproxy.org</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 8.3 ===== -->
+            <section class="theory-section" id="section-8-3">
+                <div class="section-header-tag">
+                    <span class="section-number">8.3</span>
+                    <h2 class="section-title">Burp Suite (Mòduls clau)</h2>
+                </div>
+
+                <div class="section-body">
+                    <p class="section-text">L'estàndard professional de la indústria. Se centra en el control
+                        detallat de cada petició HTTP.</p>
+
+                    <div class="advantages-grid">
+                        <div class="advantage-item adv-orange">
+                            <span class="adv-icon">🛑</span>
+                            <div class="adv-content">
+                                <h3>Proxy / Intercept</h3>
+                                <p>Permet aturar una petició en temps real, modificar-ne les dades (com preus o
+                                    cookies) i després alliberar-la cap al servidor.</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item adv-blue">
+                            <span class="adv-icon">🔁</span>
+                            <div class="adv-content">
+                                <h3>Repeater</h3>
+                                <p>Serveix per tornar a enviar la mateixa petició moltes vegades modificant
+                                    paràmetres manualment per provar diferents respostes ràpidament.</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item adv-red">
+                            <span class="adv-icon">🎯</span>
+                            <div class="adv-content">
+                                <h3>Intruder</h3>
+                                <p>S'usa per a atacs automatitzats: força bruta de contrasenyes o <em>fuzzing</em>
+                                    (enviar milers de caràcters estranys per verure on trenca).</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item adv-green">
+                            <span class="adv-icon">🔢</span>
+                            <div class="adv-content">
+                                <h3>Decoder</h3>
+                                <p>Permet codificar/decodificar dades en <strong>Base64, URL encode o
+                                        Hexadecimal</strong>. Vital per a atacs LFI i injeccions complexes.</p>
+                            </div>
+                        </div>
+                        <div class="advantage-item adv-cyber">
+                            <span class="adv-icon">🛠️</span>
+                            <div class="adv-content">
+                                <h3>curl</h3>
+                                <p>Eina de terminal fonamental per fer peticions HTTP ràpides (com POST o GET) i
+                                    testejar respostes del servidor manualment.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-callout callout-blue" style="margin-top:1.5rem;">
+                        <span class="callout-icon">📋</span>
+                        <div>
+                            <strong>Objectiu de l'Auditoria:</strong> El resultat final de l'ús de ZAP o Burp ha de
+                            ser un <strong>Informe d'Auditoria</strong> que documenti totes les vulnerabilitats
+                            detectades per a la seva correcció.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓ 8.4 ===== -->
+            <section class="theory-section" id="section-8-4">
+                <div class="section-header-tag">
+                    <span class="section-number">8.4</span>
+                    <h2 class="section-title">Mitigació des del Codi (Resum)</h2>
+                </div>
+
+                <div class="section-body">
+                    <div class="highlight-banner">
+                        <div class="highlight-banner-icon">💻</div>
+                        <div>Funcions de PHP imprescindibles per corregir els errors trobats amb ZAP o Burp.</div>
+                    </div>
+
+                    <div class="nonfunc-list">
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-auth">🛡️</div>
+                            <div class="nonfunc-content">
+                                <h3>htmlspecialchars()</h3>
+                                <p>Converteix el codi perillós (com <code>&lt;script&gt;</code>) en text inofensiu
+                                    (entitats HTML) per evitar el XSS.</p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-authz">✅</div>
+                            <div class="nonfunc-content">
+                                <h3>filter_var()</h3>
+                                <p>Valida que els inputs (emails, URLs) tinguin el format correcte, evitant
+                                    injeccions de rutes malicioses.</p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-audit">🔄</div>
+                            <div class="nonfunc-content">
+                                <h3>session_regenerate_id(true)</h3>
+                                <p>Canvia l'ID de sessió en fer el login. Això invalida qualsevol ID robat
+                                    prèviament per un atacant (evita <strong>Fixació de Sessió</strong>).</p>
+                            </div>
+                        </div>
+                        <div class="nonfunc-item">
+                            <div class="nonfunc-icon nf-icon-auth">🍪</div>
+                            <div class="nonfunc-content">
+                                <h3>Flags de Cookies</h3>
+                                <p><strong>HttpOnly:</strong> Impedeix que JavaScript llegeixi la cookie (mitiga
+                                    XSS).<br><strong>Secure:</strong> La cookie només s'envia per connexions
+                                    xifrades (HTTPS).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Card -->
+            <div class="summary-card">
+                <h2>🗂️ Resum: Eines d'Auditoria</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Root CA</span>
+                        <span class="summary-desc">Necessari per desxifrar HTTPS al navegador des del Proxy.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">ZAP Spider</span>
+                        <span class="summary-desc">Mapeja l'aplicació cercant fitxers i rutes.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">ZAP Active Scan</span>
+                        <span class="summary-desc">Llança atacs automàtics de seguretat (SQLi, XSS).</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Burp Repeater</span>
+                        <span class="summary-desc">Re-enviament manual de peticions modificades.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Burp Intruder</span>
+                        <span class="summary-desc">Automatització de força bruta i fuzzing.</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Mitigació</span>
+                        <span class="summary-desc">PHP: htmlspecialchars (XSS), filter_var (Validació),
+                            session_regenerate (Sessió).</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">CSRF</span>
+                        <span class="summary-desc">Risc: Accions no autoritzades. Atenció: El mètode
+                            <strong>GET</strong> sol ser el més usat per saltar-se proteccions si no hi ha
+                            tokens.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/indexM03-script.js"></script>
+    <script src="js/teoriaM03-script.js"></script>
+</body>
+
+</html>
