@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Seguretat en el Correu Electrònic - M03 U3 Posada en Producció Segura">
-    <title>M03 U3·M9 – Seguretat en el Correu Electrònic</title>
+    <title>M03 U3·M9 – Seguretat Integral en el Correu</title>
     <link rel="stylesheet" href="css/indexM03-style.css">
     <link rel="stylesheet" href="css/teoriaM03-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,6 @@
     <div class="floating-circle circle-1"></div>
     <div class="floating-circle circle-2"></div>
 
-    <!-- Header -->
     <header class="header">
         <div class="logo">
             <div class="logo-icon"><span>M3</span></div>
@@ -26,8 +25,7 @@
         </div>
         <nav class="nav">
             <a href="teoriaM03U3Index.html" class="stars-count">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                    stroke-linecap="round" stroke-linejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                 </svg>
@@ -39,7 +37,7 @@
                 </svg>
                 <span>Inici</span>
             </a>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Canviar tema">
+            <button id="theme-toggle" class="theme-toggle">
                 <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2">
                     <circle cx="12" cy="12" r="5"></circle>
@@ -60,327 +58,265 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-
-            <!-- Page Header -->
             <div class="page-header">
-                <div class="page-tag">TEORIA · SERVEIS DE XARXA</div>
-                <h1 class="page-title">Mòdul 9: Seguretat en el Correu</h1>
-                <p class="page-subtitle">Arquitectura de correu, protocols de transport segur i mecanismes DNS antifrau
-                    (SPF, DKIM, DMARC) per a una posada en producció professional.</p>
+                <div class="page-tag">TEORIA · SERVEIS DE XARXA M3</div>
+                <h1 class="page-title">Mòdul 9: Seguretat en el Correu Electrònic</h1>
+                <p class="page-subtitle">Guia integral des de l'arquitectura teòrica fins a la posada en producció
+                    segura en el món real.</p>
             </div>
 
-            <!-- Progress Bar -->
             <div class="progress-bar-container">
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
 
-            <!-- ===== SECCIÓ 9.1 ===== -->
+            <!-- 9.1 Arquitectura i Agents -->
             <section class="theory-section" id="section-9-1">
-                <div class="section-header-tag">
-                    <span class="section-number">9.1</span>
+                <div class="section-header-tag"><span class="section-number">9.1</span>
                     <h2 class="section-title">Arquitectura i Agents</h2>
                 </div>
-
                 <div class="section-body">
-                    <p class="section-text">A diferència de la web (HTTP), el correu electrònic és un sistema
-                        descentralitzat que depèn de diversos agents especialitzats que es passen el missatge com un
-                        relleu:</p>
-
+                    <p class="section-text">A diferència de la web (HTTP), el correu és un sistema descentralitzat on
+                        diferents agents s'encarreguen de "passar el relleu" al missatge:</p>
                     <div class="advantages-grid">
                         <div class="advantage-item adv-blue">
                             <span class="adv-icon">📤</span>
                             <div class="adv-content">
                                 <h3>MTA (Mail Transport Agent)</h3>
-                                <p>El servidor encarregat d'enviar i rebre correus entre dominis. Exemples:
-                                    <strong>Postfix</strong>, Exim.</p>
+                                <p>El "transportista" que envia i rep correus entre dominis. Un cop troba el destí via
+                                    DNS (MX), entrega el missatge.</p>
+                                <p><strong>Exemples:</strong> Postfix, Exim, Sendmail.</p>
                             </div>
                         </div>
                         <div class="advantage-item adv-purple">
                             <span class="adv-icon">📥</span>
                             <div class="adv-content">
                                 <h3>MDA (Mail Delivery Agent)</h3>
-                                <p>Rep el correu del MTA i l'entrega a la bústia de l'usuari local. Exemple:
-                                    <strong>Dovecot</strong>.</p>
+                                <p>Rep el correu de l'MTA i el desa físicament a la bústia local de l'usuari (sistema de
+                                    fitxers).</p>
+                                <p><strong>Exemples:</strong> Dovecot, Procmail.</p>
                             </div>
                         </div>
                         <div class="advantage-item adv-green">
                             <span class="adv-icon">💻</span>
                             <div class="adv-content">
                                 <h3>MUA (Mail User Agent)</h3>
-                                <p>El client que usa l'usuari final per llegir i escriure. Exemples: Thunderbird,
-                                    Outlook, Gmail.</p>
+                                <p>El client final que usa l'usuari per interactuar amb el seu correu.</p>
+                                <p><strong>Exemples:</strong> Thunderbird, Outlook, Gmail Web.</p>
                             </div>
                         </div>
                     </div>
 
-                    <p class="subsection-title">Protocols de Lectura:</p>
-                    <div class="two-col-cards">
-                        <div class="concept-card card-blue">
-                            <h3>IMAP (Port 143/993)</h3>
-                            <p>Gestió remota en carpetes. El correu roman al servidor. És l'estàndard actual per a
-                                multi-dispositiu.</p>
+                    <p class="subsection-title" style="margin-top:2rem;">📥 Protocols de Lectura (Recuperació de
+                        Missatges)</p>
+                    <div class="theory-grid">
+                        <div class="concept-card card-purple">
+                            <h3>IMAP (Ports 143 / 993)</h3>
+                            <p><strong>Gestió remota:</strong> El correu es manté al servidor. Ideal per sincronitzar
+                                múltiples dispositius alhora.</p>
                         </div>
-                        <div class="concept-card card-dark">
-                            <h3>POP3 (Port 110/995)</h3>
-                            <p>Descarrega el correu i l'esborra del servidor. En desús, ja que no permet sincronitzar
-                                diversos dispositius.</p>
+                        <div class="concept-card card-orange">
+                            <h3>POP3 (Ports 110 / 995)</h3>
+                            <p><strong>Descarrega i esborra:</strong> Pensat per a usuaris amb un sol dispositiu. En
+                                desús majoritari.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ===== SECCIÓ 9.2 ===== -->
+            <!-- 9.2 SSL vs STARTTLS -->
             <section class="theory-section" id="section-9-2">
-                <div class="section-header-tag">
-                    <span class="section-number">9.2</span>
-                    <h2 class="section-title">SSL vs STARTTLS</h2>
+                <div class="section-header-tag"><span class="section-number">9.2</span>
+                    <h2 class="section-title">Seguretat de Transport (SSL vs STARTTLS)</h2>
                 </div>
-
                 <div class="section-body">
-                    <div class="highlight-banner">
-                        <div class="highlight-banner-icon">🔐</div>
-                        <div>El correu original (SMTP port 25) viatja en <strong>text pla</strong>. Per protegir-lo
-                            existeixen dues estratègies:</div>
-                    </div>
-
-                    <div class="definition-stack">
-                        <div class="definition-card">
-                            <div class="def-icon-col">
-                                <div class="def-icon def-icon-blue">🛡️</div>
-                            </div>
-                            <div class="def-content-col">
-                                <h3>SSL/TLS Implícit</h3>
-                                <p>Es crea un canal segur <strong>abans</strong> de començar qualsevol comunicació. És
-                                    més segur ja que no permet caure en text pla per error. Ports: 465 (SMTPS), 993
-                                    (IMAPS).</p>
-                            </div>
+                    <p class="section-text">El correu original (SMTP port 25) viatja en <strong>text pla</strong>. Per
+                        protegir-lo hi ha dues estratègies fonamentals:</p>
+                    <div class="theory-grid">
+                        <div class="info-box card-blue">
+                            <h3>🛡️ SSL/TLS Implícit</h3>
+                            <p>Es crea un canal xifrat <strong>abans</strong> de començar qualsevol dada. És més robust
+                                perquè si el xifrat falla, la connexió es talla immediatament i no hi ha fugida de
+                                dades.</p>
+                            <p><strong>Ports estàndard:</strong> 465 (SMTPS), 993 (IMAPS), 995 (POPS).</p>
                         </div>
-                        <div class="definition-card">
-                            <div class="def-icon-col">
-                                <div class="def-icon def-icon-orange">⚡</div>
-                            </div>
-                            <div class="def-content-col">
-                                <h3>STARTTLS (TLS Oportunista)</h3>
-                                <p>La connexió comença en text pla i, si ambdós servidors ho suporten, s'eleva a xifrat
-                                    mitjançant la comanda <code>STARTTLS</code>. S'usa molt als ports 587 i 25.</p>
-                            </div>
+                        <div class="info-box card-orange">
+                            <h3>⚡ STARTTLS (TLS Oportunista)</h3>
+                            <p>La connexió comença en text pla i "s'eleva" a segur mitjançant una comanda. És compatible
+                                amb sistemes antics.</p>
+                            <p><strong>Ports estàndard:</strong> 587 (Submission) i 25.</p>
                         </div>
                     </div>
-
-                    <div class="info-callout callout-amber">
-                        <span class="callout-icon">⚠️</span>
-                        <div>
-                            <strong>Risc de STARTTLS:</strong> Un atacant podria fer un atac de "downgrade" eliminant la
-                            comanda STARTTLS del trànsit, forçant la comunicació a continuar en text pla sense que
-                            ningú se n'adoni.
+                    <div class="info-callout"
+                        style="border-left: 4px solid var(--accent-red); background: rgba(239, 68, 68, 0.05); margin-top: 1.5rem;">
+                        <span class="callout-icon">🚨</span>
+                        <div class="callout-content">
+                            <h4>Risc d'Atac: Downgrade (STRIPTLS)</h4>
+                            <p>Un atacant (Man-in-the-Middle) pot eliminar o bloquejar la comanda <code>STARTTLS</code>
+                                durant la fase inicial. Això força els servidors a seguir parlant en text pla sense que
+                                l'usuari ho sospiti, permetent la captura de contrasenyes.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ===== SECCIÓ 9.3 ===== -->
+            <!-- 9.3 Mecanismes Antifrau DNS -->
             <section class="theory-section" id="section-9-3">
-                <div class="section-header-tag">
-                    <span class="section-number">9.3</span>
+                <div class="section-header-tag"><span class="section-number">9.3</span>
                     <h2 class="section-title">Mecanismes Antifrau (DNS)</h2>
                 </div>
-
                 <div class="section-body">
-                    <p class="section-text">Aquesta és la part <strong>més crítica</strong> per a la producció. Són
-                        registres de tipus <strong>TXT</strong> al DNS:</p>
+                    <p class="section-text">La part més crítica per evitar el <strong>Spoofing</strong>. Són registres
+                        de tipus <code>TXT</code> que permeten al receptor validar qui ets:</p>
 
                     <div class="nonfunc-list">
                         <div class="nonfunc-item">
                             <div class="nonfunc-icon nf-icon-1">📋</div>
                             <div class="nonfunc-content">
                                 <h3>SPF (Sender Policy Framework)</h3>
-                                <p>Llista de les <strong>IPs autoritzades</strong> a enviar correu en nom del teu
-                                    domini. Evita que tercers enviïn correus fent-se passar per tu (Spoofing).</p>
+                                <p>Llista blanca d'IPs. <strong>Exemple:</strong> <code>v=spf1 ip4:1.2.3.4 -all</code>.
+                                    Diu que només la IP 1.2.3.4 pot enviar correu pel teu domini.</p>
                             </div>
                         </div>
                         <div class="nonfunc-item">
                             <div class="nonfunc-icon nf-icon-2">✍️</div>
                             <div class="nonfunc-content">
                                 <h3>DKIM (DomainKeys Identified Mail)</h3>
-                                <p>Afegeix una <strong>signatura digital</strong> a cada correu. El receptor verifica la
-                                    integritat del missatge usant la clau pública publicada al DNS.</p>
+                                <p>Signatura digital a la capçalera. Si el contingut del correu canvia durant el viatge,
+                                    la signatura es trenca, garantint la <strong>integritat</strong>.</p>
                             </div>
                         </div>
                         <div class="nonfunc-item">
                             <div class="nonfunc-icon nf-icon-3">⚖️</div>
                             <div class="nonfunc-content">
                                 <h3>DMARC</h3>
-                                <p>L'orquestrador. Indica al receptor què ha de fer si SPF o DKIM fallen:
-                                    <code>none</code> (ignorar), <code>quarantine</code> (spam) o <code>reject</code>
-                                    (rebutjar).</p>
+                                <p>L'orquestrador. Defineix la política de seguretat: <code>p=reject</code> (rebutja si
+                                    falla SPF/DKIM) o <code>p=quarantine</code> (envia a Spam).</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="image-placeholder image-placeholder-linked" style="margin-top: 1.5rem;">
-                        <a href="https://www.mail-tester.com/" target="_blank" rel="noopener" class="img-link-wrapper">
+                    <div class="image-placeholder image-placeholder-linked" style="margin-top:2rem;">
+                        <a href="https://www.mail-tester.com/" target="_blank" class="img-link-wrapper">
                             <div class="img-placeholder-inner">
-                                <img src="images/teoriaM03/mail-tester-result.png" alt="Exemple de validació DNS de correu"
-                                    class="theory-img"
+                                <img src="images/teoriaM03/mail-tester-result.jpg" alt="Mail Tester" class="theory-img"
                                     onerror="this.parentElement.classList.add('img-missing'); this.style.display='none';">
-                                <div class="img-placeholder-label">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="1.5">
-                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                    </svg>
-                                    <span>Eina: Mail-tester.com (Audit DNS)</span>
-                                    <small>Configuració SPF/DKIM/DMARC</small>
-                                </div>
+                                <div class="img-placeholder-label"><span>Audit DNS - Mail-tester.com</span></div>
                             </div>
-                            <div class="img-link-bar">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15 3 21 3 21 9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                                <span>Provar ara: Mail-tester — Comprova la teva puntuació</span>
-                            </div>
+                            <div class="img-link-bar"><span>Simular Auditoria de Domini</span></div>
                         </a>
                     </div>
                 </div>
             </section>
 
-            <!-- ===== SECCIÓ 9.4 ===== -->
+            <!-- 9.4 Hardening i Protecció de Contingut -->
             <section class="theory-section" id="section-9-4">
-                <div class="section-header-tag">
-                    <span class="section-number">9.4</span>
-                    <h2 class="section-title">Protecció de Contingut</h2>
+                <div class="section-header-tag"><span class="section-number">9.4</span>
+                    <h2 class="section-title">Protecció de Contingut i Hardening</h2>
                 </div>
-
                 <div class="section-body">
-                    <p class="section-text">Un cop la identitat està verificada, cal analitzar el contingut del missatge
-                        per evitar amenaces:</p>
+                    <div class="info-box" style="margin-bottom: 2rem;">
+                        <h3>🛡️ Blindatge del Servidor (Hardening)</h3>
+                        <p>No n'hi ha prou amb xifrar, cal configurar el programari (Postfix/Dovecot) correctament:</p>
+                        <ul class="clean-list" style="margin-top: 1rem;">
+                            <li><strong>🚫 No Open Relay:</strong> Només permetre enviar correus a usuaris que s'hagin
+                                autenticat prèviament (SMTP Auth).</li>
+                            <li><strong>�️ Fail2ban:</strong> Monitoritza els logs d'error i bloqueja automàticament IPs
+                                que intenten fer força bruta contra les bústies.</li>
+                            <li><strong>📊 Monitoring:</strong> Analitzar fitxers de log periòdicament:
+                                <code>/var/log/mail.log</code> o <code>journalctl -u postfix</code>.</li>
+                        </ul>
+                    </div>
 
-                    <div class="two-col-cards">
-                        <div class="concept-card card-red">
-                            <div class="concept-card-icon">🦠</div>
+                    <div class="theory-grid">
+                        <div class="concept-card card-green">
                             <h3>Antivirus (ClamAV)</h3>
-                            <p>Analitza binaris i fitxers adjunts cercant signatures de malware, virus o ransomware.
-                                Essencial per protegir els clients finals.</p>
+                            <p>Analitza binaris i adjunts buscant malware. Es testeja amb la signatura estàndard
+                                <strong>EICAR</strong>.</p>
                         </div>
-                        <div class="concept-card card-orange">
-                            <div class="concept-card-icon">🚫</div>
-                            <h3>Antispam (Spamassassin)</h3>
-                            <p>Usa filtres Bayesians i consulta <strong>Blacklists</strong> (RBL) per decidir si un
-                                correu és brossa segons la reputació de l'IP emissora.</p>
+                        <div class="concept-card card-red">
+                            <h3>Antispam (SpamAssassin)</h3>
+                            <p>Usa filtres de puntuació per detectar patrons de brossa i consulta Blacklists (RBL) en
+                                temps real.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ===== SECCIÓ 9.5 ===== -->
+            <!-- 9.5 Requisits de Producció -->
             <section class="theory-section" id="section-9-5">
-                <div class="section-header-tag">
-                    <span class="section-number">9.5</span>
-                    <h2 class="section-title">Requisits de Producció</h2>
+                <div class="section-header-tag"><span class="section-number">9.5</span>
+                    <h2 class="section-title">Requisits de Producció (Món Real)</h2>
                 </div>
-
                 <div class="section-body">
-                    <div class="highlight-banner">
-                        <div class="highlight-banner-icon">🏗️</div>
-                        <div>No es pot muntar un servidor de correu en qualsevol lloc. Calen uns fonaments sòlids:</div>
-                    </div>
-
-                    <div class="nonfunc-list">
-                        <div class="nonfunc-item">
-                            <div class="nonfunc-icon nf-icon-2">📍</div>
-                            <div class="nonfunc-content">
-                                <h3>IP Estàtica i Neta</h3>
-                                <p>Les IPs dinàmiques estan bloquejades per defecte. A més, cal que la IP no estigui en
-                                    cap llista negra (Spamhaus, Barracuda).</p>
-                            </div>
-                        </div>
-                        <div class="nonfunc-item">
-                            <div class="nonfunc-icon nf-icon-3">🔓</div>
-                            <div class="nonfunc-content">
-                                <h3>Port 25 Obert</h3>
-                                <p>Molts proveïdors (AWS, Azure) el tanquen per defecte. Cal demanar l'aprovació
-                                    explícita per poder intercanviar correus entre MTA.</p>
-                            </div>
-                        </div>
-                        <div class="nonfunc-item">
-                            <div class="nonfunc-icon nf-icon-1">🗺️</div>
-                            <div class="nonfunc-content">
-                                <h3>Registre MX i rDNS</h3>
-                                <p>El MX indica qui rep el correu. El <strong>rDNS (PTR)</strong> és vital: la IP ha de
-                                    resoldre al nom del domini per ser acceptat per Gmail/Outlook.</p>
-                            </div>
+                    <p class="section-text">En producció, el servidor necessita un "currículum" impecable per no ser
+                        bloquejat:</p>
+                    <div class="theory-grid" style="grid-template-columns: 1fr;">
+                        <div class="info-box">
+                            <ul class="clean-list">
+                                <li><i data-lucide="check-circle" style="color:var(--accent-blue);"></i> <strong>IP
+                                        Estàtica i Neta:</strong> Imprescindible. Els grans proveïdors bloquegen el port
+                                    25 per defecte per evitar "spambots" en núvols.</li>
+                                <li><i data-lucide="check-circle" style="color:var(--accent-blue);"></i>
+                                    <strong>Registre PTR (Reverse DNS):</strong> Vital. La IP ha de resoldre al nom del
+                                    teu servidor de correu (ex: 1.2.3.4 -> mail.elteudomini.com).</li>
+                                <li><i data-lucide="check-circle" style="color:var(--accent-blue);"></i>
+                                    <strong>Registre MX:</strong> Configurar el DNS per indicar al món que el teu
+                                    servidor és qui rep el correu del domini.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ===== SECCIÓ 9.6 ===== -->
+            <!-- 9.6 Solucions en Contenidors -->
             <section class="theory-section" id="section-9-6">
-                <div class="section-header-tag">
-                    <span class="section-number">9.6</span>
-                    <h2 class="section-title">Solucions en Contenidors</h2>
+                <div class="section-header-tag"><span class="section-number">9.6</span>
+                    <h2 class="section-title">Solucions en Contenidors (Docker)</h2>
                 </div>
-
                 <div class="section-body">
-                    <p class="section-text">Configurar Postfix + Dovecot + Spamassassin + ClamAV a mà és extremadament
-                        complex. En producció moderna s'usen solucions empaquetades en Docker:</p>
-
-                    <div class="advantages-grid">
-                        <div class="advantage-item adv-blue">
-                            <span class="adv-icon">🐋</span>
-                            <div class="adv-content">
-                                <h3>Mailu.io</h3>
-                                <p>Una suite completa, modular i fàcil de configurar mitjançant un assistent web.</p>
-                            </div>
-                        </div>
-                        <div class="advantage-item adv-green">
-                            <span class="adv-icon">🐳</span>
-                            <div class="adv-content">
-                                <h3>Docker-mailserver</h3>
-                                <p>Una sola imatge que conté tota la "stack" de seguretat configurada per defecte.</p>
-                            </div>
-                        </div>
+                    <p class="section-text">Configurar Postfix+Dovecot+Spam+Virus a mà és extremadament complex. Per
+                        això usem solucions "stack" d'una sola peça:</p>
+                    <div style="overflow-x: auto; margin-top: 1.5rem;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid var(--border-color); color: var(--accent-blue);">
+                                    <th style="padding: 1rem;">Solució</th>
+                                    <th style="padding: 1rem;">Enfocament</th>
+                                    <th style="padding: 1rem;">Admin UI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><strong>Mailu.io</strong></td>
+                                    <td style="padding: 1rem;">Modular (un contenidor per servei)</td>
+                                    <td style="padding: 1rem;">Web interface moderna i ràpida</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem;"><strong>Docker-mailserver</strong></td>
+                                    <td style="padding: 1rem;">Stack clàssica en una sola imatge</td>
+                                    <td style="padding: 1rem;">Línia de comandes (CLI) robusta</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
 
-            <!-- Summary Card -->
             <div class="summary-card">
-                <h2>🗂️ Resum: Seguretat Correu</h2>
+                <h2>🗂️ Resum Ràpid de Serveis i Ports</h2>
                 <div class="summary-grid">
-                    <div class="summary-item">
-                        <span class="summary-label">MTA / MDA / MUA</span>
-                        <span class="summary-desc">Postfix (Mou) / Dovecot (Entrega) / Thunderbird (Usuari).</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">Ports Clau</span>
-                        <span class="summary-desc">25 (SMTP), 587 (Submission), 465 (SMTPS), 993 (IMAPS).</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">SPF (TXT)</span>
-                        <span class="summary-desc">Llista blanca d'IPs autoritzades per enviar.</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">DKIM (TXT)</span>
-                        <span class="summary-desc">Signatura digital per garantir la integritat del missatge.</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">DMARC (TXT)</span>
-                        <span class="summary-desc">Decideix què fer si SPF o DKIM fallen (Reject/Quarantine).</span>
-                    </div>
-                    <div class="summary-item">
-                        <span class="summary-label">Requisit Vital</span>
-                        <span class="summary-desc">IP Estàtica + rDNS (PTR) + Registre MX al DNS.</span>
-                    </div>
+                    <div class="summary-item"><span class="summary-label">MTA (Postfix)</span><span
+                            class="summary-desc">Envia i rep correu entre servidors (Ports 25, 465, 587).</span></div>
+                    <div class="summary-item"><span class="summary-label">MDA (Dovecot)</span><span
+                            class="summary-desc">Gestiona bústies i lectura d'usuaris (Ports 143, 993).</span></div>
+                    <div class="summary-item"><span class="summary-label">SPF/DKIM/DMARC</span><span
+                            class="summary-desc">Trio de seguretat DNS per evitar Spoofing i Spam.</span></div>
+                    <div class="summary-item"><span class="summary-label">PTR (Reverse DNS)</span><span
+                            class="summary-desc">Validació d'identitat de l'IP del servidor.</span></div>
                 </div>
             </div>
-
         </div>
     </main>
 
