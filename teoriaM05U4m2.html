@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M05 U4·M2 – Extracció de Credencials i Cracking</title>
+    <meta name="description"
+        content="Teoria sobre l'Extracció de Credencials i Cracking en Windows - M05 Seguretat Informàtica">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="css/teoriaM05.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="stars-container" id="stars"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-at">Hacking Etic</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hashes">Hashes</a></li>
+                <li><a href="#sam">SAM</a></li>
+                <li><a href="#lsass">LSASS</a></li>
+                <li><a href="#cracking">Cracking</a></li>
+                <li><a href="#resum" class="nav-connect">Resum</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="badge">M05: Seguretat Informàtica · Unitat 4</div>
+                <h1 class="hero-title">
+                    Extracció i Cracking<br>
+                    <span class="accent-text">The Keymaker</span>
+                </h1>
+                <p class="hero-subtitle">Obtenint les "claus del regne" per al moviment lateral</p>
+                <div class="scroll-indicator">
+                    <i data-lucide="chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-container">
+
+            <!-- Section 2 Intro -->
+            <section id="hashes" class="content-section">
+                <div class="glass-card">
+                    <div class="page-tag" style="color: var(--accent-purple); font-weight: 700; margin-bottom: 1rem;">
+                        TEORIA · RECOL·LECCIÓ DE DADES</div>
+                    <h2>SECCIÓ 2: Extracció de Credencials i Cracking</h2>
+                    <p>Un cop obtinguts els privilegis de SYSTEM, l'auditoria passa de la màquina local a l'objectiu de
+                        xarxa. Per moure'ns lateralment, necessitem les "claus del regne": les credencials dels
+                        administradors emmagatzemades al sistema en forma de hashes.</p>
+
+                    <div class="image-placeholder">
+                        <a href="https://learn.microsoft.com/en-us/windows/win32/secauthn/microsoft-ntlm"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir documentació de Microsoft sobre NTLM">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriam05/hash_concept.png" alt="Funcionament de Hash"
+                                    class="theory-img">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Cicle de vida d'un Hash NTLM</span>
+                                    <small>images/teoriam05/hash_concept.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="external-link" style="width: 15px;"></i>
+                                <span>Explorar protocol: Autenticació NTLM</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3>🔑 El concepte de Hash i Autenticació NTLM</h3>
+                    <p>Windows no guarda les contrasenyes en text pla per seguretat. En el seu lloc, utilitza funcions
+                        resum (hashes) com el protocol NTLM.</p>
+                    <div class="theory-grid">
+                        <div class="theory-card">
+                            <i data-lucide="refresh-cw"></i>
+                            <h3>Determinisme</h3>
+                            <p>El protocol NTLM és determinista; una mateixa contrasenya sempre genera el mateix hash.
+                            </p>
+                        </div>
+                        <div class="theory-card">
+                            <i data-lucide="slash"></i>
+                            <h3>Manca de Salt</h3>
+                            <p>No utilitza una llavor aleatòria ("Salt") per defecte. Això fa que els hashes siguin
+                                vulnerables a Taules Rainbow.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2.1: SAM -->
+            <section id="sam" class="content-section">
+                <div class="glass-card">
+                    <h2>2.1 Extracció de la base de dades SAM</h2>
+                    <p>La <strong>Security Accounts Manager (SAM)</strong> és el fitxer on Windows guarda els hashes
+                        dels usuaris locals.</p>
+
+                    <ul class="clean-list">
+                        <li><i data-lucide="lock"></i> <strong>Bloqueig de Sistema:</strong> El fitxer SAM està protegit
+                            pel Kernel mentre el sistema està engegat.</li>
+                        <li><i data-lucide="copy"></i> <strong>Tècnica de Bolcat:</strong> Com que som administradors,
+                            podem utilitzar el registre per fer una còpia "en viu":</li>
+                    </ul>
+
+                    <div
+                        style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 12px; font-family: var(--font-mono); font-size: 0.9rem; margin: 1.5rem 0; border-left: 3px solid var(--accent-blue);">
+                        reg save hklm\sam C:\sam.hiv<br>
+                        reg save hklm\system C:\system.hiv
+                    </div>
+
+                    <div class="image-placeholder">
+                        <a href="https://www.secureauth.com/labs/open-source-tools/impacket/" target="_blank"
+                            rel="noopener" class="img-link-wrapper" aria-label="Obrir eines Impacket">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriam05/sam_extraction.png" alt="Bolcat de SAM" class="theory-img">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Procés: Bolcat de ruscs del registre</span>
+                                    <small>images/teoriam05/sam_extraction.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="tool" style="width: 15px;"></i>
+                                <span>Veure eines: Impacket Secretsdump</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2.2: LSASS -->
+            <section id="lsass" class="content-section">
+                <div class="glass-card">
+                    <h2>2.2 L'Anomalia de la Memòria: El procés LSASS</h2>
+                    <p>El procés <strong>LSASS (Local Security Authority Subsystem Service)</strong> gestiona les
+                        polítiques de seguretat i guarda les credencials dels usuaris actius per facilitar el
+                        <strong>Single Sign-On (SSO)</strong>.</p>
+
+                    <div class="info-box">
+                        <h3>🔎 Evolució de la seguretat en memòria:</h3>
+                        <div class="theory-grid" style="grid-template-columns: 1fr; margin-top: 1rem;">
+                            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                                <span class="badge"
+                                    style="background: rgba(168, 85, 247, 0.1); color: var(--accent-purple); flex-shrink: 0;">Legacy</span>
+                                <p><strong>Windows Server 2008:</strong> Utilitza WDigest. És possible extreure la
+                                    contrasenya en <strong>text clar</strong> amb Mimikatz.</p>
+                            </div>
+                            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                                <span class="badge"
+                                    style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); flex-shrink: 0;">Modern</span>
+                                <p><strong>Windows 10 MiniOS:</strong> WDigest desactivat. Només trobarem hashes NTLM,
+                                    dificultant la lectura directa però permetent suplantacions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <a href="https://github.com/gentilkiwi/mimikatz" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir Mimikatz a GitHub">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriam05/passwords_search.png" alt="Extracció de memòria"
+                                    class="theory-img">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Tècnica: Lectura de credencials en RAM</span>
+                                    <small>images/teoriam05/passwords_search.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="github" style="width: 15px;"></i>
+                                <span>Projecte: Mimikatz — gentilkiwi</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2.3: Cracking -->
+            <section id="cracking" class="content-section">
+                <div class="glass-card">
+                    <h2>2.3 La Forja: Cracking Offline</h2>
+                    <p>El cracking és el procés de provar milers de combinacions fora de la màquina víctima per no
+                        aixecar sospites (atac offline).</p>
+
+                    <div style="overflow-x: auto; margin-top: 1.5rem;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid var(--border-color); color: var(--accent-gold);">
+                                    <th style="padding: 1rem;">Mètode</th>
+                                    <th style="padding: 1rem;">Eina</th>
+                                    <th style="padding: 1rem;">Descripció</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><strong>Diccionari</strong></td>
+                                    <td style="padding: 1rem;">John the Ripper</td>
+                                    <td style="padding: 1rem;">Comprova paraules de llistes (ex: <em>rockyou.txt</em>).
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><strong>Força Bruta</strong></td>
+                                    <td style="padding: 1rem;">Hashcat</td>
+                                    <td style="padding: 1rem;">Prova totes les combinacions (màscares amb
+                                        <code>-a 3</code>).</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem;"><strong>Rainbow Tables</strong></td>
+                                    <td style="padding: 1rem;">CrackStation</td>
+                                    <td style="padding: 1rem;">Cerca en bases de dades gegants de hashes precalculats.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparativa -->
+            <section class="content-section">
+                <div class="glass-card">
+                    <h2>⚖️ Comparativa: Seguretat de Credencials</h2>
+                    <div style="overflow-x: auto; margin-top: 1.5rem;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid var(--border-color); color: var(--accent-blue);">
+                                    <th style="padding: 1rem;">Característica</th>
+                                    <th style="padding: 1rem;">Server 2008</th>
+                                    <th style="padding: 1rem;">Win 10 MiniOS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;">Facilitat d'extracció</td>
+                                    <td style="padding: 1rem;">Molt Alta</td>
+                                    <td style="padding: 1rem;">Mitjana (requereix Bypass UAC)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;">Text pla en memòria</td>
+                                    <td style="padding: 1rem;">Sí (via WDigest)</td>
+                                    <td style="padding: 1rem;">No (Proteccions actives)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem;">Protocol per defecte</td>
+                                    <td style="padding: 1rem;">NTLM / Kerberos</td>
+                                    <td style="padding: 1rem;">Kerberos (Hardened)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Callout PtH -->
+            <section class="content-section">
+                <div class="info-callout"
+                    style="background: rgba(234, 179, 8, 0.05); border-color: rgba(234, 179, 8, 0.1);">
+                    <span class="callout-icon">💡</span>
+                    <div class="callout-content">
+                        <h4>Info Callout: Per què volem el Hash si no el podem crackejar?</h4>
+                        <p>Si la contrasenya és massa complexa, podem fer servir <strong>Pass-the-Hash (PtH)</strong>.
+                            Windows permet utilitzar el hash NTLM directament per autenticar-se en serveis de xarxa
+                            sense haver de saber mai la contrasenya real.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resum de la Secció 2 -->
+            <section id="resum" class="content-section mb-5">
+                <div class="summary-box">
+                    <h3>🗂️ Resum de la Secció 2</h3>
+                    <div class="summary-items">
+                        <div class="summary-item">
+                            <span class="summary-label">Objectiu</span>
+                            <p>Obtenir material d'autenticació (hashes) dels administradors.</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Fonts</span>
+                            <p>Registre (SAM) i memòria RAM (LSASS).</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Concepte</span>
+                            <p>Manca de "Salting" a NTLM: contrasenyes febles cauen en segons.</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 3rem;">
+                        <p><strong>Eines de referència:</strong></p>
+                        <div
+                            style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                            <a href="https://hashcat.net/hashcat/" target="_blank"
+                                style="color: var(--accent-blue); text-decoration: none; border-bottom: 1px solid;">Hashcat
+                                Official</a>
+                            <a href="https://crackstation.net/" target="_blank"
+                                style="color: var(--accent-blue); text-decoration: none; border-bottom: 1px solid;">CrackStation</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="js/teoriaM05.js" defer></script>
+</body>
+
+</html>

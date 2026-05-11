@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M05 U4·M1 – Escalada de Privilegis Local</title>
+    <meta name="description"
+        content="Teoria sobre l'Escalada de Privilegis Local (PrivEsc) en Windows - M05 Seguretat Informàtica">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="css/teoriaM05.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="stars-container" id="stars"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-at">Hacking Etic</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#foothold">Foothold</a></li>
+                <li><a href="#auditoria">Auditoria</a></li>
+                <li><a href="#vectors">Vectors</a></li>
+                <li><a href="#comparativa">Privilegis</a></li>
+                <li><a href="#resum" class="nav-connect">Resum</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="badge">M05: Seguretat Informàtica · Unitat 4</div>
+                <h1 class="hero-title">
+                    Escalada de Privilegis<br>
+                    <span class="accent-text">Local (PrivEsc)</span>
+                </h1>
+                <p class="hero-subtitle">Proces d'explotació per assolir el nivell NT AUTHORITY\SYSTEM</p>
+                <div class="scroll-indicator">
+                    <i data-lucide="chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-container">
+
+            <!-- Section 1: Intro -->
+            <section id="foothold" class="content-section">
+                <div class="glass-card">
+                    <div class="page-tag" style="color: var(--accent-purple); font-weight: 700; margin-bottom: 1rem;">
+                        TEORIA · RESUM UNITAT</div>
+                    <h2>SECCIÓ 1: Escalada de Privilegis Local (PrivEsc)</h2>
+                    <p>Un cop s'ha aconseguit traspassar el perímetre (<strong>foothold</strong>) mitjançant phishing o
+                        vulnerabilitats web, l'atacant sol tenir una sessió d'usuari ras. L'escalada de privilegis és el
+                        procés d'explotar errors de configuració per assolir el nivell d'accés màxim: <strong>NT
+                            AUTHORITY\SYSTEM</strong>.</p>
+
+                    <div class="image-placeholder">
+                        <a href="https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir guia d'Escalada de Privilegis a HackTricks">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriam05/privesc_concept.png" alt="Concepte de Privilege Escalation"
+                                    class="theory-img">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Jerarquia d'accés</span>
+                                    <small>images/teoriam05/privesc_concept.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="external-link" style="width: 15px;"></i>
+                                <span>Llegir metodologia: Windows PrivEsc — HackTricks</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3>🔑 El concepte d'Escalada Local</h3>
+                    <p>L'objectiu no és "hackejar" el sistema de nou, sinó abusar de la confiança del sistema operatiu
+                        en els seus propis serveis i configuracions mal gestionades pels administradors.</p>
+                </div>
+            </section>
+
+            <!-- Section 1.1: Foothold -->
+            <section id="partida" class="content-section">
+                <div class="glass-card">
+                    <h2>1.1 El Punt de Partida: Foothold i getuid</h2>
+                    <p>Abans de qualsevol acció, cal validar el context actual:</p>
+
+                    <div class="theory-grid">
+                        <div class="theory-card">
+                            <i data-lucide="terminal"></i>
+                            <h3>Sessió inicial</h3>
+                            <p>Obtinguda normalment via <strong>Meterpreter</strong> o shells reversas simples.</p>
+                        </div>
+                        <div class="theory-card">
+                            <i data-lucide="user"></i>
+                            <h3>Comprovació</h3>
+                            <p>L'execució de <code>getuid</code> o <code>whoami</code> ens dirà si som un usuari sense
+                                privilegis (com <em>treballador</em>) o si ja som el "déu" de la màquina
+                                (<em>SYSTEM</em>).</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box" style="border-left: 4px solid var(--accent-red);">
+                        <p><strong>Restricció:</strong> Un usuari ras no pot llegir fitxers d'altres usuaris, no pot
+                            aturar l'antivirus ni modificar el registre de màquina (HKLM).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 1.2: Auditoria -->
+            <section id="auditoria" class="content-section">
+                <div class="glass-card">
+                    <h2>1.2 Metodologies d'Auditoria Local (Enumeració)</h2>
+                    <p>L'èxit de l'escalada depèn d'una bona anàlisi prèvia. Tenim dues vies:</p>
+
+                    <div class="info-box">
+                        <h3>A. Enumeració Automatitzada (Eines PEASS)</h3>
+                        <p>Buscar errors a mà és lent i propici a l'error humà.</p>
+                        <p><strong>WinPEAS:</strong> L'eina definitiva que pinta en <strong>vermell</strong>
+                            (vulnerabilitat gairebé segura) o <strong>groc</strong> (potencial) els vectors d'atac.</p>
+                        <p><em>Procediment:</em> Es puja l'executable a <code>C:\Users\Public</code>, s'executa i es
+                            redirigeix la sortida a un fitxer de text (<code>winpeas.exe > output.txt</code>) per a la
+                            seva anàlisi offline.</p>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <a href="https://github.com/peass-ng/PEASS-ng" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir repositori PEASS-ng">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriam05/winpeas_logo.png" alt="WinPEAS Logo" class="theory-img"
+                                    style="max-width: 300px;">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Eina: WinPEAS</span>
+                                    <small>images/teoriam05/winpeas_logo.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="github" style="width: 15px;"></i>
+                                <span>Veure a GitHub: PEASS-ng</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>B. Enumeració Manual</h3>
+                        <p>Ús de comandes natives com <code>wmic</code> o <code>sc</code> per revisar serveis sospitosos
+                            o el cmdlet de PowerShell <code>Get-Acl</code> per verificar permisos de fitxers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 1.3: Vectors -->
+            <section id="vectors" class="content-section">
+                <div class="glass-card">
+                    <h2>1.3 Vectors d'Explotació Principals (Pràctica "Olympus")</h2>
+
+                    <div class="info-box">
+                        <h3>Vector 1: Ruta de Servei sense cometes (Unquoted Service Path)</h3>
+                        <p>Aprofitar com Windows interpreta els espais en les rutes dels binaris.</p>
+                        <p><strong>La vulnerabilitat:</strong> Si un servei té la ruta
+                            <code>C:\Program Files\Servei Alumne\run.exe</code> (sense cometes), Windows intentarà
+                            executar:</p>
+                        <ul class="clean-list"
+                            style="margin-left: 1rem; color: var(--accent-gold); font-family: var(--font-mono); font-size: 0.9rem;">
+                            <li>1. C:\Program.exe</li>
+                            <li>2. C:\Program Files\Servei.exe</li>
+                            <li>3. C:\Program Files\Servei Alumne\run.exe (La ruta real)</li>
+                        </ul>
+                        <p><strong>L'atac:</strong> L'atacant crea un implant maliciós amb <code>msfvenom</code>,
+                            l'anomena <code>Program.exe</code> i el col·loca a l'arrel <code>C:\</code>. Al següent
+                            reinici, el sistema l'executarà amb privilegis de SYSTEM.</p>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <a href="https://medium.com/@SumitVerma101/windows-privilege-escalation-unquoted-service-path-719711edc665"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir article sobre Unquoted Service Path">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriam05/unquoted_path.png" alt="Diagrama Unquoted Path"
+                                    class="theory-img">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Diagrama: Funcionament de l'explotació</span>
+                                    <small>images/teoriam05/unquoted_path.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="book-open" style="width: 15px;"></i>
+                                <span>Llegir article: Unquoted Service Path — Medium</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>Vector 2: Serveis amb permisos dèbils (binPath)</h3>
+                        <p><strong>La vulnerabilitat:</strong> Quan un usuari normal té permisos
+                            <code>SERVICE_CHANGE_CONFIG</code> sobre un servei que corre com a administrador.</p>
+                        <p><strong>L'atac:</strong> Canviem la ruta de l'executable legítim per la del nostre implant:
+                        </p>
+                        <code>sc config [NOM_SERVEI] binPath= "C:\Users\Public\implant.exe"</code>
+                        <p style="margin-top: 1rem;"><strong>Execució:</strong> En reiniciar el servei
+                            (<code>sc stop</code> / <code>sc start</code>), l'implant ens retornarà una shell reversa
+                            amb privilegis elevats.</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>Vector 3: Always Install Elevated</h3>
+                        <p>Directiva que permet instal·lar fitxers <code>.msi</code> amb poders de sistema. Es valida
+                            mirant si les claus de registre <code>AlwaysInstallElevated</code> a <strong>HKLM</strong> i
+                            <strong>HKCU</strong> estan a <code>1</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 1.4: Comparativa -->
+            <section id="comparativa" class="content-section">
+                <div class="glass-card">
+                    <h2>⚖️ Comparativa de Privilegis en Windows</h2>
+                    <div style="overflow-x: auto; margin-top: 1.5rem;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid var(--border-color); color: var(--accent-blue);">
+                                    <th style="padding: 1rem;">Nivell</th>
+                                    <th style="padding: 1rem;">Usuari</th>
+                                    <th style="padding: 1rem;">Capacitat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><span class="badge"
+                                            style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); padding: 0.2rem 0.6rem; font-size: 0.7rem;">Baix</span>
+                                    </td>
+                                    <td style="padding: 1rem;">treballador / vagrant</td>
+                                    <td style="padding: 1rem;">Només pot tocar els seus fitxers personals.</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><span class="badge"
+                                            style="background: rgba(168, 85, 247, 0.1); color: var(--accent-purple); padding: 0.2rem 0.6rem; font-size: 0.7rem;">Mitjà</span>
+                                    </td>
+                                    <td style="padding: 1rem;">Administrador Local</td>
+                                    <td style="padding: 1rem;">Té poder total però està limitat per l'UAC (cal bypass).
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem;"><span class="badge"
+                                            style="background: rgba(239, 68, 68, 0.1); color: var(--accent-red); padding: 0.2rem 0.6rem; font-size: 0.7rem;">Màxim</span>
+                                    </td>
+                                    <td style="padding: 1rem;">SYSTEM</td>
+                                    <td style="padding: 1rem;">El sistema mateix. Control absolut sobre el Kernel i la
+                                        memòria LSASS.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Callout -->
+            <section class="content-section">
+                <div class="info-callout">
+                    <span class="callout-icon">⚙️</span>
+                    <div class="callout-content">
+                        <h4>Info Callout: DevSecOps i Hardening</h4>
+                        <p>L'escalada de privilegis es pot prevenir mitjançant el <strong>Hardening</strong>
+                            (enduriment) del sistema: aplicar el principi de "mínim privilegi", tancar rutes de serveis
+                            entre cometes i monitorar l'ús de l'eina <code>sc.exe</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resum de la Secció 1 -->
+            <section id="resum" class="content-section mb-5">
+                <div class="summary-box">
+                    <h3>🗂️ Resum de la Secció 1</h3>
+                    <div class="summary-items">
+                        <div class="summary-item">
+                            <span class="summary-label">Objectiu</span>
+                            <p>Passar d'usuari ras a SYSTEM.</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Fases</span>
+                            <p>Enumeració → Identificació del vector → Implant (msfvenom) → Execució.</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Eines Clau</span>
+                            <p>WinPEAS, Metasploit, msfvenom, accesschk.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="js/teoriaM05.js" defer></script>
+</body>
+
+</html>

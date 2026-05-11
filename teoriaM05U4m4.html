@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M05 U4·M4 – Domini, Kerberos i Moviment Lateral</title>
+    <meta name="description"
+        content="Teoria sobre Active Directory, Kerberos i Moviment Lateral en Windows - M05 Seguretat Informàtica">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="css/teoriaM05.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="stars-container" id="stars"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-at">Hacking Etic</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#active-directory">AD DS</a></li>
+                <li><a href="#kerberos">Kerberos</a></li>
+                <li><a href="#moviment">Moviment Lateral</a></li>
+                <li><a href="#bloodhound">BloodHound</a></li>
+                <li><a href="#resum" class="nav-connect">Resum</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="badge">M05: Seguretat Informàtica · Unitat 4</div>
+                <h1 class="hero-title">
+                    Domini i Kerberos<br>
+                    <span class="accent-text">Moviment Lateral</span>
+                </h1>
+                <p class="hero-subtitle">Conquerint el "Cervell" de l'organització (Active Directory)</p>
+                <div class="scroll-indicator">
+                    <i data-lucide="chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-container">
+
+            <!-- Section 4 Intro -->
+            <section id="pivoting" class="content-section">
+                <div class="glass-card">
+                    <div class="page-tag" style="color: var(--accent-purple); font-weight: 700; margin-bottom: 1rem;">
+                        TEORIA · PIVOTATGE A LA XARXA</div>
+                    <h2>SECCIÓ 4: Domini, Kerberos i Moviment Lateral</h2>
+                    <p>Un cop compromès un equip i elevats els privilegis a la màquina local, l'atacant ja no busca
+                        dades en un sol disc dur, sinó que intenta conquerir el "Cervell" de l'organització: el
+                        <strong>Controlador de Domini (DC)</strong>. Aquest procés de saltar d'una màquina a una altra
+                        s'anomena <em>Island Hopping</em> o <strong>Moviment Lateral</strong>.
+                    </p>
+
+                    <div class="image-placeholder">
+                        <a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/ad-ds-getting-started"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir documentació de Microsoft sobre AD DS">
+                            <div class="img-placeholder-inner">
+                                <div class="img-placeholder-label">
+                                    <i data-lucide="network"
+                                        style="width: 48px; height: 48px; margin-bottom: 1rem; color: var(--accent-blue);"></i>
+                                    <span>Diagrama: Estructura d'Active Directory</span>
+                                    <p style="font-size: 0.9rem;">El repositori centralitzat d'objectes i permisos.</p>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="external-link" style="width: 15px;"></i>
+                                <span>Explorar: Fonaments d'Active Directory</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3>🔑 Fonaments de l'Active Directory (AD)</h3>
+                    <p>L'<strong>Active Directory</strong> gestiona tots els objectes de la xarxa des d'un servidor
+                        central.</p>
+                    <div class="theory-grid">
+                        <div class="theory-card">
+                            <i data-lucide="server"></i>
+                            <h3>Controlador de Domini (DC)</h3>
+                            <p>El servidor que valida qui pot entrar a la xarxa i gestiona els serveis de domini.</p>
+                        </div>
+                        <div class="theory-card">
+                            <i data-lucide="users"></i>
+                            <h3>Objectes i Grups</h3>
+                            <p>Els privilegis de <strong>Domain Admins</strong> permeten el control total sobre tot el
+                                domini.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Kerberos -->
+            <section id="kerberos" class="content-section">
+                <div class="glass-card">
+                    <h2>🛡️ El Protocol Kerberos: L'estàndard de Seguretat</h2>
+                    <p>Kerberos es basa en l'ús de tiquets per evitar l'enviament de contrasenyes per la xarxa.</p>
+
+                    <div class="info-box">
+                        <ul class="clean-list">
+                            <li><i data-lucide="ticket" style="color: var(--accent-gold);"></i> <strong>TGT (Ticket
+                                    Granting Ticket):</strong> El tiquet mestre que s'obté al iniciar sessió i es guarda
+                                a la RAM (LSASS).</li>
+                            <li><i data-lucide="key" style="color: var(--accent-blue);"></i> <strong>KDC (Key
+                                    Distribution Center):</strong> El servei del DC que emet aquests tiquets.</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><strong>L'Avantatge per a l'atacant:</strong> Robar un TGT permet
+                            suplantar l'administrador sense saber mai la seva contrasenya real.</p>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <a href="https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/kerberos-authentication"
+                            target="_blank" rel="noopener" class="img-link-wrapper"
+                            aria-label="Obrir guia de Kerberos a HackTricks">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriam05/hash_concept.png" alt="Flux Kerberos" class="theory-img">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Procés: Flux d'Autenticació Kerberos</span>
+                                    <small>images/teoriam05/hash_concept.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="book-open" style="width: 15px;"></i>
+                                <span>Metodologia: Atacs a Kerberos — HackTricks</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Moviment Lateral -->
+            <section id="moviment" class="content-section">
+                <div class="glass-card">
+                    <h2>🚀 Tècniques de Moviment Lateral Avançat</h2>
+                    <p>Per saltar cap al Controlador de Domini s'utilitzen principalment dues metodologies:</p>
+
+                    <div class="theory-grid" style="grid-template-columns: 1fr;">
+                        <div class="info-box" style="border-left: 4px solid var(--accent-blue);">
+                            <h3>A. Pass-The-Ticket (PtT)</h3>
+                            <p>Tècnica sigil·losa que utilitza eines com <strong>Rubeus</strong> per extreure tiquets
+                                Kerberos de la memòria i injectar-los en la sessió de l'atacant.</p>
+                        </div>
+                        <div class="info-box" style="border-left: 4px solid var(--accent-purple);">
+                            <h3>B. Pass-The-Hash (PtH)</h3>
+                            <p>S'utilitza quan tenim el <strong>Hash NTLM</strong>. S'envia directament per
+                                autenticar-se via SMB o WMI (eines com <em>wmiexec</em>).</p>
+                        </div>
+                    </div>
+
+                    <div style="overflow-x: auto; margin-top: 2rem;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid var(--border-color); color: var(--accent-gold);">
+                                    <th style="padding: 1rem;">Característica</th>
+                                    <th style="padding: 1rem;">Pass-The-Hash (PtH)</th>
+                                    <th style="padding: 1rem;">Pass-The-Ticket (PtT)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><strong>Material usat</strong></td>
+                                    <td style="padding: 1rem;">Hash NTLM</td>
+                                    <td style="padding: 1rem;">Tiquet Kerberos (TGT/TGS)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><strong>Protocol</strong></td>
+                                    <td style="padding: 1rem;">SMB / RPC / WMI</td>
+                                    <td style="padding: 1rem;">Kerberos (Natiu d'AD)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem;"><strong>Visibilitat</strong></td>
+                                    <td style="padding: 1rem;">Alta (logs NTLM)</td>
+                                    <td style="padding: 1rem;">Baixa (trànsit legítim)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem;"><strong>Persistència</strong></td>
+                                    <td style="padding: 1rem;">Validesa del hash</td>
+                                    <td style="padding: 1rem;">Caducitat del tiquet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: BloodHound -->
+            <section id="bloodhound" class="content-section">
+                <div class="glass-card">
+                    <h2>🔍 Reconeixement amb BloodHound</h2>
+                    <p>Si la xarxa és gran, l'atacant no sap on saltar. <strong>BloodHound</strong> utilitza la teoria
+                        de grafs per dibuixar visualment el "camí d'atac" més curt mitjançant peticions LDAP.</p>
+
+                    <div class="image-placeholder">
+                        <a href="https://github.com/BloodHoundAD/BloodHound" target="_blank" rel="noopener"
+                            class="img-link-wrapper" aria-label="Obrir BloodHound a GitHub">
+                            <div class="img-placeholder-inner">
+                                <img src="images/teoriam05/passwords_search.png" alt="Interfície BloodHound"
+                                    class="theory-img">
+                                <div class="img-placeholder-label">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                    <span>Visualització: Graf de camins d'atac</span>
+                                    <small>images/teoriam05/passwords_search.png</small>
+                                </div>
+                            </div>
+                            <div class="img-link-bar">
+                                <i data-lucide="github" style="width: 15px;"></i>
+                                <span>Veure eina: BloodHound Project</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Callout -->
+            <section class="content-section">
+                <div class="info-callout" style="border-left: 4px solid var(--accent-purple);">
+                    <span class="callout-icon">💡</span>
+                    <div class="callout-content">
+                        <h4>Info Callout: El perill de les sessions oblidades</h4>
+                        <p>Si un administrador inicia sessió en una estació de treball i bloqueja la pantalla en lloc de
+                            tancar la sessió, el seu <strong>TGT queda exposat</strong> a la memòria LSASS, a punt per
+                            ser extret amb un simple <code>Rubeus.exe dump</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resum de la Secció 4 -->
+            <section id="resum" class="content-section mb-5">
+                <div class="summary-box">
+                    <h3>🗂️ Resum de la Secció 4</h3>
+                    <div class="summary-items">
+                        <div class="summary-item">
+                            <span class="summary-label">Objectiu</span>
+                            <p>Moviment lateral cap al Controlador de Domini.</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Mètodes</span>
+                            <p>Pass-The-Ticket (Kerberos) i Pass-The-Hash (NTLM).</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Eines</span>
+                            <p>Rubeus, BloodHound, PowerView, WMIexec.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="js/teoriaM05.js" defer></script>
+</body>
+
+</html>

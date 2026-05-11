@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índex Teoria U4 - M05 Seguretat Informàtica</title>
+    <meta name="description"
+        content="Índex de Teoria Unitat 4 - M05 Seguretat Informàtica: Escalada de Privilegis, AD, Ransomware i Forense">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS links -->
+    <link rel="stylesheet" href="css/teoriaM05.css">
+    <link rel="stylesheet" href="css/teoriaM05U4Index.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="stars-container" id="stars"></div>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-at">Hacking Etic</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inici</a></li>
+                <li><a href="#" class="nav-connect">Unitat 4</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="main-container" style="margin-top: 100px;">
+            <div class="page-header">
+                <div class="page-tag">M05 · UNITAT 4</div>
+                <h1 class="page-title">Escalada de Privilegis i Post-Explotació</h1>
+                <p class="page-subtitle">Explora els mòduls de la Unitat 4: des del foothold inicial fins a l'impacte
+                    final i la neteja de traces.</p>
+            </div>
+
+            <div class="theory-index-grid">
+                <!-- M1 -->
+                <a href="teoriaM05U4m1.html" class="theory-module-card">
+                    <div class="module-number">M1</div>
+                    <div class="module-info">
+                        <h3>Escalada de Privilegis Local</h3>
+                        <p>Enumeració automatitzada (WinPEAS), Unquoted Service Path, Weak Permissions (binPath) i
+                            AlwaysInstallElevated.</p>
+                        <div class="view-link">
+                            Veure Mòdul
+                            <i data-lucide="arrow-right" style="width: 16px;"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M2 -->
+                <a href="teoriaM05U4m2.html" class="theory-module-card"
+                    style="border-left-color: var(--accent-purple);">
+                    <div class="module-number" style="color: var(--accent-purple);">M2</div>
+                    <div class="module-info">
+                        <h3>Extracció de Credencials</h3>
+                        <p>Hashes NTLM, extracció de la SAM, bolcat de memòria de l'LSASS i cracking offline amb Hashcat
+                            i John the Ripper.</p>
+                        <div class="view-link" style="color: var(--accent-purple);">
+                            Veure Mòdul
+                            <i data-lucide="arrow-right" style="width: 16px;"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M3 -->
+                <a href="teoriaM05U4m3.html" class="theory-module-card" style="border-left-color: var(--accent-gold);">
+                    <div class="module-number" style="color: var(--accent-gold);">M3</div>
+                    <div class="module-info">
+                        <h3>Persistències i Backdoors</h3>
+                        <p>Autorun Keys, Serveis, RATs, LOLBins (curl, powershell) i malware fileless per mantenir
+                            l'accés permanent.</p>
+                        <div class="view-link" style="color: var(--accent-gold);">
+                            Veure Mòdul
+                            <i data-lucide="arrow-right" style="width: 16px;"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M4 -->
+                <a href="teoriaM05U4m4.html" class="theory-module-card" style="border-left-color: var(--accent-blue);">
+                    <div class="module-number">M4</div>
+                    <div class="module-info">
+                        <h3>Domini i Moviment Lateral</h3>
+                        <p>Fonaments d'Active Directory, Kerberos (TGT/KDC), Pass-The-Ticket, Pass-The-Hash i
+                            reconeixement amb BloodHound.</p>
+                        <div class="view-link">
+                            Veure Mòdul
+                            <i data-lucide="arrow-right" style="width: 16px;"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M5 -->
+                <a href="teoriaM05U4m5.html" class="theory-module-card" style="border-left-color: var(--accent-red);">
+                    <div class="module-number" style="color: var(--accent-red);">M5</div>
+                    <div class="module-info">
+                        <h3>Impacte i Ransomware</h3>
+                        <p>Inhibició de la recuperació (vssadmin), xifratge de dades, notes de rescat i el model de
+                            doble extorsió.</p>
+                        <div class="view-link" style="color: var(--accent-red);">
+                            Veure Mòdul
+                            <i data-lucide="arrow-right" style="width: 16px;"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- M6 -->
+                <a href="teoriaM05U4m6.html" class="theory-module-card">
+                    <div class="module-number">M6</div>
+                    <div class="module-info">
+                        <h3>Anti-Forense i Neteja</h3>
+                        <p>Timestomping, esborrat de logs (wevtutil), desactivació d'auditories (AuditPol) i detecció
+                            d'incident response.</p>
+                        <div class="view-link">
+                            Veure Mòdul
+                            <i data-lucide="arrow-right" style="width: 16px;"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer
+        style="margin-top: 5rem; padding-bottom: 2rem; text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+        <p>© 2026 Hacking Etic - M05 Seguretat Informàtica</p>
+    </footer>
+
+    <script src="js/teoriaM05.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
