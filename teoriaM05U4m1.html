@@ -31,6 +31,9 @@
                 <span class="logo-at">Hacking Etic</span>
             </a>
             <ul class="nav-links">
+                <li><a href="teoriaM05U4Index.html" style="color: var(--accent-blue); font-weight: 700;">
+                        <i data-lucide="chevron-left" style="width: 16px; vertical-align: middle;"></i> Teoria
+                    </a></li>
                 <li><a href="#foothold">Foothold</a></li>
                 <li><a href="#auditoria">Auditoria</a></li>
                 <li><a href="#vectors">Vectors</a></li>
@@ -186,7 +189,8 @@
                         <p>Aprofitar com Windows interpreta els espais en les rutes dels binaris.</p>
                         <p><strong>La vulnerabilitat:</strong> Si un servei té la ruta
                             <code>C:\Program Files\Servei Alumne\run.exe</code> (sense cometes), Windows intentarà
-                            executar:</p>
+                            executar:
+                        </p>
                         <ul class="clean-list"
                             style="margin-left: 1rem; color: var(--accent-gold); font-family: var(--font-mono); font-size: 0.9rem;">
                             <li>1. C:\Program.exe</li>
@@ -226,7 +230,8 @@
                     <div class="info-box">
                         <h3>Vector 2: Serveis amb permisos dèbils (binPath)</h3>
                         <p><strong>La vulnerabilitat:</strong> Quan un usuari normal té permisos
-                            <code>SERVICE_CHANGE_CONFIG</code> sobre un servei que corre com a administrador.</p>
+                            <code>SERVICE_CHANGE_CONFIG</code> sobre un servei que corre com a administrador.
+                        </p>
                         <p><strong>L'atac:</strong> Canviem la ruta de l'executable legítim per la del nostre implant:
                         </p>
                         <code>sc config [NOM_SERVEI] binPath= "C:\Users\Public\implant.exe"</code>
@@ -239,7 +244,8 @@
                         <h3>Vector 3: Always Install Elevated</h3>
                         <p>Directiva que permet instal·lar fitxers <code>.msi</code> amb poders de sistema. Es valida
                             mirant si les claus de registre <code>AlwaysInstallElevated</code> a <strong>HKLM</strong> i
-                            <strong>HKCU</strong> estan a <code>1</code>.</p>
+                            <strong>HKCU</strong> estan a <code>1</code>.
+                        </p>
                     </div>
                 </div>
             </section>
